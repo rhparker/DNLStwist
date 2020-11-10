@@ -1,7 +1,7 @@
 k = 0.25;
 d = -1;
 
-t = linspace(0,2*pi,1000);
+t = linspace(0,50*pi,8000);
 
 % complex version
 
@@ -27,11 +27,11 @@ mags = mags';
 % u0 = exp( 1i*phi*nn');
 % u0 = u0.*mags';
 
-% get phases from AUTO
+% % get phases from AUTO
 % N = (length(mags)+1)/2;
 % p = [0 ; mags(N+1:end)];
 % u0 = ( mags(1:N).*exp( 1i*p ) );
-% phi = 0.25;
+% phi = 0.5;
 
 % even hole from AUTO, phi = pi/N
 N = length(mags)*2;
@@ -40,8 +40,8 @@ nn = [1:length(mags) - 1]';
 p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
 u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
-% % perturbation 
-% u0(4) = 1e-4;
+% perturbation 
+u0(4) = 0.01;
 
 % solve on interval with IC
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
@@ -59,11 +59,11 @@ l0 = diag(l0);
 
 figure('DefaultAxesFontSize',20);
 % plot(t,abs(u),'Linewidth',3 );
-plot(t,abs(u1),'Linewidth',3 );
+plot(t,abs(u),'Linewidth',3 );
 legendCell = string(num2cell(1:N));
 legend(legendCell);
 xlabel('t');
-% ylabel('|c_n|');
+ylabel('|c_n|');
 
 
 %%

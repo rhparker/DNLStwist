@@ -1,0 +1,13 @@
+import numpy as np
+from scipy.io import savemat
+
+r1=run('ab',c='ab',sv='1')
+
+# solution we want
+s = r1('UZ1')
+sol = np.array(s[0]['u'])
+
+# save array
+savemat( 'mags.mat', { 'mags' : sol } )
+
+

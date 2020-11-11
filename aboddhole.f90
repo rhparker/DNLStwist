@@ -17,47 +17,21 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
 
       IMPLICIT NONE
       INTEGER NDIM, IJAC, ICP(*)
-      INTEGER I,N
+      INTEGER I
       DOUBLE PRECISION U(NDIM), PAR(*), F(NDIM), DFDU(*), DFDP(*)
       DOUBLE PRECISION D,K,W,PHI
-
-      ! variable split into magnitude and angle
-      DOUBLE PRECISION A((NDIM+1)/2), P((NDIM+1)/2), S((NDIM+1)/2), C((NDIM+1)/2)
 
       D = PAR(1)
       K = PAR(2)
       W = PAR(3)
       PHI = PAR(4)
 
-      ! magnitudes
-      N = (NDIM+1)/2
-      DO I = 1,N
-          A(I) = U(I)
+      F(1) = K*U(2) + W*U(1) + D*(U(1)**3)
+      DO I = 2,NDIM-1
+          F(I) = K*( U(I-1) + U(I+1) ) + W*U(I) + D*(U(I)**3)
       END DO
-      ! phase angles, first one is always 0
-      P(1) = 0
-      DO I = 1,N-1
-          P(I+1) = U(I+N)
-      END DO
+      F(NDIM) = K*(U(NDIM) + U(NDIM-1)) + W*U(NDIM) + D*(U(NDIM)**3)
 
-      ! compute relevant sin/cos terms
-      DO I = 1,N-1
-          C(I) = COS( P(I+1) - P(I) - PHI )
-          S(I) = SIN( P(I+1) - P(I) - PHI )
-      END DO
-      C(N) = COS( P(1) - P(N) - PHI )
-      S(N) = SIN( P(1) - P(N) - PHI )
-
-      ! full domain with periodic BCs     
-      DO I = 2,N-1
-          F(I)   = K*( C(I)*A(I+1) + C(I-1)*A(I-1) ) + W*A(I) + D*(A(I)**3)
-          F(I+N) =   ( S(I)*A(I+1) - S(I-1)*A(I-1) )
-      END DO
-      ! periodic BCs
-      F(1)   = K*( C(1)*A(2) + C(N)*A(N) ) + W*A(1) + D*(A(1)**3)
-      F(1+N) =   ( S(1)*A(2) - S(N)*A(N) )
-      F(N)   = K*( C(N)*A(1) + C(N-1)*A(N-1) ) + W*A(N) + D*(A(N)**3)
-      F(N+N) =   ( S(N)*A(1) - S(N-1)*A(N-1) )
 
 END SUBROUTINE FUNC
 !----------------------------------------------------------------------
@@ -76,7 +50,7 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
       IMPLICIT NONE
       INTEGER NDIM
       INTEGER LOFFSET, ROFFSET
-      INTEGER I, N, C
+      INTEGER I
       DOUBLE PRECISION U(NDIM), PAR(*), T
       DOUBLE PRECISION D, K, W, PHI
 
@@ -91,16 +65,7 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
           U(I) = 0
       END DO
 
-      N = (NDIM+1)/2
-      ! find center
-      IF ( MOD(N, 2) == 0 ) THEN
-            C = N/2
-      ELSE
-            C = (N+1)/2
-      END IF
-
-      U(C) = 1
-      U(C+1) = 1
+      U(NDIM) = 1
 
       PAR(1) = D
       PAR(2) = K

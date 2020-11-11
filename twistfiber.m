@@ -1,7 +1,7 @@
 k = 0.25;
 d = -1;
 
-t = linspace(0,50*pi,8000);
+t = linspace(0,2*pi,1000);
 
 % complex version
 
@@ -31,17 +31,24 @@ mags = mags';
 % N = (length(mags)+1)/2;
 % p = [0 ; mags(N+1:end)];
 % u0 = ( mags(1:N).*exp( 1i*p ) );
-% phi = 0.5;
+% phi = 4.48799E-01;
 
-% even hole from AUTO, phi = pi/N
-N = length(mags)*2;
+% % even hole from AUTO, phi = pi/N
+% N = length(mags)*2;
+% phi = pi/N;
+% nn = [1:length(mags) - 1]';
+% p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
+% u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
+
+% odd hole from AUTO, phi = pi/N
+N = length(mags)*2 + 1;
 phi = pi/N;
-nn = [1:length(mags) - 1]';
-p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
-u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
+nn = [1:length(mags)]';
+p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
+u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
 
 % perturbation 
-u0(4) = 0.01;
+% u0(1) = 0.01;
 
 % solve on interval with IC
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
@@ -88,27 +95,29 @@ ylabel('|c_n|');
 
 %% 
 
-% try shooting method
-
-t = linspace(0,2*pi,1000);
-phi = 0.4;
-options = optimoptions('fsolve', 'Algorithm','levenberg-marquardt','Display','iter');
-a = u0;
-a1 = fsolve(@(y) BC(t, y, k, phi, d), a, options);
-u = rk4( @(s,u) twist(s,u,k,phi ,d), a1, t);
-
-figure;
-subplot(1,2,1);
-plot(t,real(u),'Linewidth',3);
-subplot(1,2,2);
-plot(t,abs(u),'Linewidth',3);
+% % try shooting method
+% 
+% t = linspace(0,2*pi,1000);
+% phi = 0.4;
+% options = optimoptions('fsolve', 'Algorithm','levenberg-marquardt','Display','iter');
+% a = u0;
+% a1 = fsolve(@(y) BC(t, y, k, phi, d), a, options);
+% u = rk4( @(s,u) twist(s,u,k,phi ,d), a1, t);
+% 
+% figure;
+% subplot(1,2,1);
+% plot(t,real(u),'Linewidth',3);
+% subplot(1,2,2);
+% plot(t,abs(u),'Linewidth',3);
 
 %%
 
 % phases
 
-% make everything have positive real part (we allow coeffs to be negative
-m1 = a1;
+% make everything have positive real part (we allow coeffs to be negative)
+
+a1 = u0;
+m1 = u0;
 phases = angle(a1);
 
 for index = 1:length(a1)

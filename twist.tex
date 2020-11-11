@@ -124,15 +124,23 @@ For $N$ even, using these symmetries, as well as $\theta_0 = \theta_M = 0$, the 
 \end{aligned}
 \end{equation}
 
-From the numerical parameter continuation, we see that when $\phi = \pi/N$, node $M$ (the nod) opposite the node with maximum excitation) has an amplitude of 0, i.e. is a dark node. If $a_M = 0$, then it follow from \cref{eq:twisteqeven} that $a_n = 0$ for all $n$ unless
+From the numerical parameter continuation, we see that when $\phi = \pi/N$, node $M$ (the node opposite the node with maximum excitation) has an amplitude of 0, i.e. is a dark node. If $a_M = 0$, then it follows from \cref{eq:twisteqeven} that $a_n = 0$ for all $n$ unless
 \begin{equation}\label{eq:evendarknodecond}
+\begin{aligned}
+&\cos(\theta_{M-1} + \phi) = 0 \\
+&\sin(\theta_{n} - \theta_{n-1} - \phi) = 0 && n = 3, \dots, M-1 \\
+&\sin(\theta_2 - \phi) = 0
+\end{aligned}
+\end{equation}
+One solution to this is
+\begin{equation}\label{eq:evendarknodecond1}
 \begin{aligned}
 &\theta_{M-1} + \phi = \pi/2 \\
 &\theta_{n} - \theta_{n-1} - \phi = 0 && n = 3, \dots, M-1 \\
 &\theta_2 - \phi = 0
 \end{aligned}
 \end{equation}
-from which it follows that $\phi = \pi/N$, which agrees with the numerical results. For this case, $a_M = 0$, $\theta_n = (n-1)\phi$, and \cref{eq:twisteqeven} reduces to the simpler system of equations
+from which it follows that we can have a single dark node when $\phi = \pi/N$, which agrees with the numerical results. For this case, $a_M = 0$, and \cref{eq:twisteqeven} reduces to the simpler system of equations
 \begin{equation}\label{eq:twisteqevenhole}
 \begin{aligned}
 &2 k a_2 + \omega a_1 + d a_1^3 = 0 \\
@@ -153,7 +161,7 @@ from which it follows that $\phi = \pi/N$, which agrees with the numerical resul
 \end{figure}
 
 For $N$ odd, using the symmetries above, the system \cref{eq:twisteqreal} reduces to the system of equations
-\begin{equation}\label{eq:twisteqeven}
+\begin{equation}\label{eq:twisteqodd}
 \begin{aligned}
 &2 k a_2 \cos(\theta_2 - \phi) + \omega a_1 + d a_1^3 = 0 \\
 &k\left( a_3 \cos(\theta_3-\theta_2-\phi) + a_1 \cos(\theta_2-\phi)\right) + \omega a_2 + d a_2^3 = 0 \\
@@ -164,9 +172,42 @@ For $N$ odd, using the symmetries above, the system \cref{eq:twisteqreal} reduce
 & a_M \sin(-2 \theta_M - \phi) - a_{M-1} \sin(\theta_M - \theta_{M-1} - \phi) = 0
 \end{aligned}
 \end{equation}
-In this case, it follows from \cref{eq:twisteqeven} that if $a_M = 0$, then $a_n = 0$ for all $n$, thus for this symmetry, there are no solutions with a dark node if $N$ is odd. You might be able to get a dark node for $N$ odd if you start with two adjacent excited nodes in the AC limit.
+For this symmetry, we can have a solution with a dark node at $a_1$. In this case, it will be opposite a pair of bright nodes at $a_M$ and $a_{M+1}$ with the same amplitude. We see this occur in the numerical parameter continuation. If $a_1 = 0$, then it follows from \cref{eq:twisteqodd} that $a_n = 0$ for all $n$ unless
+\begin{equation}\label{eq:odddarknodecond}
+\begin{aligned}
+&\cos(\theta_2 - \phi) = 0 \\
+&\sin(\theta_{n} - \theta_{n-1} - \phi) = 0 && n = 3, \dots, M-1 \\
+&\sin(2 \theta_M + \phi) = 0
+\end{aligned}
+\end{equation}
+One solution to this is
+\begin{equation}\label{eq:odddarknodecond1}
+\begin{aligned}
+&\theta_2 - \phi = -\pi/2 \\
+&\theta_{n} - \theta_{n-1} - \phi = 0 && n = 3, \dots, M-1 \\
+&2 \theta_M + \phi = 0
+\end{aligned}
+\end{equation}
+from which it follows that we can have a single dark node when $\phi = \pi/N$. This is the same as for the case of $N$ even, and it agrees with the numerical results. For this case, $a_1 = 0$,  and \cref{eq:twisteqodd} reduces to the simpler system of equations
+\begin{equation}\label{eq:twisteqoddhole}
+\begin{aligned}
+& k a_3 + \omega a_2 + d a_2^3 = 0\\
+&k( a_{n+1} + a_{n-1} ) + \omega a_n + d a_n^3 = 0 && n = 3, \dots, M-1 \\
+&k ( a_M + a_{M-1} ) + \omega a_M + d a_M^3 = 0
+\end{aligned}
+\end{equation}
+\cref{fig:oddhole7} shows this solution for $N=7$. 
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=15cm]{images/oddhole7.eps}
+\end{tabular}
+\end{center}
+\caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. Left is real part of solution for each node, right is absolute value of solution at each node (this is constant in $t$). Nodes for and 4 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1$, $k = 0.25$, $d=-1$.}
+\label{fig:oddhole7}
+\end{figure}
 
-For spectral stability and results of timestepping, all solutions generated this way (from AC limit with single excited node) are spectrally neutrally stable, for both $N$ even and $N$ odd. Spectrum is purely imaginary. In particular, this is true for the case with even $N$ and a dark node. Timestepping for a perturbation of this is shown in \cref{fig:oddhole7}.
+For spectral stability and results of timestepping, all solutions generated this way (from AC limit with single excited node) are spectrally neutrally stable, for both $N$ even and $N$ odd. Spectrum is purely imaginary. In particular, this is true for the two case described above with a single dark node. Timestepping for a perturbation of this for $N=6$ is shown in \cref{fig:evenhole6perturbed}. Similar results are obtained for $N=7$
 
 \begin{figure}[H]
 \begin{center}

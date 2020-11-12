@@ -84,7 +84,7 @@ Multi-core waveguides composed of $N$ twisted fibers arranged in a ring, propaga
 \begin{equation}\label{eq:twist1}
 i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + d |c_n|^2 c_n,
 \end{equation}
-which is \cite[(2.1)]{castro2016}. The degree of twisting is represented by $\phi$. As in DNLS, we are interested in standing wave solutions, which are bound states that can be written in the form
+which is \cite[(2.1)]{castro2016}. The degree of twisting is represented by $\phi$. $d < 0$ is the defocusing case, and $d>0$ is the focusing case. We consider $d<0$ here. As in DNLS, we are interested in standing wave solutions, which are bound states that can be written in the form
 \begin{equation}\label{eq:ansatz1}
 c_n = a_n e^{i (\omega z + \theta_n) },
 \end{equation}
@@ -101,7 +101,7 @@ a_{n+1} \sin(\theta_{n+1}-\theta_n-\phi) - a_{n-1} \sin(\theta_n - \theta_{n-1}-
 \end{equation}
 Due to the gauge invariance of \cref{eq:twist1}, we may without loss of generality take $\theta_1 = 0$. If $\phi = 0$ (no twist), we can take $\theta_n = 0$ for all $n$, which is the untwisted case with perioidic boundary conditions. Similarly, if we take $\phi = 2 \pi/N$ and $\theta_n = (n-1)\phi$ for $n = 1, \dots, N$, the ``twist'' terms in \cref{eq:twisteq} do not contribute, and the magnitudes $a_n$ are the same as in the untwisted case. The more interesting case is when $0 < \theta < 2 \pi/N$.
 
-In the AC limit ($k = 0$), the sites are decoupled: each $a_n$ can take on any of the values 0, $\pm \sqrt{\omega}$, the phases $\theta_n$ can take on any value, and $\phi$ does not contribute. To construct solutions, we use AUTO for parameter continuation from the AC limit. For the an initial condition, we take $a = (1, 0, \dots, 0)$ (only one excited site) with $\theta_n = 0$ for all $n$ and $\phi = 0$. We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we find that the solutions have the following symmetry:
+In the AC limit ($k = 0$), the sites are decoupled: each $a_n$ can take on any of the values 0, $\pm \sqrt{-\omega/d}$ (which is real since we are taking $d<0$), the phases $\theta_n$ can take on any value, and $\phi$ does not contribute. To construct solutions, we use AUTO for parameter continuation from the AC limit. For the an initial condition, we take $a = (1, 0, \dots, 0)$ (only one excited site) with $\theta_n = 0$ for all $n$ and $\phi = 0$. We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we find that the solutions have the following symmetry:
 \begin{equation}
 \begin{aligned}
 a_k &= a_{N-k+2} && k = 2, \dots, M-1 \\
@@ -148,7 +148,7 @@ from which it follows that we can have a single dark node when $\phi = \pi/N$, w
 &k a_{M-2} + \omega a_{M-1} + d a_{M-1}^3 = 0 \\
 \end{aligned}
 \end{equation}
-\cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}.
+This system of equations is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (\sqrt{-\omega/d}, 0, \dots, 0)$. Since $D_F(\tilde{a}, 0) = \diag(-2\omega,\omega, \dots, \omega)$, which is invertible for $\omega \neq 0$, the system \cref{eq:twisteqevenhole} has a solution for sufficiently small $k$ by the implicit function theorem. \cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}.
 
 \begin{figure}[H]
 \begin{center}
@@ -206,8 +206,19 @@ from which it follows that we can have a single dark node when $\phi = \pi/N$. T
 \caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. Left is real part of solution for each node, right is absolute value of solution at each node (this is constant in $t$). Nodes for and 4 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1$, $k = 0.25$, $d=-1$.}
 \label{fig:oddhole7}
 \end{figure}
+This system of equations is of the form $F(a,k) = 0$, where $a = (a_2, \dots, a_M)$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (0, \dots, 0, \sqrt{-\omega/d}, 0)$. Since $D_F(\tilde{a}, 0) = \diag(\omega, \dots, \omega, -2\omega)$, which is invertible for $\omega \neq 0$, the system \cref{eq:twisteqoddhole} has a solution for sufficiently small $k$ by the implicit function theorem.
 
-For spectral stability and results of timestepping, all solutions generated this way (from AC limit with single excited node) are spectrally neutrally stable, for both $N$ even and $N$ odd. Spectrum is purely imaginary. In particular, this is true for the two case described above with a single dark node. Timestepping for a perturbation of this for $N=6$ is shown in \cref{fig:evenhole6perturbed}. Similar results are obtained for $N=7$
+The linearization about a standing wave solution $c_n = a_n e^{i (\omega z + \theta_n) } = (v_n + i w_n)e^{i\omega z}$ is the $2N \times 2N$ block matrix
+\[
+A(\phi) =
+k \begin{pmatrix}S & C \\ -C & S \end{pmatrix}
++ \omega\begin{pmatrix}0 & I \\ -I & 0 \end{pmatrix} \\
+- \begin{pmatrix} \diag(2v_n w_n) & \diag(v_n^2 + 3 w_n^2) \\
+-\diag(3 v_n^2 + w_n^2) & -\diag(2v_n w_n) \end{pmatrix}
+\]
+where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal.
+
+For spectral stability, all solutions generated this way (from AC limit with single excited node) are spectrally neutrally stable, for both $N$ even and $N$ odd. In other words, the spectrum is purely imaginary. In particular, this is true for the two case described above with a single dark node. This is verified by timestepping for a perturbations of the standing wave solutions. Results of this for $N=6$ is shown in \cref{fig:evenhole6perturbed}. Similar results are obtained for $N=7$
 
 \begin{figure}[H]
 \begin{center}

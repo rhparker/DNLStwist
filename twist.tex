@@ -80,51 +80,96 @@
 
 \begin{document}
 
-Multi-core waveguides composed of $N$ twisted fibers arranged in a ring, propagation dynamics in setting of no gain/loss described by 
-\begin{equation}\label{eq:twist1}
-i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + d |c_n|^2 c_n,
+\section{Introduction}
+
+
+\section{Background}
+
+We consider the propagation dynamics in a multi-core fiber consisting of $N$ waveguides arranged in a ring (\cref{fig:ring}).
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=4cm]{circle.eps}
+\end{center}
+\caption{Schematic of $N$ twisted fibers arranged in a ring.}
+\label{fig:ring}
+\end{figure}
+Each fiber is twisted in a uniform fashion along the propagation direction $z$. The dynamics are given by the coupled system of equations
+\begin{equation}\label{eq:twist}
+i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n 
 \end{equation}
-which is \cite[(2.1)]{castro2016}. The degree of twisting is represented by $\phi$. $d < 0$ is the defocusing case, and $d>0$ is the focusing case. We consider $d<0$ here. As in DNLS, we are interested in standing wave solutions, which are bound states that can be written in the form
+for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the nearest-neighbor coupling, $\gamma_n$ is the optical gain or loss at site $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[(2.1)]{castro2016} for a description of the parameters in terms of the optical waveguide system). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, equation \cref{eq:twist} becomes
+\begin{equation}\label{eq:twist1}
+i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n,
+\end{equation}
+which is Hamiltonian with energy given by
+\begin{equation}
+H = \sum_{n=1}^N k (c_{n+1}c_n^* e^{-i \phi} + c_n c_{n+1}^* e^{i \phi}) + \frac{d}{2}|c_n|^4.
+\end{equation}
+We will consider the Hamiltonian case here, and will comment on the case with loss/gain at the end.
+
+We are interested in standing wave solutions to \cref{eq:twist1}, which are bound states of the form
 \begin{equation}\label{eq:ansatz1}
 c_n = a_n e^{i (\omega z + \theta_n) },
 \end{equation}
-where $a_n \in \R$ and $\theta_n \in (-\pi/2, \pi/2]$. (Allowing $a_n$ to be negative lets us restrict $\theta_n$ in this way). Making this substitution, equation \cref{eq:twist1} becomes (after simplification)
+where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the frequency of oscillation. (Since $a_n$ can be negative, we can restrict $\theta_n$ to that interval). Making this substitution and simplifying, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twisteq}
-k\left( a_{n+1} e^{i((\theta_{n+1}-\theta_n)-\phi)} + a_{n-1} e^{-i((\theta_n - \theta_{n-1})-\phi)}\right) + \omega a_n + d a_n^3 = 0
+k\left( a_{n+1} e^{i((\theta_{n+1}-\theta_n)-\phi)} + a_{n-1} e^{-i((\theta_n - \theta_{n-1})-\phi)}\right) + \omega a_n + d a_n^3 = 0,
 \end{equation}
-Note that the the exponential terms depend only on the phase differences between adjacent sites. Separating into real and imaginary parts, we have the $2n$ equations
+which can be written as the system of $2n$ equations
 \begin{equation}\label{eq:twisteqreal}
 \begin{aligned}
-k\left( a_{n+1} \cos(\theta_{n+1}-\theta_n-\phi) + a_{n-1} \cos(\theta_n - \theta_{n-1}-\phi)\right) + \omega a_n + d a_n^3 &= 0 \\\
-a_{n+1} \sin(\theta_{n+1}-\theta_n-\phi) - a_{n-1} \sin(\theta_n - \theta_{n-1}-\phi) &= 0
+&k\left( a_{n+1} \cos(\theta_{n+1}-\theta_n-\phi) + a_{n-1} \cos(\theta_n - \theta_{n-1}-\phi)\right) + \omega a_n + d a_n^3 = 0 \\\
+&a_{n+1} \sin(\theta_{n+1}-\theta_n-\phi) - a_{n-1} \sin(\theta_n - \theta_{n-1}-\phi) = 0
 \end{aligned}
 \end{equation}
-Due to the gauge invariance of \cref{eq:twist1}, we may without loss of generality take $\theta_1 = 0$. If $\phi = 0$ (no twist), we can take $\theta_n = 0$ for all $n$, which is the untwisted case with perioidic boundary conditions. Similarly, if we take $\phi = 2 \pi/N$ and $\theta_n = (n-1)\phi$ for $n = 1, \dots, N$, the ``twist'' terms in \cref{eq:twisteq} do not contribute, and the magnitudes $a_n$ are the same as in the untwisted case. The more interesting case is when $0 < \theta < 2 \pi/N$.
+by separating real and imaginary parts. We note that the the exponential terms in \cref{eq:twisteq} depend only on the phase differences $\theta_{n+1}-\theta_n$ between adjacent sites. Due to the gauge invariance of \cref{eq:twist1}, if $c_n$ is solution, so is $e^{i \theta} c_n$, thus we may without loss of generality take $\theta_1 = 0$. If $\phi = 0$, i.e. the fibers are not twisted, we can take $\theta_n = 0$ for all $n$, and so \cref{eq:twisteq} reduces to the untwisted case with periodic boundary conditions. Similarly, if we take $\phi = 2 \pi/N$ and $\theta_n = (n-1)\phi$ for all $n$, the exponential terms do not contribute, and \cref{eq:twisteq} once again reduces to untwisted case. The interesting case, therefore, occurs when $0 < \theta < 2 \pi/N$. 
 
-In the AC limit ($k = 0$), the sites are decoupled: each $a_n$ can take on any of the values 0, $\pm \sqrt{-\omega/d}$ (which is real since we are taking $d<0$), the phases $\theta_n$ can take on any value, and $\phi$ does not contribute. To construct solutions, we use AUTO for parameter continuation from the AC limit. For the an initial condition, we take $a = (1, 0, \dots, 0)$ (only one excited site) with $\theta_n = 0$ for all $n$ and $\phi = 0$. We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we find that the solutions have the following symmetry:
-\begin{equation}
+\section{Construction of solutions}
+
+In the anti-continuum (AC) limit, which occurs when $k = 0$, the sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{-\omega/d} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{-\omega/d}$ are real if $d$ and $\omega$ have opposite signs.
+
+We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose $a = (\sqrt{-\omega/d}, 0, \dots, 0)$ (a single excited site) and $\theta_n = 0$ for all $n$. We also take $\phi = 0$. We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
+\begin{equation}\label{eq:symm}
 \begin{aligned}
-a_k &= a_{N-k+2} && k = 2, \dots, M-1 \\
-\theta_k &= -a_{N-k+2} && k = 2, \dots, M-1 
+a_k &= a_{N-k+2} && \qquad k = 2, \dots, M-1 \\
+\theta_k &= -a_{N-k+2} && \qquad k = 2, \dots, M-1 
 \end{aligned}
 \end{equation}
-where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. In addition, for $N$ even, $\theta_M = 0$. 
+where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. See \cref{fig:symmetry1} for an illustration of these symmetry relations for $N = 6$ and $N = 7$. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=10cm]{symmetry1.eps}
+\end{center}
+\caption{Schematic of symmetry relationship between nodes for $N = 6$ and $N=7$. For nodes connected with arrows, the amplitudes $a_k$ are the same and the phases $\theta_k$ are opposite.}
+\label{fig:symmetry1}
+\end{figure}
+\noi For $N$ even, node $M$ is the node directly across the ring from node 1, and $\theta_M = 0$. For all $N$, $\theta_1 = 0$. \cref{fig:twist025} shows an example of a standing wave solution produced by numerical parameter continuation for $N = 6$. The right panel illustrates the symmetry relations \cref{eq:symm} among the amplitudes $a_k$.
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=15cm]{images/twist025.eps}
+\end{tabular}
+\end{center}
+\caption{Standing wave solution for $N = 6$, $\omega = 1$, and $\phi = 0.25$. Left is real part of solution $c_n$ versus $z$ for each node over a full period ($2 \pi)$, right is amplitude $a_n$ solution at each node. $k = 0.25$, $d=-1$.}
+\label{fig:twist025}
+\end{figure}
 
-For $N$ even, using these symmetries, as well as $\theta_0 = \theta_M = 0$, the system \cref{eq:twisteqreal} reduces to the system of equations
+\subsection{\texorpdfstring{$N$}{N} even}
+
+Numerical parameter continuation for $N$ even, starting from a single excited node at node 1, suggests that when the twist parameter $\phi = \pi/N$, the opposite node is completely dark, i.e. has an amplitude of 0. Using the symmetries \cref{eq:symm}, as well as $\theta_0 = \theta_M = 0$, the system \cref{eq:twisteqreal} for $N$ even reduces to the system of equations
 \begin{equation}\label{eq:twisteqeven}
 \begin{aligned}
-&2 k a_2 \cos(\theta_2 - \phi) + \omega a_1 + d a_1^3 = 0 \\
-&k\left( a_3 \cos(\theta_3-\theta_2-\phi) + a_1 \cos(\theta_2-\phi)\right) + \omega a_2 + d a_2^3 = 0 \\
-&a_3 \sin(\theta_3-\theta_2-\phi) - a_1 \sin(\theta_2-\phi) = 0 \\
-&k\left( a_{n+1} \cos(\theta_{n+1}-\theta_n-\phi) + a_{n-1} \cos(\theta_n - \theta_{n-1}-\phi)\right) + \omega a_n + d a_n^3 = 0 && n = 3, \dots, M-2 \\
-&a_{n+1} \sin(\theta_{n+1}-\theta_n-\phi) - a_{n-1} \sin(\theta_n - \theta_{n-1}-\phi) = 0 && n = 3, \dots, M-2 \\
-&k\left( a_M \cos(-\theta_{M-1}-\phi) + a_{M-2} \cos(\theta_{M-1} - \theta_{M-2}-\phi)\right) + \omega a_{M-1} + d a_{M-1}^3 = 0 \\
-&a_M \sin(-\theta_{M-1} -\phi) - a_{M-2} \sin(\theta_{M-1} - \theta_{M-2}-\phi) = 0 \\
-&2 k a_{M-1} \cos(\theta_{M-1} + \phi) + \omega a_M + d a_M^3 = 0
+2 k a_2 &\cos(\theta_2 - \phi) + \omega a_1 + d a_1^3 = 0 \\
+k(a_3 &\cos(\theta_3-\theta_2-\phi) + a_1 \cos(\theta_2-\phi)) + \omega a_2 + d a_2^3 = 0 \\
+a_3 &\sin(\theta_3-\theta_2-\phi) - a_1 \sin(\theta_2-\phi) = 0 \\
+k( a_{n+1} &\cos(\theta_{n+1}-\theta_n-\phi) + a_{n-1} \cos(\theta_n - \theta_{n-1}-\phi)) + \omega a_n + d a_n^3 = 0 && n = 3, \dots, M-2 \\
+a_{n+1} &\sin(\theta_{n+1}-\theta_n-\phi) - a_{n-1} \sin(\theta_n - \theta_{n-1}-\phi) = 0 && n = 3, \dots, M-2 \\
+k(a_M &\cos(-\theta_{M-1}-\phi) + a_{M-2} \cos(\theta_{M-1} - \theta_{M-2}-\phi)) + \omega a_{M-1} + d a_{M-1}^3 = 0 \\
+a_M &\sin(-\theta_{M-1} -\phi) - a_{M-2} \sin(\theta_{M-1} - \theta_{M-2}-\phi) = 0 \\
+2 k a_{M-1} &\cos(\theta_{M-1} + \phi) + \omega a_M + d a_M^3 = 0
 \end{aligned}
 \end{equation}
-
-From the numerical parameter continuation, we see that when $\phi = \pi/N$, node $M$ (the node opposite the node with maximum excitation) has an amplitude of 0, i.e. is a dark node. If $a_M = 0$, then it follows from \cref{eq:twisteqeven} that $a_n = 0$ for all $n$ unless
+If $a_M = 0$, then it follows from \cref{eq:twisteqeven} that $a_n = 0$ for all $n$ unless
 \begin{equation}\label{eq:evendarknodecond}
 \begin{aligned}
 &\cos(\theta_{M-1} + \phi) = 0 \\
@@ -148,6 +193,8 @@ from which it follows that we can have a single dark node when $\phi = \pi/N$, w
 &k a_{M-2} + \omega a_{M-1} + d a_{M-1}^3 = 0 \\
 \end{aligned}
 \end{equation}
+For the full solution, $a_M = 0$, $a_{M+k} = a_{M-k}$ for $k = 1, \dots, M-2$, $\theta_0 = 0$, $\theta_M = 0$, $\theta_n = (n-1)\phi$ for $n = 2, \dots, M-1$, and $\theta_{M+k} = -\theta_{M-k}$ for $k = 1, \dots, M-2$.
+
 This system of equations is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (\sqrt{-\omega/d}, 0, \dots, 0)$. Since $D_F(\tilde{a}, 0) = \diag(-2\omega,\omega, \dots, \omega)$, which is invertible for $\omega \neq 0$, the system \cref{eq:twisteqevenhole} has a solution for sufficiently small $k$ by the implicit function theorem. \cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}.
 
 \begin{figure}[H]
@@ -159,6 +206,10 @@ This system of equations is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_
 \caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. Left is real part of solution for each node, right is absolute value of solution at each node (this is constant in $t$). Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1$, $k = 0.25$, $d=-1$.}
 \label{fig:evenhole6}
 \end{figure}
+
+\noi We note that we can start with more excited nodes at the AC limit, but these do not appear to be stable. 
+
+\subsection{$N$ odd}
 
 For $N$ odd, using the symmetries above, the system \cref{eq:twisteqreal} reduces to the system of equations
 \begin{equation}\label{eq:twisteqodd}
@@ -172,7 +223,7 @@ For $N$ odd, using the symmetries above, the system \cref{eq:twisteqreal} reduce
 & a_M \sin(-2 \theta_M - \phi) - a_{M-1} \sin(\theta_M - \theta_{M-1} - \phi) = 0
 \end{aligned}
 \end{equation}
-For this symmetry, we can have a solution with a dark node at $a_1$. In this case, it will be opposite a pair of bright nodes at $a_M$ and $a_{M+1}$ with the same amplitude. We see this occur in the numerical parameter continuation. If $a_1 = 0$, then it follows from \cref{eq:twisteqodd} that $a_n = 0$ for all $n$ unless
+For this symmetry, we can have a solution with a dark node at $a_1$. In this case, it will be opposite a pair of bright nodes at $a_M$ and $a_{M+1}$ with the same amplitude. We observe this as well using numerical parameter continuation. If $a_1 = 0$, then it follows from \cref{eq:twisteqodd} that $a_n = 0$ for all $n$ unless
 \begin{equation}\label{eq:odddarknodecond}
 \begin{aligned}
 &\cos(\theta_2 - \phi) = 0 \\
@@ -188,7 +239,7 @@ One solution to this is
 &2 \theta_M + \phi = 0
 \end{aligned}
 \end{equation}
-from which it follows that we can have a single dark node when $\phi = \pi/N$. This is the same as for the case of $N$ even, and it agrees with the numerical results. For this case, $a_1 = 0$,  and \cref{eq:twisteqodd} reduces to the simpler system of equations
+from which it follows that we can have a single dark node when $\phi = \pi/N$. This is the same condition as for $N$ even case, and it agrees with the numerical results. For this case, $a_1 = 0$,  and \cref{eq:twisteqodd} reduces to the simpler system of equations
 \begin{equation}\label{eq:twisteqoddhole}
 \begin{aligned}
 & k a_3 + \omega a_2 + d a_2^3 = 0\\
@@ -203,10 +254,14 @@ from which it follows that we can have a single dark node when $\phi = \pi/N$. T
 \includegraphics[width=15cm]{images/oddhole7.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. Left is real part of solution for each node, right is absolute value of solution at each node (this is constant in $t$). Nodes for and 4 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1$, $k = 0.25$, $d=-1$.}
+\caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. Left is real part of solution for each node, right is absolute value of solution at each node (this is constant in $t$). Nodes 4 and 5 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1$, $k = 0.25$, $d=-1$.}
 \label{fig:oddhole7}
 \end{figure}
-This system of equations is of the form $F(a,k) = 0$, where $a = (a_2, \dots, a_M)$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (0, \dots, 0, \sqrt{-\omega/d}, 0)$. Since $D_F(\tilde{a}, 0) = \diag(\omega, \dots, \omega, -2\omega)$, which is invertible for $\omega \neq 0$, the system \cref{eq:twisteqoddhole} has a solution for sufficiently small $k$ by the implicit function theorem.
+For the full solution, $a_1 = 0$, $a_{M+k} = a_{M-k+}$ for $k = 1, \dots, M-1$, $\theta_0 = 0$, $\theta_n = (n-1)\phi - \pi/2$ for $n = 2, \dots, M$, and $\theta_{M+k} = -\theta_{M-k+1}$ for $k = 1, \dots, M-1$.
+
+This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \dots, a_M)$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (0, \dots, 0, \sqrt{-\omega/d}, 0)$. Since $D_F(\tilde{a}, 0) = \diag(\omega, \dots, \omega, -2\omega)$, which is invertible for $\omega \neq 0$, the system \cref{eq:twisteqoddhole} has a solution for sufficiently small $k$ by the implicit function theorem.
+
+\section{Stability}
 
 The linearization about a standing wave solution $c_n = a_n e^{i (\omega z + \theta_n) } = (v_n + i w_n)e^{i\omega z}$ is the $2N \times 2N$ block matrix
 \[
@@ -218,7 +273,7 @@ k \begin{pmatrix}S & C \\ -C & S \end{pmatrix}
 \]
 where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal.
 
-For spectral stability, all solutions generated this way (from AC limit with single excited node) are spectrally neutrally stable, for both $N$ even and $N$ odd. In other words, the spectrum is purely imaginary. In particular, this is true for the two case described above with a single dark node. This is verified by timestepping for a perturbations of the standing wave solutions. Results of this for $N=6$ is shown in \cref{fig:evenhole6perturbed}. Similar results are obtained for $N=7$
+For spectral stability, all solutions generated this way (from AC limit with single excited node or the solutions with a single dark node) are spectrally neutrally stable, for both $N$ even and $N$ odd. In other words, the spectrum is purely imaginary. In particular, this is true for the two case described above with a single dark node. This is verified by timestepping for a perturbations of the standing wave solutions. Results of this for $N=6$ is shown in \cref{fig:evenhole6perturbed}. Similar results are obtained for $N=7$
 
 \begin{figure}[H]
 \begin{center}

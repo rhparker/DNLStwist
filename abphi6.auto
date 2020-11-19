@@ -1,12 +1,12 @@
 import numpy as np
 from scipy.io import savemat
 
-r1=run('abphi',c='abphi',sv='1')
-r2=run(r1('UZ1'),c='abphi.1',sv='2')
-# r3=run(r2('BP1'),c='abphi.2',sv='3')
+r1=run('abphi6',c='abphi6',sv='1')
+r2=run(r1('UZ1'),c='abphi6.1',sv='2')
+r3=run(r2('UZ1'),c='abphi6.2',sv='3')
 
 # solution we want
-s = r2('UZ1')
+s = r3('UZ1')
 sol = np.array(s[0]['u'])
 
 # save array

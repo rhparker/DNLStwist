@@ -91,16 +91,17 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
           U(I) = 0
       END DO
 
-      N = (NDIM+1)/2
-      ! find center
-      IF ( MOD(N, 2) == 0 ) THEN
-            C = N/2
-      ELSE
-            C = (N+1)/2
-      END IF
+      ! N = (NDIM+1)/2
+      ! ! find center
+      ! IF ( MOD(N, 2) == 0 ) THEN
+      !       C = N/2
+      ! ELSE
+      !       C = (N+1)/2
+      ! END IF
+      ! U(C) = 1
+      ! U(C+1) = 1
 
-      U(C) = 1
-      U(C+1) = 1
+      U(1) = 1
 
       PAR(1) = D
       PAR(2) = K

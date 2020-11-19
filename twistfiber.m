@@ -1,7 +1,7 @@
 k = 0.25;
 d = -1;
 
-t = linspace(0,2*pi,1000);
+t = linspace(0,2*pi,2000);
 
 % complex version
 
@@ -27,11 +27,12 @@ mags = mags';
 % u0 = exp( 1i*phi*nn');
 % u0 = u0.*mags';
 
-% % get phases from AUTO
-% N = (length(mags)+1)/2;
-% p = [0 ; mags(N+1:end)];
-% u0 = ( mags(1:N).*exp( 1i*p ) );
-% phi = 4.48799E-01;
+% get phases from AUTO
+N = (length(mags)+1)/2;
+p = [0 ; mags(N+1:end)];
+u0 = ( mags(1:N).*exp( 1i*p ) );
+phi = 0.25;
+% phi = pi/N; 
 
 % % even hole from AUTO, phi = pi/N
 % N = length(mags)*2;
@@ -39,30 +40,53 @@ mags = mags';
 % nn = [1:length(mags) - 1]';
 % p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
 % u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
+% % k = 5.77349E-01;
 
-% odd hole from AUTO, phi = pi/N
-N = length(mags)*2 + 1;
-phi = pi/N;
-nn = [1:length(mags)]';
-p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
-u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
+% % odd hole from AUTO, phi = pi/N
+% N = length(mags)*2 + 1;
+% phi = pi/N;
+% nn = [1:length(mags)]';
+% p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
+% u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
 
 % perturbation 
-% u0(1) = 0.01;
+% u0(4) = 0.01;
 
-% solve on interval with IC
+% k = 0.25;
+
+% solve on interval with IC (regular)
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
 w = 1;
 
+% % solve on interval with IC (k-version)
+% k = 0.25*ones(size(u0));
+% phi = phi*1.05;
+% u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
+% w = 1;
+
 u1 = u0.*exp(1i*w*t);
 
-J = twistJ(real(u0),imag(u0),k,phi,d,w);
-[V,l] = eig(J);
-l = diag(l);
+% J = twistJ(real(u0),imag(u0),k,phi,d,w);
+% [V,l] = eig(J);
+% l = diag(l);
 
-J0 = twistJ(mags,0*mags,k,0,d,w);
-[V0,l0] = eig(J0);
-l0 = diag(l0);
+phases = angle(u0);
+amps = u0;
+for index = 1:length(u0)
+    if (real(u0(index)) < 0)
+        amps(index) = -abs( u0(index) );
+        phases(index) = angle( u0(index) ) + pi;
+    else
+        amps(index) = abs( u0(index) );
+        phases(index) = angle( u0(index) );
+    end
+end
+
+% AClimit = 0*u0;
+% AClimit(1) = 1;
+% J0 = twistJ(AClimit,0*AClimit,0,phi,d,w);
+% [V0,l0] = eig(J0);
+% l0 = diag(l0);
 
 figure('DefaultAxesFontSize',20);
 % plot(t,abs(u),'Linewidth',3 );
@@ -77,20 +101,21 @@ ylabel('|c_n|');
 
 % make plots
 
-figure('DefaultAxesFontSize',20,'Position', [0 0 1600 600]);
+figure('DefaultAxesFontSize',24,'Position', [0 0 1600 600]);
+set(gca,'fontname','times');
 subplot(1,2,1);
 plot(t,real(u),'Linewidth',3 );
 legendCell = string(num2cell(1:N));
-legend(legendCell);
-xlabel('t');
-ylabel('Re c_n');
+legend(legendCell,'Interpreter','latex');
+xlabel('$z$','Interpreter','latex');
+ylabel('Re $c_n$','Interpreter','latex');
 
 subplot(1,2,2);
 hold on;
-plot(1:N,abs(u0),'.','MarkerSize',30);
-plot(1:N,abs(u0),'-k');
-xlabel('n');
-ylabel('|c_n|');
+plot(1:N,amps,'.','MarkerSize',30);
+plot(1:N,amps,'-k');
+xlabel('$n$','Interpreter','latex');
+ylabel('$a_n$','Interpreter','latex');
 
 
 %% 
@@ -152,6 +177,7 @@ function u = BC_t(t, u0, k, phi, d)
     u = [u1(:,end) - u0];
 end
 
+
 function dudt = twist(t,u,k,phi,d)
     N = length(u);
     K =  exp(-1i*phi)*diag( ones(1,N-1), 1  ) ...
@@ -160,6 +186,17 @@ function dudt = twist(t,u,k,phi,d)
     K(N,1) = exp(-1i*phi);
     Nc = diag( abs(u).^2 );
     dudt = -1i*(k*K*u + d*Nc*u);
+end
+
+% in this case k is a vector, so can have different couplings
+function dudt = twist_k(t,u,k,phi,d)
+    N = length(u);
+    K =  exp(-1i*phi)*diag( k(1:end-1), 1  ) ...
+        + exp(1i*phi)*diag( k(1:end-1), -1 );
+    K(1,N) = exp(1i*phi)*k(end);
+    K(N,1) = exp(-1i*phi)*k(end);
+    Nc = diag( abs(u).^2 );
+    dudt = -1i*(K*u + d*Nc*u);
 end
 
 function dudt = twist_t(t,u,k,phi,d)

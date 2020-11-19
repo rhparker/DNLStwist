@@ -4,7 +4,7 @@ from scipy.io import savemat
 r1=run('abevenhole',c='abevenhole',sv='1')
 
 # solution we want
-s = r1('UZ1')
+s = r1('UZ2')
 sol = np.array(s[0]['u'])
 
 # save array

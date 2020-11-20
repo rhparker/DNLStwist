@@ -1,7 +1,7 @@
 k = 0.25;
 d = -1;
 
-t = linspace(0,2*pi,2000);
+t = linspace(0,50*pi,10000);
 
 % complex version
 
@@ -34,22 +34,22 @@ mags = mags';
 % phi = 0.25;
 % % phi = pi/N; 
 
-% % even hole from AUTO, phi = pi/N
-% N = length(mags)*2;
-% phi = pi/N;
-% nn = [1:length(mags) - 1]';
-% p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
-% u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
-
-% odd hole from AUTO, phi = pi/N
-N = length(mags)*2 + 1;
+% even hole from AUTO, phi = pi/N
+N = length(mags)*2;
 phi = pi/N;
-nn = [1:length(mags)]';
-p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
-u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
+nn = [1:length(mags) - 1]';
+p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
+u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
+
+% % odd hole from AUTO, phi = pi/N
+% N = length(mags)*2 + 1;
+% phi = pi/N;
+% nn = [1:length(mags)]';
+% p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
+% u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
 
 % perturbation 
-% u0(4) = 0.01;
+u0(4) = 0.01;
 
 % k = 0.25;
 
@@ -65,9 +65,9 @@ w = 1;
 
 u1 = u0.*exp(1i*w*t);
 
-% J = twistJ(real(u0),imag(u0),k,phi,d,w);
-% [V,l] = eig(J);
-% l = diag(l);
+J = twistJ(real(u0),imag(u0),k,phi,d,w);
+[V,l] = eig(J);
+l = diag(l);
 
 phases = angle(u0);
 amps = u0;
@@ -87,13 +87,24 @@ end
 % [V0,l0] = eig(J0);
 % l0 = diag(l0);
 
-figure('DefaultAxesFontSize',20);
+figure('DefaultAxesFontSize',24);
+set(gca,'fontname','times');
 % plot(t,abs(u),'Linewidth',3 );
 plot(t,abs(u),'Linewidth',3 );
 legendCell = string(num2cell(1:N));
 legend(legendCell);
-xlabel('t');
-ylabel('|c_n|');
+xlabel('$z$','Interpreter','latex');
+ylabel('$|c_n|$','Interpreter','latex');
+
+%%
+
+figure('DefaultAxesFontSize',24);
+set(gca,'fontname','times');
+% spectrum plot
+plot(l, '.', 'MarkerSize',30);
+axis([-1e-12,1e-12,-1.5,1.5]);
+xlabel('Re $\lambda$','Interpreter','latex');
+ylabel('Im $\lambda$','Interpreter','latex');
 
 
 %%
@@ -107,7 +118,7 @@ plot(t,real(u),'Linewidth',3 );
 legendCell = string(num2cell(1:N));
 legend(legendCell,'Interpreter','latex');
 xlabel('$z$','Interpreter','latex');
-ylabel('Re $c_n$','Interpreter','latex');
+ylabel('Re $c_n$');
 
 % subplot(1,2,2);
 % hold on;

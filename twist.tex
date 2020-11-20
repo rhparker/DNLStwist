@@ -128,7 +128,7 @@ by separating real and imaginary parts. We note that the the exponential terms i
 
 In the anti-continuum (AC) limit, which occurs when $k = 0$, the sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{-\omega/d} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{-\omega/d}$ are real if $d$ and $\omega$ have opposite signs.
 
-We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{-\omega/d}$ and $a_n = 0$ for all other $n$; for the phases, $\theta_n = 0$ for all $n$. We also take $\phi = 0$. We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
+We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{-\omega/d}$ and $a_n = 0$ for all other $n$; for the phases, $\theta_n = 0$ for all $n$, and we also take $\phi = 0$. (We can start with more than once excited state, but, in general, these solutions will not be stable.) We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
 \begin{equation}\label{eq:symm}
 \begin{aligned}
 a_k &= a_{N-k+2} && \qquad k = 2, \dots, M-1 \\
@@ -199,7 +199,7 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
 &\theta_M = 0 \\
 &\theta_{M+k} = -\theta_{M-k} && \qquad k = 1, \dots, M-2.
 \end{align*}
-\cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}.
+\cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}. Numerical parameter continuation suggests that for $N=6$, $\omega = 1$, and $d=-1$, these standing wave solutions exist for approximately $0 \leq k \leq 0.57735$.
 
 \begin{figure}[H]
 \begin{center}
@@ -241,7 +241,7 @@ One solution to this is
 &2 \theta_M + \phi = 0,
 \end{aligned}
 \end{equation}
-from which it follows that we can have a single dark node at $a_1$ when $\phi = \pi/N$. This condition for a dark node is the same as for $N$ even case. For this case, \cref{eq:twisteqodd} reduces to the simpler system of equations
+from which it follows that we can have a single dark node at $a_1$ when $\phi = \pi/N$. This condition for a dark node is the same as for the $N$ even case. For this case, \cref{eq:twisteqodd} reduces to the simpler system of equations
 \begin{equation}\label{eq:twisteqoddhole}
 \begin{aligned}
 & k a_3 + \omega a_2 + d a_2^3 = 0\\
@@ -268,33 +268,31 @@ This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \do
 \label{fig:oddhole7}
 \end{figure}
 
-
-
-
 \section{Stability}
 
-The linearization about a standing wave solution $c_n = a_n e^{i (\omega z + \theta_n) } = (v_n + i w_n)e^{i\omega z}$ is the $2N \times 2N$ block matrix
+We now look at the stability of the standing wave solutions we constructed in the previous section. The linearization of \cref{eq:twist1} about a standing wave solution $c_n = a_n e^{i (\omega z + \theta_n) } = (v_n + i w_n)e^{i\omega z}$ is the $2N \times 2N$ block matrix
 \[
-A(\phi) =
+A(c_n) =
 k \begin{pmatrix}S & C \\ -C & S \end{pmatrix}
 + \omega\begin{pmatrix}0 & I \\ -I & 0 \end{pmatrix} \\
 - \begin{pmatrix} \diag(2v_n w_n) & \diag(v_n^2 + 3 w_n^2) \\
 -\diag(3 v_n^2 + w_n^2) & -\diag(2v_n w_n) \end{pmatrix}
 \]
-where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal.
-
-For spectral stability, all solutions generated this way (from AC limit with single excited node or the solutions with a single dark node) are spectrally neutrally stable, for both $N$ even and $N$ odd. In other words, the spectrum is purely imaginary. In particular, this is true for the two case described above with a single dark node. This is verified by timestepping for a perturbations of the standing wave solutions. Results of this for $N=6$ is shown in \cref{fig:evenhole6perturbed}. Similar results are obtained for $N=7$
-
+where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal. The spectrum of all solutions generated from the AC limit starting with a single excited node is purely imaginary, thus we expect these solutions to be neutrally stable. In particular, this is the case for solutions with even $N$ and a single dark node opposite the bright node. The left panel of \cref{fig:evenhole6perturbed} shows this spectrum for the $N=6$. There is a double eigenvalue at 0 from the gauge invariance of \cref{eq:twist1}, and the remainder of the spectrum is purely imaginary. The right panel shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$. The solutions show small oscillations but no growth, suggesting neutral stability. Similar results are obtained for other values of $N$ for $N$ even, as well as $N$ odd with a dark node opposite a pair of bright nodes. 
 \begin{figure}[H]
 \begin{center}
-\begin{tabular}{c}
-\includegraphics[width=10cm]{images/evenhole6perturbed.eps}
+\begin{tabular}{cc}
+\includegraphics[width=8cm]{images/evenhole6spec.eps}
+\includegraphics[width=8cm]{images/evenhole6perturbed.eps}
 \end{tabular}
 \end{center}
-\caption{$|c_n|$ versus $t$. Solution with $N=6$ with dark node, perturbed by adding 0.01 to initial condition at dark node. RK4 for timestepping, $k=0.25$, $d=-1$.}
+\caption{Left panel is spectrum of linearization of \cref{eq:twist1} about solution with $N=6$ and a single dark node opposite a single bright node. Right panel shows $|c_n|$ versus $z$, where initial condition is perturbed by adding 0.01 to dark node. Timestepping using a fourth order Runge-Kutta scheme. $k=0.25$, $d=-1$, $\phi=\pi/6$.}
 \label{fig:evenhole6perturbed}
 \end{figure}
 
+\section{Variants}
+
+\section{Conclusions}
 
 \bibliographystyle{amsplain}
 \bibliography{twist.bib}

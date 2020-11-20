@@ -66,7 +66,7 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
       END DO
 
       U(1) = 1
-
+      
       PAR(1) = D
       PAR(2) = K
       PAR(3) = W

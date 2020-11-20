@@ -7,7 +7,11 @@ r1=run('abevenhole',c='abevenhole',sv='1')
 s = r1('UZ1')
 sol = np.array(s[0]['u'])
 
+par = np.array( r1[0].coordarray[0,:] )
+L2norm = np.array( r1[0].coordarray[1,:] )
+
 # save array
 savemat( 'mags.mat', { 'mags' : sol } )
+savemat( 'bd.mat', {'par' : par, 'L2norm' : L2norm } )
 
 print(sol)

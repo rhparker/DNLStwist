@@ -27,12 +27,12 @@ mags = mags';
 % u0 = exp( 1i*phi*nn');
 % u0 = u0.*mags';
 
-% get phases from AUTO
-N = (length(mags)+1)/2;
-p = [0 ; mags(N+1:end)];
-u0 = ( mags(1:N).*exp( 1i*p ) );
-phi = 0.25;
-% phi = pi/N; 
+% % get phases from AUTO
+% N = (length(mags)+1)/2;
+% p = [0 ; mags(N+1:end)];
+% u0 = ( mags(1:N).*exp( 1i*p ) );
+% phi = 0.25;
+% % phi = pi/N; 
 
 % % even hole from AUTO, phi = pi/N
 % N = length(mags)*2;
@@ -40,14 +40,13 @@ phi = 0.25;
 % nn = [1:length(mags) - 1]';
 % p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
 % u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
-% % k = 5.77349E-01;
 
-% % odd hole from AUTO, phi = pi/N
-% N = length(mags)*2 + 1;
-% phi = pi/N;
-% nn = [1:length(mags)]';
-% p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
-% u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
+% odd hole from AUTO, phi = pi/N
+N = length(mags)*2 + 1;
+phi = pi/N;
+nn = [1:length(mags)]';
+p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
+u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
 
 % perturbation 
 % u0(4) = 0.01;
@@ -110,12 +109,19 @@ legend(legendCell,'Interpreter','latex');
 xlabel('$z$','Interpreter','latex');
 ylabel('Re $c_n$','Interpreter','latex');
 
+% subplot(1,2,2);
+% hold on;
+% plot(1:N,amps,'.','MarkerSize',30);
+% plot(1:N,amps,'-k');
+% xlabel('$n$','Interpreter','latex');
+% ylabel('$a_n$','Interpreter','latex');
+
 subplot(1,2,2);
 hold on;
-plot(1:N,amps,'.','MarkerSize',30);
-plot(1:N,amps,'-k');
+plot(1:N,abs(amps),'.','MarkerSize',30);
+plot(1:N,abs(amps),'-k');
 xlabel('$n$','Interpreter','latex');
-ylabel('$a_n$','Interpreter','latex');
+ylabel('$|c_n|$','Interpreter','latex');
 
 
 %% 

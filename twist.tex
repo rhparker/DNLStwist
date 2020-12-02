@@ -278,7 +278,7 @@ k \begin{pmatrix}S & C \\ -C & S \end{pmatrix}
 - \begin{pmatrix} \diag(2v_n w_n) & \diag(v_n^2 + 3 w_n^2) \\
 -\diag(3 v_n^2 + w_n^2) & -\diag(2v_n w_n) \end{pmatrix}
 \]
-where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal. The spectrum of all solutions generated from the AC limit starting with a single excited node is purely imaginary, thus we expect these solutions to be neutrally stable. In particular, this is the case for solutions with even $N$ and a single dark node opposite the bright node. The left panel of \cref{fig:evenhole6perturbed} shows this spectrum for the $N=6$. There is a double eigenvalue at 0 from the gauge invariance of \cref{eq:twist1}, and the remainder of the spectrum is purely imaginary. The right panel shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$. The solutions show small oscillations but no growth, suggesting neutral stability. Similar results are obtained for other values of $N$ for $N$ even, as well as $N$ odd with a dark node opposite a pair of bright nodes. 
+where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal. The spectrum of all solutions generated from the AC limit starting with a single excited node is purely imaginary, thus we expect these solutions to be neutrally stable. In particular, this is the case for solutions with even $N$ and a single dark node opposite the bright node. The left panel of \cref{fig:evenhole6perturbed} shows this spectrum for the $N=6$. There is a double eigenvalue at 0 from the gauge invariance of \cref{eq:twist1}, and the remainder of the spectrum is purely imaginary. The right panel shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$. The solutions show small oscillations but no growth, suggesting neutral stability. Similar results are obtained for other values of $N$ for $N$ even, as well as $N$ odd with a dark node opposite a pair of bright nodes. In addition, if we start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$, the time evolution resembles that in \cref{fig:evenhole6perturbed}.
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
@@ -290,7 +290,24 @@ where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \p
 \label{fig:evenhole6perturbed}
 \end{figure}
 
-\section{Variants}
+If the strength of the nearest-neighbor coupling is allowed to differ between pairs of nodes, equation \cref{eq:twist1} becomes
+\begin{equation}\label{eq:twistk}
+i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} + i \gamma_n c_n + d |c_n|^2 c_n.
+\end{equation}
+This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}). These asymmetric solutions are also neutrally stable. 
+
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=15cm]{images/even6assym.eps}
+\end{tabular}
+\end{center}
+\caption{Standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.2$ for all other $n$. Left is real part of solution $c_n$ versus $z$ for each node over a full period ($2 \pi)$, right is amplitude $a_n$ solution at each node. $\phi = 0.25$, $d=-1$.}
+\label{fig:even6assym}
+\end{figure}
+
+
+
 
 \section{Conclusions}
 

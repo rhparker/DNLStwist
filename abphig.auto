@@ -1,0 +1,18 @@
+import numpy as np
+from scipy.io import savemat
+
+r1=run('abphig',c='abphig',sv='1')
+r2=run(r1('UZ1'),c='abphig.1',sv='2')
+r3=run(r2('UZ1'),c='abphig.2',sv='3')
+# r4=run(r3('UZ1'),c='abphig.3',sv='4')
+
+# solution we want
+s = r2('UZ1')
+sol = np.array(s[0]['u'])
+
+# save array
+savemat( 'mags.mat', { 'mags' : sol } )
+
+N = int( (len(sol) + 1)/2 )
+print(sol[0:N])
+print(sol[N:])

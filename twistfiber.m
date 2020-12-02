@@ -1,7 +1,7 @@
 k = 0.25;
 d = -1;
 
-t = linspace(0,50*pi,10000);
+t = linspace(0,2*pi,1000);
 
 % complex version
 
@@ -27,19 +27,22 @@ mags = mags';
 % u0 = exp( 1i*phi*nn');
 % u0 = u0.*mags';
 
-% % get phases from AUTO
-% N = (length(mags)+1)/2;
-% p = [0 ; mags(N+1:end)];
-% u0 = ( mags(1:N).*exp( 1i*p ) );
-% phi = 0.25;
-% % phi = pi/N; 
+% get phases from AUTO
+N = (length(mags)+1)/2;
+p = [0 ; mags(N+1:end)];
+u0 = ( mags(1:N).*exp( 1i*p ) );
+phi = 0.25;
+% g = 0;
+% phi = pi/N; 
 
-% even hole from AUTO, phi = pi/N
-N = length(mags)*2;
-phi = pi/N;
-nn = [1:length(mags) - 1]';
-p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
-u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
+w = 1;
+
+% % even hole from AUTO, phi = pi/N
+% N = length(mags)*2;
+% phi = pi/N;
+% nn = [1:length(mags) - 1]';
+% p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
+% u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
 % % odd hole from AUTO, phi = pi/N
 % N = length(mags)*2 + 1;
@@ -49,17 +52,26 @@ u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 % u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
 
 % perturbation 
-u0(4) = 0.01;
+% u0(1) = u0(1) * 1.05;
 
 % k = 0.25;
 
-% solve on interval with IC (regular)
+% solve on interval  with IC (regular)
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
 w = 1;
 
+% solve on interval with IC (g-version)
+% g = 0.1;
+% u0(4) = u0(4)+.01;
+% u0 = [1 0 0 0 0 0]';
+
+% u  = rk4( @(s,u) twist_g(s,u,k,phi,d,g), u0, t);
+
 % % solve on interval with IC (k-version)
-% k = 0.25*ones(size(u0));
-% phi = phi*1.05;
+% k = 0.2*ones(size(u0));
+% k(1) = 0.4;
+% phi = 0.25;
+% % u0(4) = u0(4)+.01;
 % u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
 % w = 1;
 
@@ -89,8 +101,8 @@ end
 
 figure('DefaultAxesFontSize',24);
 set(gca,'fontname','times');
-% plot(t,abs(u),'Linewidth',3 );
 plot(t,abs(u),'Linewidth',3 );
+% plot(t,abs(u).^2,'Linewidth',3 );
 legendCell = string(num2cell(1:N));
 legend(legendCell);
 xlabel('$z$','Interpreter','latex');
@@ -118,39 +130,41 @@ plot(t,real(u),'Linewidth',3 );
 legendCell = string(num2cell(1:N));
 legend(legendCell,'Interpreter','latex');
 xlabel('$z$','Interpreter','latex');
-ylabel('Re $c_n$');
-
-% subplot(1,2,2);
-% hold on;
-% plot(1:N,amps,'.','MarkerSize',30);
-% plot(1:N,amps,'-k');
-% xlabel('$n$','Interpreter','latex');
-% ylabel('$a_n$','Interpreter','latex');
+ylabel('Re $c_n$','Interpreter','latex');
 
 subplot(1,2,2);
 hold on;
-plot(1:N,abs(amps),'.','MarkerSize',30);
-plot(1:N,abs(amps),'-k');
+plot(1:N,amps,'.','MarkerSize',30);
+plot(1:N,amps,'-k');
 xlabel('$n$','Interpreter','latex');
-ylabel('$|c_n|$','Interpreter','latex');
+ylabel('$a_n$','Interpreter','latex');
+% 
+% subplot(1,2,2);
+% hold on;
+% plot(1:N,abs(amps),'.','MarkerSize',30);
+% plot(1:N,abs(amps),'-k');
+% xlabel('$n$','Interpreter','latex');
+% ylabel('$|c_n|$','Interpreter','latex');
 
 
 %% 
 
-% % try shooting method
-% 
-% t = linspace(0,2*pi,1000);
-% phi = 0.4;
-% options = optimoptions('fsolve', 'Algorithm','levenberg-marquardt','Display','iter');
-% a = u0;
-% a1 = fsolve(@(y) BC(t, y, k, phi, d), a, options);
-% u = rk4( @(s,u) twist(s,u,k,phi ,d), a1, t);
-% 
-% figure;
-% subplot(1,2,1);
-% plot(t,real(u),'Linewidth',3);
-% subplot(1,2,2);
-% plot(t,abs(u),'Linewidth',3);
+% try shooting method
+
+t = linspace(0,2*pi,1000);
+phi = pi/8;
+g = 0.1;
+k = 0.25;
+options = optimoptions('fsolve', 'Algorithm','levenberg-marquardt','Display','iter');
+a = [1 0 0 0 0 0]';
+a1 = fsolve(@(y) BC_g(t, y, k, phi, d, g), a, options);
+u = rk4( @(s,u) twist_g(s,u,k,phi ,d, g), a1, t);
+%%
+figure;
+subplot(1,2,1);
+plot(t,real(u),'Linewidth',3);
+subplot(1,2,2);
+plot(t,abs(u),'Linewidth',3);
 
 %%
 
@@ -189,11 +203,15 @@ function u = BC(t, u0, k, phi, d)
     u = [u1(:,end) - u0];
 end
 
+function u = BC_g(t, u0, k, phi, d, g)
+    u1 = rk4( @(s,u) twist_g(s,u,k,phi,d,g), u0, t);
+    u = [u1(:,end) - u0];
+end
+
 function u = BC_t(t, u0, k, phi, d)
     u1 = rk4( @(s,u) twist_t(s,u,k,phi,d), u0, t);
     u = [u1(:,end) - u0];
 end
-
 
 function dudt = twist(t,u,k,phi,d)
     N = length(u);
@@ -203,6 +221,40 @@ function dudt = twist(t,u,k,phi,d)
     K(N,1) = exp(-1i*phi);
     Nc = diag( abs(u).^2 );
     dudt = -1i*(k*K*u + d*Nc*u);
+end
+
+function dudt = twist_w(t,u,k,phi,d,w)
+    N = length(u);
+    K =  exp(-1i*phi)*diag( ones(1,N-1), 1  ) ...
+        + exp(1i*phi)*diag( ones(1,N-1), -1 );
+    K(1,N) = exp(1i*phi);
+    K(N,1) = exp(-1i*phi);
+    Nc = diag( abs(u).^2 );
+    dudt = -1i*(k*K*u + w*eye(N)*u + d*Nc*u);
+end
+
+% PT symmetric version with gain/loss
+function dudt = twist_g(t,u,k,phi,d,g)
+    N = length(u);
+    K =  exp(-1i*phi)*diag( ones(1,N-1), 1  ) ...
+        + exp(1i*phi)*diag( ones(1,N-1), -1 );
+    K(1,N) = exp(1i*phi);
+    K(N,1) = exp(-1i*phi);
+    Nc = diag( abs(u).^2 );
+    GL = diag( (-1).^(2:N+1) );
+    dudt = -1i*(k*K*u + d*Nc*u + 1i*g*GL*u);
+end
+
+% PT symmetric version with gain/loss and omega
+function dudt = twist_g_w(t,u,k,phi,d,g,w)
+    N = length(u);
+    K =  exp(-1i*phi)*diag( ones(1,N-1), 1  ) ...
+        + exp(1i*phi)*diag( ones(1,N-1), -1 );
+    K(1,N) = exp(1i*phi);
+    K(N,1) = exp(-1i*phi);
+    Nc = diag( abs(u).^2 );
+    GL = diag( (-1).^(2:N+1) );
+    dudt = -1i*(k*K + d*Nc + w*eye(N) + 1i*g*GL)*u;
 end
 
 % in this case k is a vector, so can have different couplings

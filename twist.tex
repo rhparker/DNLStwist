@@ -199,8 +199,7 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
 &\theta_M = 0 \\
 &\theta_{M+k} = -\theta_{M-k} && \qquad k = 1, \dots, M-2.
 \end{align*}
-\cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}. Numerical parameter continuation suggests that for $N=6$, $\omega = 1$, and $d=-1$, these standing wave solutions exist for approximately $0 \leq k \leq 0.57735$.
-
+\cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}. 
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{c}
@@ -209,6 +208,16 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
 \end{center}
 \caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. Left is real part of solution for each node, right is absolute value of solution at each node. Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1$, $k = 0.25$, $d=-1$.}
 \label{fig:evenhole6}
+\end{figure}
+Numerical parameter continuation with AUTO shows that for $N=6$, $\omega = 1$, and $d=-1$, these standing wave solutions exist for $|k| \leq k_0$, where $k_0 \approx 0.57735$ (\cref{fig:evenbif6}). As the parameter continuation approaches $k_0$, the solution approaches the zero solution.
+\begin{figure}[H]
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[width=8cm]{evenbif6.eps}
+\end{tabular}
+\end{center}
+\caption{$L^2$ norm of solution vs $k$, for $N = 6$ with dark node at node 4. $\omega = 1$, $d=-1$.}
+\label{fig:evenbif6}
 \end{figure}
 
 \subsection{\texorpdfstring{$N$}{N} odd}

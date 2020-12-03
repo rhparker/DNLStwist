@@ -27,22 +27,22 @@ mags = mags';
 % u0 = exp( 1i*phi*nn');
 % u0 = u0.*mags';
 
-% get phases from AUTO
-N = (length(mags)+1)/2;
-p = [0 ; mags(N+1:end)];
-u0 = ( mags(1:N).*exp( 1i*p ) );
-phi = 0.25;
-% g = 0;
-% phi = pi/N; 
+% % get phases from AUTO
+% N = (length(mags)+1)/2;
+% p = [0 ; mags(N+1:end)];
+% u0 = ( mags(1:N).*exp( 1i*p ) );
+% phi = 0.25;
+% % g = 0;
+% % phi = pi/N; 
 
 w = 1;
 
-% % even hole from AUTO, phi = pi/N
-% N = length(mags)*2;
-% phi = pi/N;
-% nn = [1:length(mags) - 1]';
-% p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
-% u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
+% even hole from AUTO, phi = pi/N
+N = length(mags)*2;
+phi = pi/N;
+nn = [1:length(mags) - 1]';
+p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
+u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
 % % odd hole from AUTO, phi = pi/N
 % N = length(mags)*2 + 1;
@@ -101,7 +101,7 @@ end
 
 figure('DefaultAxesFontSize',24);
 set(gca,'fontname','times');
-plot(t,abs(u),'Linewidth',3 );
+plot(t,real(u),'Linewidth',3 );
 % plot(t,abs(u).^2,'Linewidth',3 );
 legendCell = string(num2cell(1:N));
 legend(legendCell);

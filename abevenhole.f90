@@ -55,7 +55,7 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
       DOUBLE PRECISION D, K, W, PHI
 
 ! Initialize the equation parameters
-      D = -1.5
+      D = -1
       K = 0
       W = 1
       PHI = 0

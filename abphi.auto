@@ -2,7 +2,7 @@ import numpy as np
 from scipy.io import savemat
 
 r1=run('abphi',c='abphi',sv='1')
-r2=run(r1('UZ1'),c='abphi.1',sv='2')
+r2=run(r1, c='abphi.1',sv='2')
 # r3=run(r2('BP1'),c='abphi.2',sv='3')
 
 # solution we want

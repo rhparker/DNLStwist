@@ -1,7 +1,7 @@
-k = 0.25;
+k = 0.1;
 d = -1;
 
-t = linspace(0,2*pi,1000);
+t = linspace(0,4*pi,1000);
 
 % complex version
 
@@ -108,13 +108,11 @@ legend(legendCell);
 xlabel('$z$','Interpreter','latex');
 ylabel('$|c_n|$','Interpreter','latex');
 
-%%
-
-figure('DefaultAxesFontSize',24);
+figure('DefaultAxesFontSize',20);
 set(gca,'fontname','times');
 % spectrum plot
 plot(l, '.', 'MarkerSize',30);
-axis([-1e-12,1e-12,-1.5,1.5]);
+axis([-1e-12,1e-12,-3,3]);
 xlabel('Re $\lambda$','Interpreter','latex');
 ylabel('Im $\lambda$','Interpreter','latex');
 
@@ -148,8 +146,32 @@ ylabel('$a_n$','Interpreter','latex');
 
 
 %% 
+d = -1;
+omega = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+k0 = [0.12524714663, 0.25049429326, 0.37574143989, 0.50098858651, 0.62623573316, ...
+    0.7514828798, 0.87673002633, 1.0019764545]
+p = polyfit(omega, k0, 1);
+figure('DefaultAxesFontSize',20);
+hold on;
+set(gca,'fontname','times');
+plot(omega, k0, '.','MarkerSize',30);
+plot(omega, polyval(p,omega),'LineWidth',2);
+xlabel('$\omega$','Interpreter','latex');
+ylabel('$k_0$','Interpreter','latex');
 
-% try shooting method
+
+%%
+
+% plot bifurcation diagram
+load bd;
+figure('DefaultAxesFontSize',20);
+set(gca,'fontname','times');
+plot(par,l2norm,'LineWidth',3);
+xlabel('$k$','Interpreter','latex');
+ylabel('$l^2$ norm','Interpreter','latex');
+
+
+%% try shooting method
 
 t = linspace(0,2*pi,1000);
 phi = pi/8;

@@ -22,7 +22,7 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       DOUBLE PRECISION D,K,W,PHI
 
       ! variable split into magnitude and angle
-      DOUBLE PRECISION A((NDIM+1)/2), P((NDIM+1)/2), S((NDIM+1)/2), C((NDIM+1)/2)
+      DOUBLE PRECISION A(NDIM), P(NDIM), S(NDIM), C(NDIM)
 
       D = PAR(1)
       K = PAR(2)
@@ -30,7 +30,7 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       PHI = PAR(4)
 
       ! magnitudes
-      N = (NDIM+1)/2
+      N = NDIM/2
       DO I = 1,N
           A(I) = U(I)
       END DO
@@ -51,14 +51,14 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       ! full domain with periodic BCs     
       DO I = 2,N-1
           F(I)   = K*( C(I)*A(I+1) + C(I-1)*A(I-1) ) + W*A(I) + D*(A(I)**3)
-          F(I+N) =   ( S(I)*A(I+1) - S(I-1)*A(I-1) )
+          F(I+N) = K*( S(I)*A(I+1) - S(I-1)*A(I-1) )
       END DO
       ! periodic BCs
-      F(1)   = K*( C(1)*A(2) + C(N)*A(N) ) + W*A(1) + D*(A(1)**3)
-      F(1+N) =   ( S(1)*A(2) - S(N)*A(N) )
+      F(1)   = K*( C(1)*A(2) + C(N)*A(N) ) + W*A(1) + D*(A(1)**3) 
+      F(1+N) = K*( S(1)*A(2) - S(N)*A(N) )
       F(N)   = K*( C(N)*A(1) + C(N-1)*A(N-1) ) + W*A(N) + D*(A(N)**3)
-      F(N+N) =   ( S(N)*A(1) - S(N-1)*A(N-1) )
-
+      F(N+N) = K*( S(N)*A(1) - S(N-1)*A(N-1) )
+      
 END SUBROUTINE FUNC
 !----------------------------------------------------------------------
 !----------------------------------------------------------------------

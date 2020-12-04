@@ -209,15 +209,16 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
 \caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. Left is real part of solution for each node, right is absolute value of solution at each node. Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1$, $k = 0.25$, $d=-1$.}
 \label{fig:evenhole6}
 \end{figure}
-Numerical parameter continuation with AUTO shows that for $N=6$, $\omega = 1$, and $d=-1$, these standing wave solutions exist for $|k| \leq k_0$, where $k_0 \approx 0.57735$ (\cref{fig:evenbif6}). As the parameter continuation approaches $k_0$, the solution approaches the zero solution.
+Numerical parameter continuation with AUTO shows that these standing wave solutions exist for $|k| \leq k_0$, where $k_0$ depends on $N$ and $\omega$ but not $d$ (\cref{fig:evenbif}, left panel). The dependence of $k_0$ on $\omega$ is shown in the right panel of \cref{fig:evenbif}, which suggests that $k_0$ approaches $\omega/2$ as $N$ gets large. As the parameter continuation approaches $k_0$, the solution approaches the zero solution. 
 \begin{figure}[H]
 \begin{center}
-\begin{tabular}{c}
-\includegraphics[width=8cm]{evenbif6.eps}
+\begin{tabular}{cc}
+\includegraphics[width=8cm]{evenbif50.eps} &
+\includegraphics[width=8cm]{k0vsomega.eps}
 \end{tabular}
 \end{center}
-\caption{$L^2$ norm of solution vs $k$, for $N = 6$ with dark node at node 4. $\omega = 1$, $d=-1$.}
-\label{fig:evenbif6}
+\caption{Left panel shows $l^2$ norm of solution vs $k$, for $N = 50$ with dark node at node 4, $\omega = 1$, and $d=-1$. Right panel shows $k_0$ vs $\omega$ together with least squares linear regression line for $N = 50$ and $d = -1$.}
+\label{fig:evenbif}
 \end{figure}
 
 \subsection{\texorpdfstring{$N$}{N} odd}
@@ -266,7 +267,7 @@ This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \do
 &\theta_k = (k-1)\phi - \pi/2 && \qquad k = 2, \dots, M \\
 &\theta_{M+k} = -\theta_{M-k+1} && \qquad k = 1, \dots, M-1
 \end{align*}
-\cref{fig:oddhole7} shows this solution for $N=7$. 
+\cref{fig:oddhole7} shows this solution for $N=7$. The results of parameter continuation experiments are similar to that of the $N$ even case.
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{c}
@@ -280,14 +281,37 @@ This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \do
 \section{Stability}
 
 We now look at the stability of the standing wave solutions we constructed in the previous section. The linearization of \cref{eq:twist1} about a standing wave solution $c_n = a_n e^{i (\omega z + \theta_n) } = (v_n + i w_n)e^{i\omega z}$ is the $2N \times 2N$ block matrix
-\[
+\begin{align}\label{eq:linearization}
 A(c_n) =
 k \begin{pmatrix}S & C \\ -C & S \end{pmatrix}
 + \omega\begin{pmatrix}0 & I \\ -I & 0 \end{pmatrix} \\
 - \begin{pmatrix} \diag(2v_n w_n) & \diag(v_n^2 + 3 w_n^2) \\
 -\diag(3 v_n^2 + w_n^2) & -\diag(2v_n w_n) \end{pmatrix}
-\]
-where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal. The spectrum of all solutions generated from the AC limit starting with a single excited node is purely imaginary, thus we expect these solutions to be neutrally stable. In particular, this is the case for solutions with even $N$ and a single dark node opposite the bright node. The left panel of \cref{fig:evenhole6perturbed} shows this spectrum for the $N=6$. There is a double eigenvalue at 0 from the gauge invariance of \cref{eq:twist1}, and the remainder of the spectrum is purely imaginary. The right panel shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$. The solutions show small oscillations but no growth, suggesting neutral stability. Similar results are obtained for other values of $N$ for $N$ even, as well as $N$ odd with a dark node opposite a pair of bright nodes. In addition, if we start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$, the time evolution resembles that in \cref{fig:evenhole6perturbed}.
+\end{align}
+where each block is $N\times N$, $C$ is the periodic banded matrix with $\cos \phi$ on the first upper and lower diagonals, and $S$ is the periodic banded matrix with $\sin \phi$ on the first lower diagonal and $-\sin \phi$ on the first upper diagonal:
+\begin{align*}
+C &= \begin{pmatrix}
+0 & \cos \phi & & \dots & \cos \phi \\
+\cos \phi & 0 & \cos \phi & & & \\
+& & \ddots & \ddots &  & \\
+\cos \phi & & \dots & \cos \phi & 0
+\end{pmatrix} \\
+S &= \begin{pmatrix}
+0 & -\sin \phi & & \dots & \sin \phi \\
+\sin \phi & 0 & -\sin \phi & & & \\
+& & \ddots & \ddots &  & \\
+-\sin \phi & & \dots & \sin \phi & 0
+\end{pmatrix}.
+\end{align*}
+Since \cref{eq:linearization} is a finite dimensional matrix, the spectrum is purely point spectrum. Due to the gauge invariance, there an eigenvalue at 0 with algebraic multiplicity 2 and geometric multiplicity 1. Following the analysis in \cite[Section 2.1.1.1]{Kevrekidis2009}, there are plane wave eigenfunctions which are, to leading order, of the form $e^{\pm( i q n + \lambda z)}$ and satisfy the dispersion relation
+\begin{equation}\label{eq:dispersion}
+\lambda = \pm i \left( \omega + 2 k \cos(q + \phi) \right).
+\end{equation}
+The corresponding eigenvalues are thus purely imaginary and are contained in the bounded intervals $\pm i[\omega - 2 k, \omega + 2 k]$. As $N$ increases, these eigenvalues fill out this interval. For $|k| < k_0 = \omega/2$, these eigenvalues are bounded away from 0 and thus cannot interact with the kernel eigenvalues. 
+
+
+
+The spectrum of all solutions generated from the AC limit starting with a single excited node is purely imaginary, thus we expect these solutions to be neutrally stable. In particular, this is the case for solutions with even $N$ and a single dark node opposite the bright node. The left panel of \cref{fig:evenhole6perturbed} shows this spectrum for the $N=6$. There is a double eigenvalue at 0 from the gauge invariance of \cref{eq:twist1}, and the remainder of the spectrum is purely imaginary. The right panel shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$. The solutions show small oscillations but no growth, suggesting neutral stability. Similar results are obtained for other values of $N$ for $N$ even, as well as $N$ odd with a dark node opposite a pair of bright nodes. In addition, if we start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$, the time evolution resembles that in \cref{fig:evenhole6perturbed}.
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}

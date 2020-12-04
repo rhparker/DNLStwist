@@ -57,7 +57,7 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
 ! Initialize the equation parameters
       D = -1
       K = 0
-      W = 1
+      W = 1  
       PHI = 0
 
       ! initialize to 0

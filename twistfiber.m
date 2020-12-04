@@ -1,4 +1,4 @@
-k = 0.1;
+k = 0.25;
 d = -1;
 
 t = linspace(0,4*pi,1000);
@@ -58,7 +58,6 @@ u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
 % solve on interval  with IC (regular)
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
-w = 1;
 
 % solve on interval with IC (g-version)
 % g = 0.1;
@@ -75,6 +74,7 @@ w = 1;
 % u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
 % w = 1;
 
+w = 1;
 u1 = u0.*exp(1i*w*t);
 
 J = twistJ(real(u0),imag(u0),k,phi,d,w);
@@ -101,7 +101,7 @@ end
 
 figure('DefaultAxesFontSize',24);
 set(gca,'fontname','times');
-plot(t,real(u),'Linewidth',3 );
+plot(t,abs(u),'Linewidth',3 );
 % plot(t,abs(u).^2,'Linewidth',3 );
 legendCell = string(num2cell(1:N));
 legend(legendCell);
@@ -112,7 +112,7 @@ figure('DefaultAxesFontSize',20);
 set(gca,'fontname','times');
 % spectrum plot
 plot(l, '.', 'MarkerSize',30);
-axis([-1e-12,1e-12,-3,3]);
+axis([-1e-12,1e-12,-2,2]);
 xlabel('Re $\lambda$','Interpreter','latex');
 ylabel('Im $\lambda$','Interpreter','latex');
 

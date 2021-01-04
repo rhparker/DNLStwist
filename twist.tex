@@ -82,12 +82,7 @@
 
 \section{Introduction}
 
-
-
-
-\section{Background}
-
-We consider the propagation dynamics in a multi-core fiber consisting of $N$ waveguides arranged in a ring (\cref{fig:ring}).
+There has been much recent theoretical and experimental interest in light dynamics in twisted multi-core optical fibers. Geometries that have been studied include helical waveguides arranged in Lieb lattices \cite{Marzuola2019bulk} and honeycomb lattices \cite{Ablowitz2014,Lumer2013}. Applications of twisted multi-core fibers include sensors for shape, strain, and temperature \cite{Gannot2014,Westbrook2017}. Early work on twisted fibers can be found in \cite{Longhi2007,Longhi2007b}, in which the coupled mode equations describing light propagation in a circular array of helical waveguides is derived. The introduction of a fiber twist in a circular array allows for control of diffraction and light transfer, in a similar manner to axis bending in linear waveguide arrays \cite{Longhi2005}. The fiber twist introduces additional phase terms to the model, which is known as the Peierls phase \cite{Longhi2007,Peierls1933}. This system is considered as an optical analogue of topological Aharonov-Bohm suppression in \cite{Ornigotti2007}. Parity-time ($\mathcal{PT}$) symmetry in model with balanced gain and loss terms is considered in \cite{Longhi2016,castro2016}. In this paper, we consider a multi-core fiber consisting of $N$ waveguides arranged in a ring (\cref{fig:ring}).
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=4cm]{circle}
@@ -95,11 +90,11 @@ We consider the propagation dynamics in a multi-core fiber consisting of $N$ wav
 \caption{Schematic of $N$ twisted fibers arranged in a ring.}
 \label{fig:ring}
 \end{figure}
-Each fiber is twisted in a uniform fashion along the propagation direction $z$. The dynamics are given by the coupled system of equations
+Each fiber is twisted in a uniform fashion along the propagation direction $z$. For the system with an optical Kerr nonlinearity, the dynamics are given by the coupled system of equations \cite{castro2016,Parto2017}
 \begin{equation}\label{eq:twist}
 i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n 
 \end{equation}
-for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the nearest-neighbor coupling, $\gamma_n$ is the optical gain or loss at site $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[(2.1)]{castro2016} for a description of the parameters in terms of the optical waveguide system). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, equation \cref{eq:twist} becomes
+for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the nearest-neighbor coupling, $\gamma_n$ is the optical gain or loss at site $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[section 2]{castro2016} for a description of the parameters in terms of the optical waveguide system). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, equation \cref{eq:twist} becomes
 \begin{equation}\label{eq:twist1}
 i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n,
 \end{equation}
@@ -107,9 +102,13 @@ which is Hamiltonian with energy given by
 \begin{equation}
 H = \sum_{n=1}^N k (c_{n+1}c_n^* e^{-i \phi} + c_n c_{n+1}^* e^{i \phi}) + \frac{d}{2}|c_n|^4.
 \end{equation}
-We will consider the Hamiltonian case here, and will comment on the case with loss/gain at the end.
+The system with no gain or loss is considered in \cite{castro2016}. Asymptotic analysis for the case of $N=6$ fibers where the peak intensity is contained in the first fiber ($n=1$) is used to demonstrate that the opposite fiber in the ring ($n=4$) has, to leading order, zero intensity when the twist parameter is given by $\phi = \pi/6$. This is confirmed by numerical time evolution simulations (see \cite[Figures 4 and 5]{castro2016}). This phenomenon is discussed in the context of Aharonov-Bohm (AB) suppression of optical tunneling in twisted multicore fibers in \cite{Parto2017}; in particular, this effect is demonstrated analytically for the case of $N = 4$ fibers by solving the nonlinear system \cref{eq:twist} analytically. 
 
-We are interested in standing wave solutions to \cref{eq:twist1}, which are bound states of the form
+In this paper, we study standing wave solutions (bound states) of equation \cref{eq:twist}. This paper is organized as follows. In \cref{sec:standingwave}, we construct standing wave solutions to \cref{eq:twist}.
+
+\section{Standing wave solutions}\label{sec:standingwave}
+
+Standing wave solutions to \cref{eq:twist1} are bound states of the form
 \begin{equation}\label{eq:ansatz1}
 c_n = a_n e^{i (\omega z + \theta_n) },
 \end{equation}
@@ -126,18 +125,14 @@ which can be written as the system of $2n$ equations
 \end{equation}
 by separating real and imaginary parts. We note that the the exponential terms in \cref{eq:twisteq} depend only on the phase differences $\theta_{n+1}-\theta_n$ between adjacent sites. Due to the gauge invariance of \cref{eq:twist1}, if $c_n$ is solution, so is $e^{i \theta} c_n$, thus we may without loss of generality take $\theta_1 = 0$. If $\phi = 0$, i.e. the fibers are not twisted, we can take $\theta_n = 0$ for all $n$, and so \cref{eq:twisteq} reduces to the untwisted case with periodic boundary conditions. Similarly, if we take $\phi = 2 \pi/N$ and $\theta_n = (n-1)\phi$ for all $n$, the exponential terms do not contribute, and \cref{eq:twisteq} once again reduces to untwisted case. The interesting case, therefore, occurs when $0 < \theta < 2 \pi/N$. 
 
-\section{Construction of solutions}
-
-In the anti-continuum (AC) limit, which occurs when $k = 0$, the sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{-\omega/d} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{-\omega/d}$ are real if $d$ and $\omega$ have opposite signs.
-
-We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{-\omega/d}$ and $a_n = 0$ for all other $n$; for the phases, $\theta_n = 0$ for all $n$, and we also take $\phi = 0$. (We can start with more than once excited state, but, in general, these solutions will not be stable.) We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
+In the anti-continuum (AC) limit, which occurs when $k = 0$, the sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{-\omega/d} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{-\omega/d}$ are real if $d$ and $\omega$ have opposite signs. We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{-\omega/d}$ and $a_n = 0$ for all other $n$; for the phases, $\theta_n = 0$ for all $n$, and we also take $\phi = 0$. (We can start with more than once excited state, but, in general, these solutions will not be stable.) We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
 \begin{equation}\label{eq:symm}
 \begin{aligned}
 a_k &= a_{N-k+2} && \qquad k = 2, \dots, M-1 \\
 \theta_k &= -a_{N-k+2} && \qquad k = 2, \dots, M-1,
 \end{aligned}
 \end{equation}
-where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. See \cref{fig:symmetry1} for an illustration of these symmetry relations for $N = 6$ and $N = 7$. 
+where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, node $M$ is the node directly across the ring from node 1, and $\theta_M = 0$. For all $N$, $\theta_1 = 0$. See \cref{fig:symmetry1} for an illustration of these symmetry relations for $N = 6$ and $N = 7$. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=10cm]{symmetry1.eps}
@@ -145,7 +140,7 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. See \cref{fig:sy
 \caption{Schematic of symmetry relationship between nodes for $N = 6$ and $N=7$. For nodes connected with arrows, the amplitudes $a_k$ are the same and the phases $\theta_k$ are opposite.}
 \label{fig:symmetry1}
 \end{figure}
-\noi For $N$ even, node $M$ is the node directly across the ring from node 1, and $\theta_M = 0$. For all $N$, $\theta_1 = 0$. \cref{fig:twist025} shows an example of a standing wave solution produced by numerical parameter continuation for $N = 6$. The right panel illustrates the symmetry relations \cref{eq:symm} among the amplitudes $a_k$.
+\noi \cref{fig:twist025} shows an example of a standing wave solution produced by numerical parameter continuation for $N = 6$. The symmetry relations \cref{eq:symm} among the amplitudes $a_k$ can be seen in the right panel.
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{c}
@@ -155,6 +150,8 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. See \cref{fig:sy
 \caption{Standing wave solution for $N = 6$, $\omega = 1$, and $\phi = 0.25$. Left is real part of solution $c_n$ versus $z$ for each node over a full period ($2 \pi)$, right is amplitude $a_n$ solution at each node. $k = 0.25$, $d=-1$.}
 \label{fig:twist025}
 \end{figure}
+
+To find 
 
 \subsection{\texorpdfstring{$N$}{N} even}
 

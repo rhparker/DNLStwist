@@ -30,7 +30,7 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       PHI = PAR(4)
 
       ! magnitudes
-      N = NDIM/2
+      N = (NDIM+1)/2
       DO I = 1,N
           A(I) = U(I)
       END DO

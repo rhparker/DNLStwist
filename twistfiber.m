@@ -66,20 +66,20 @@ u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
 
 % u  = rk4( @(s,u) twist_g(s,u,k,phi,d,g), u0, t);
 
-% % solve on interval with IC (k-version)
-% k = 0.2*ones(size(u0));
-% k(1) = 0.4;
-% phi = 0.25;
-% % u0(4) = u0(4)+.01;
-% u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
-% w = 1;
+% solve on interval with IC (k-version)
+k = 0.20*ones(size(u0));
+k(1) = 0.40;
+phi = 0.25;
+% u0(4) = u0(4)+.01;
+u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
+w = 1;
 
 w = 1;
 u1 = u0.*exp(1i*w*t);
 
-J = twistJ(real(u0),imag(u0),k,phi,d,w);
-[V,l] = eig(J);
-l = diag(l);
+% J = twistJ(real(u0),imag(u0),k,phi,d,w);
+% [V,l] = eig(J);
+% l = diag(l);
 
 phases = angle(u0);
 amps = u0;
@@ -108,13 +108,13 @@ legend(legendCell);
 xlabel('$z$','Interpreter','latex');
 ylabel('$|c_n|$','Interpreter','latex');
 
-figure('DefaultAxesFontSize',20);
-set(gca,'fontname','times');
-% spectrum plot
-plot(l, '.', 'MarkerSize',30);
-axis([-1e-12,1e-12,-2,2]);
-xlabel('Re $\lambda$','Interpreter','latex');
-ylabel('Im $\lambda$','Interpreter','latex');
+% figure('DefaultAxesFontSize',20);
+% set(gca,'fontname','times');
+% % spectrum plot
+% plot(l, '.', 'MarkerSize',30);
+% axis([-1e-12,1e-12,-2,2]);
+% xlabel('Re $\lambda$','Interpreter','latex');
+% ylabel('Im $\lambda$','Interpreter','latex');
 
 
 %%
@@ -143,7 +143,7 @@ plot(1:N,amps,'-k');
 xlabel('$n$','Interpreter','latex');
 ylabel('$a_n$','Interpreter','latex');
 set(gca,'XTick',1:N);
-axis([1,n,-0.4,1.2]);
+axis([1,N,-0.4,1.2]);
 axis(ax2,'tight');
 % 
 % subplot(1,2,2);

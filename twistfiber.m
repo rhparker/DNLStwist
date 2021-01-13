@@ -1,7 +1,7 @@
 k = 0.25;
 d = -1;
 
-t = linspace(0,4*pi,1000);
+t = linspace(0,2*pi,1000);
 
 % complex version
 
@@ -50,7 +50,7 @@ u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 % nn = [1:length(mags)]';
 % p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
 % u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
-
+% 
 % perturbation 
 % u0(1) = u0(1) * 1.05;
 
@@ -121,21 +121,30 @@ ylabel('Im $\lambda$','Interpreter','latex');
 
 % make plots
 
-figure('DefaultAxesFontSize',24,'Position', [0 0 1600 600]);
+figure('DefaultAxesFontSize',20,'Position', [0 0 1600 600]);
 set(gca,'fontname','times');
-subplot(1,2,1);
-plot(t,real(u),'Linewidth',3 );
-legendCell = string(num2cell(1:N));
-legend(legendCell,'Interpreter','latex');
+
+ax1 = subplot(1,2,1);
+hold on
+lS = {'-','--',':','-.'};
+NPlot=4;
+for index = 1:NPlot
+    plot(t,real(u(index,:)),'Linewidth',3, 'LineStyle', lS{mod(index,length(lS))+1} );
+end
+legendCell = strcat('n=', string(num2cell(1:NPlot)) );
+legend(legendCell,'Interpreter','latex','location','southeast');
 xlabel('$z$','Interpreter','latex');
 ylabel('Re $c_n$','Interpreter','latex');
 
-subplot(1,2,2);
+ax2=subplot(1,2,2);
 hold on;
 plot(1:N,amps,'.','MarkerSize',30);
 plot(1:N,amps,'-k');
 xlabel('$n$','Interpreter','latex');
 ylabel('$a_n$','Interpreter','latex');
+set(gca,'XTick',1:N);
+axis([1,n,-0.4,1.2]);
+axis(ax2,'tight');
 % 
 % subplot(1,2,2);
 % hold on;

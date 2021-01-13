@@ -1,7 +1,7 @@
 k = 0.25;
 d = -1;
 
-t = linspace(0,2*pi,1000);
+t = linspace(0,50*pi,1000);
 
 % complex version
 
@@ -27,13 +27,13 @@ mags = mags';
 % u0 = exp( 1i*phi*nn');
 % u0 = u0.*mags';
 
-% get phases from AUTO
-N = (length(mags)+1)/2;
-p = [0 ; mags(N+1:end)];
-u0 = ( mags(1:N).*exp( 1i*p ) );
-phi = 0.25;
-% g = 0;
-% phi = pi/N; 
+% % get phases from AUTO
+% N = (length(mags)+1)/2;
+% p = [0 ; mags(N+1:end)];
+% u0 = ( mags(1:N).*exp( 1i*p ) );
+% phi = 0.25;
+% % g = 0;
+% % phi = pi/N; 
 
 w = 1;
 
@@ -44,15 +44,16 @@ w = 1;
 % p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
 % u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
-% % odd hole from AUTO, phi = pi/N
-% N = length(mags)*2 + 1;
-% phi = pi/N;
-% nn = [1:length(mags)]';
-% p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
-% u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
-% 
+% odd hole from AUTO, phi = pi/N
+N = length(mags)*2 + 1;
+phi = pi/N;
+nn = [1:length(mags)]';
+p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
+u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
+
 % perturbation 
 % u0(1) = u0(1) * 1.05;
+u0(1) = 0.01;
 
 % k = 0.25;
 
@@ -66,13 +67,13 @@ u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
 
 % u  = rk4( @(s,u) twist_g(s,u,k,phi,d,g), u0, t);
 
-% solve on interval with IC (k-version)
-k = 0.20*ones(size(u0));
-k(1) = 0.40;
-phi = 0.25;
-% u0(4) = u0(4)+.01;
-u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
-w = 1;
+% % solve on interval with IC (k-version)
+% k = 0.20*ones(size(u0));
+% k(1) = 0.40;
+% phi = 0.25;
+% % u0(4) = u0(4)+.01;
+% u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
+% w = 1;
 
 w = 1;
 u1 = u0.*exp(1i*w*t);
@@ -101,10 +102,14 @@ end
 
 figure('DefaultAxesFontSize',24);
 set(gca,'fontname','times');
-plot(t,abs(u),'Linewidth',3 );
+hold on
+lS = {'-','--',':','-.'};
+NPlot=4;
+for index = 1:NPlot
+    plot(t,abs(u(index,:)),'Linewidth',2, 'LineStyle', lS{index} );
+end
 % plot(t,abs(u).^2,'Linewidth',3 );
-legendCell = string(num2cell(1:N));
-legend(legendCell);
+legendCell = strcat('n=', string(num2cell(1:NPlot)) );legend(legendCell);
 xlabel('$z$','Interpreter','latex');
 ylabel('$|c_n|$','Interpreter','latex');
 

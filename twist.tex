@@ -93,7 +93,7 @@ Dallas, TX 75275}
 \email{aaceves@smu.edu}
 
 \begin{abstract}
-In the present work, we consider the existence and spectral stability of standing wave solutions to a model for light propagation in a circular array of helical waveguides. Numerical parameter continuation experiments demonstrate the existence of standing wave solutions for sufficiently small values of the coupling parameter. Furthermore, standing waves exhibiting optical Aharonov-Bohm suppression, where there is a single waveguide which remains unexcited, exist when the twist parameter $\phi$ and the number of waveguides $N$ is related by $\phi = \pi/N$. Spectral computations and numerical timestepping simulations suggest that standing wave solutions where the energy is concentrated in a single site are neutrally stable. 
+In the present work, we consider the existence and spectral stability of standing wave solutions to a model for light propagation in a circular array of helical waveguides with no gain or loss of energy. Numerical parameter continuation experiments demonstrate the existence of standing wave solutions for sufficiently small values of the coupling parameter. Furthermore, standing waves exhibiting optical Aharonov-Bohm suppression, where there is a single waveguide which remains unexcited, exist when the twist parameter $\phi$ and the number of waveguides $N$ is related by $\phi = \pi/N$. Spectral computations and numerical timestepping simulations suggest that standing wave solutions where the energy is concentrated in a single site are neutrally stable. 
 \end{abstract}
 
 \maketitle
@@ -112,17 +112,17 @@ In this paper, we consider a multi-core fiber consisting of $N$ waveguides arran
 \end{figure}
 \noi Each fiber is twisted in a uniform fashion along the propagation direction $z$. For the system with an optical Kerr nonlinearity, the dynamics are given by the coupled system of equations \cite{castro2016,Parto2017}
 \begin{equation}\label{eq:twist}
-i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n 
+i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n
 \end{equation}
-for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the nearest-neighbor coupling, $\gamma_n$ is the optical gain or loss at site $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[section 2]{castro2016} for a description of the parameters in terms of the geometry of the optical waveguide system). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, equation \cref{eq:twist} becomes
+for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the nearest-neighbor coupling, $\gamma_n$ is the optical gain or loss at site $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[section 2]{castro2016} for a description of the parameters in terms of the geometry of the optical waveguide system). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node. Furthermore, upon normalizing the fields $c_n \rightarrow \frac{1}{\sqrt{|d|}}c_n$,  equation \cref{eq:twist} becomes
 \begin{equation}\label{eq:twist1}
-i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n,
+i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right)  \pm |c_n|^2 c_n,
 \end{equation}
-which is Hamiltonian with energy given by
+which is Hamiltonian with conserved energy given by
 \begin{equation}
-H = \sum_{n=1}^N k (c_{n+1}c_n^* e^{-i \phi} + c_n c_{n+1}^* e^{i \phi}) + \frac{d}{2}|c_n|^4.
+H = \sum_{n=1}^N k (c_{n+1}c_n^* e^{-i \phi} + c_n c_{n+1}^* e^{i \phi}) \pm \frac{1}{2}|c_n|^4.
 \end{equation}
-The Hamiltonian system is considered in \cite{castro2016}, in which asymptotic analysis for $N=6$ fibers where the peak intensity is contained in the first fiber ($n=1$) is performed; most notably, the opposite fiber in the ring ($n=4$) has, to leading order, zero intensity when the twist parameter is given by $\phi = \pi/6$. This is confirmed by numerical time evolution simulations (see \cite[Figures 4 and 5]{castro2016}). This phenomenon is discussed in the context of Aharonov-Bohm (AB) suppression of optical tunneling in twisted multicore fibers in \cite{Parto2017,Parto2019}. In particular, this effect is demonstrated analytically for the case of $N = 4$ and $\phi = \pi/4$ fibers by solving the nonlinear system \cref{eq:twist} analytically. 
+In this paper, we will only be concerned with the Hamiltonian case \cref{eq:twist1}, with defocusing (minus) nonlinearity. The case with gain-loss terms ($\mathcal{PT}$ symmetry) is considered in \cite{castro2016}. For the Hamiltonian system \cref{eq:twist1}, asymptotic analysis for $N=6$ fibers where the peak intensity is contained in the first fiber ($n=1$) shows the opposite fiber in the ring ($n=4$) has, to leading order, zero intensity when the twist parameter is given by $\phi = \pi/6$ \cite{castro2016}. This is confirmed by numerical time evolution simulations (see \cite[Figures 4 and 5]{castro2016}). This phenomenon is discussed in the context of Aharonov-Bohm (AB) suppression of optical tunneling in twisted multicore fibers in \cite{Parto2017,Parto2019}. In particular, this effect is demonstrated analytically for the case of $N = 4$ and $\phi = \pi/4$ fibers by solving the nonlinear system \cref{eq:twist} analytically. 
 
 In this paper, we study standing wave solutions (bound states) of equation \cref{eq:twist}. This paper is organized as follows. In \cref{sec:standingwave}, we construct standing wave solutions to \cref{eq:twist}. In \cref{sec:ABsupp}, we show the existence, both analytically and numerically, of standing wave solutions which have a single dark node when $\phi = \pi/N$. We then investigate stability of these solutions in \cref{sec:stability}. We conclude with a brief discussion of asymmetric variants and some directions for future research.
 
@@ -134,18 +134,18 @@ c_n = a_n e^{i (\omega z + \theta_n) },
 \end{equation}
 where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the frequency of oscillation. (Since we allow $a_n$ to be negative, we can restrict $\theta_n$ to that interval). Making this substitution and simplifying, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twisteq}
-k\left( a_{n+1} e^{i((\theta_{n+1}-\theta_n)-\phi)} + a_{n-1} e^{-i((\theta_n - \theta_{n-1})-\phi)}\right) + \omega a_n + d a_n^3 = 0,
+k\left( a_{n+1} e^{i((\theta_{n+1}-\theta_n)-\phi)} + a_{n-1} e^{-i((\theta_n - \theta_{n-1})-\phi)}\right) + \omega a_n - a_n^3 = 0,
 \end{equation}
 which can be written as the system of $2n$ equations
 \begin{equation}\label{eq:twisteqreal}
 \begin{aligned}
-&k\left( a_{n+1} \cos(\theta_{n+1}-\theta_n-\phi) + a_{n-1} \cos(\theta_n - \theta_{n-1}-\phi)\right) + \omega a_n + d a_n^3 = 0 \\\
+&k\left( a_{n+1} \cos(\theta_{n+1}-\theta_n-\phi) + a_{n-1} \cos(\theta_n - \theta_{n-1}-\phi)\right) + \omega a_n -  a_n^3 = 0 \\\
 &a_{n+1} \sin(\theta_{n+1}-\theta_n-\phi) - a_{n-1} \sin(\theta_n - \theta_{n-1}-\phi) = 0
 \end{aligned}
 \end{equation}
 by separating real and imaginary parts. We note that the the exponential terms in \cref{eq:twisteq} depend only on the phase differences $\theta_{n+1}-\theta_n$ between adjacent sites. Due to the gauge invariance of \cref{eq:twist1}, if $c_n$ is solution, so is $e^{i \theta} c_n$, thus we may without loss of generality take $\theta_1 = 0$. If $\phi = 0$, i.e. the fibers are not twisted, we can take $\theta_n = 0$ for all $n$, and so \cref{eq:twisteq} reduces to the untwisted case with periodic boundary conditions. Similarly, if we take $\phi = 2 \pi/N$ and $\theta_n = (n-1)\phi$ for all $n$, the exponential terms do not contribute, and \cref{eq:twisteq} once again reduces to untwisted case. The interesting case, therefore, occurs when $0 < \theta < 2 \pi/N$. 
 
-In the anti-continuum (AC) limit, which occurs when $k = 0$, the lattice sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{-\omega/d} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{-\omega/d}$ are real if $d$ and $\omega$ have opposite signs. We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{-\omega/d}$ and $a_n = 0$ for all other $n$. (We can start with more than once excited state, but, in general, these solutions will not be stable.) In addition, we take $\theta_n = 0$ for all $n$ and $\phi = 0$.  We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
+In the anti-continuum (AC) limit, which occurs when $k = 0$, the lattice sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{\omega} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{\omega}$ are real if  $\omega > 0$. We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{-\omega/d}$ and $a_n = 0$ for all other $n$. (We can start with more than once excited state, but, in general, these solutions will not be stable.) In addition, we take $\theta_n = 0$ for all $n$ and $\phi = 0$.  We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
 \begin{equation}\label{eq:symm}
 \begin{aligned}
 a_k &= a_{N-k+2} && \qquad k = 2, \dots, M-1 \\
@@ -238,7 +238,7 @@ Numerical parameter continuation with AUTO shows that these standing wave soluti
 \includegraphics[width=8cm]{k0vsomega.eps}
 \end{tabular}
 \end{center}
-\caption{Left panel shows $l^2$ norm of solution vs $k$, for $N = 50$ with dark node at node 4, $\omega = 1$, and $d=-1$. Right panel shows $k_0$ vs $\omega$ together with least squares linear regression line for $N = 50$ and $d = -1$.}
+\caption{Left panel shows $l^2$ norm of solution vs $k$, for $N = 50$ with dark node at node 4, $\omega = 1$, and $d=-1$. For this value of $\omega$, $k_0 = 0.5$. Right panel is a plot of $k_0$ vs $\omega$ together with least squares linear regression line for $N = 50$ and $d = -1$.}
 \label{fig:evenbif}
 \end{figure}
 
@@ -328,7 +328,7 @@ Since \cref{eq:linearization} is a finite dimensional matrix, the spectrum is pu
 \begin{equation}\label{eq:dispersion}
 \lambda = \pm i \left( \omega + 2 k \cos(q + \phi) \right).
 \end{equation}
-The corresponding eigenvalues are thus purely imaginary and are contained in the bounded intervals $\pm i[\omega - 2 k, \omega + 2 k]$. As $N$ increases, these eigenvalues fill out this interval. For $|k| < k_0 = \omega/2$, these eigenvalues cannot interact with the kernel eigenvalues. \cref{fig:evenholespec} illustrates these results numerically for $\omega = 1$ and $k = 0.25$ for the case of $N$ even $\phi = \pi/N$, i.e. a single dark node opposite a single bright node. Similar results are obtained for other values of $\omega$ and $k$ with a single bright node as well as the solutions from Section \ref{sec:Nodd}.
+The corresponding eigenvalues are thus purely imaginary and are contained in the bounded intervals $\pm i[\omega - 2 k, \omega + 2 k]$. As $N$ increases, these eigenvalues fill out this interval. For $|k| < k_0 = \omega/2$, these eigenvalues cannot interact with the kernel eigenvalues. \cref{fig:evenholespec} illustrates these results numerically for $\omega = 1$ and $k = 0.25$ for the case of $N$ even $\phi = \pi/N$, i.e. a single dark node opposite a single bright node. Similar results are obtained for other values of $\omega$ and $k$ with a single bright node as well as the solutions from Section \ref{sec:Nodd} with odd $N$ and a single dark node.
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
@@ -340,17 +340,18 @@ The corresponding eigenvalues are thus purely imaginary and are contained in the
 \label{fig:evenholespec}
 \end{figure}
 
-Since the spectrum of these solutions is purely imaginary, we expect that they will be neutrally stable.  \cref{fig:evenhole6perturbed} shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$. The solutions show small oscillations but no growth, which provides evidence for neutral stability. Similar results are obtained for other values of $N$ and $\omega$. In addition, if we start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$, the time evolution resembles that in \cref{fig:evenhole6perturbed}.
+Since the spectrum of these solutions is purely imaginary, we expect that they will be neutrally stable.  \cref{fig:evenhole6perturbed} shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$ and $N=7$. The solutions show small oscillations but no growth, which provides evidence for neutral stability. Similar results are obtained for other values of $N$ and $\omega$. In addition, if we start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$, the time evolution resembles that in \cref{fig:evenhole6perturbed}.
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
 \includegraphics[width=8cm]{images/evenhole6perturbed.eps} & 
-\includegraphics[width=8cm]{images/oddhole7perturbed.eps
+\includegraphics[width=8cm]{images/oddhole7perturbed.eps}
 \end{tabular}
 \end{center}
-\caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=6$ and $\phi = \pi/6$ (left panel) and $N=7$ and $\phi = \pi/7$ (right panel). Initial condition is perturbed by adding 0.01 to dark node. Timestepping using a fourth order Runge-Kutta scheme. $k=0.25$, $d=-1$, $\phi=\pi/6$.}
+\caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=6$,  $\phi = \pi/6$ (left panel) and $N=7$, $\phi = \pi/7$ (right panel). Initial condition is perturbed by adding 0.01 to dark node. Timestepping using a fourth order Runge-Kutta scheme. $k=0.25$, $d=-1$}
 \label{fig:evenhole6perturbed}
 \end{figure}
+Additional timestepping results can be found in \cite{castro2016}. In particular, see \cite[Figure 4]{castro2016} for timestepping results when the fiber is initially excited at a single site. 
 
 \section{Variants}\label{sec:variants}
 

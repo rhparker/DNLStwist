@@ -1,7 +1,8 @@
 k = 0.25;
 d = -1;
+w = 1;
 
-t = linspace(0,50*pi,1000);
+t = linspace(0,50*pi,10000);
 
 % complex version
 
@@ -31,31 +32,26 @@ mags = mags';
 % N = (length(mags)+1)/2;
 % p = [0 ; mags(N+1:end)];
 % u0 = ( mags(1:N).*exp( 1i*p ) );
-% phi = 0.25;
-% % g = 0;
-% % phi = pi/N; 
+% phi = pi/4;
+% w = 1;
 
-w = 1;
-
-% % even hole from AUTO, phi = pi/N
-% N = length(mags)*2;
-% phi = pi/N;
-% nn = [1:length(mags) - 1]';
-% p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
-% u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
-
-% odd hole from AUTO, phi = pi/N
-N = length(mags)*2 + 1;
+% even hole from AUTO, phi = pi/N
+N = length(mags)*2;
 phi = pi/N;
-nn = [1:length(mags)]';
-p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
-u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
+nn = [1:length(mags) - 1]';
+p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
+u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
-% perturbation 
-% u0(1) = u0(1) * 1.05;
-u0(1) = 0.01;
+% % odd hole from AUTO, phi = pi/N
+% N = length(mags)*2 + 1;
+% phi = pi/N;
+% nn = [1:length(mags)]';
+% p = [0 ; nn*phi-pi/2 ; -flip(nn*phi-pi/2) ];
+% u0 = [0 ; mags ; flip(mags) ].*exp(1i*p);
 
+% % perturbation 
 % k = 0.25;
+k = 0.35;
 
 % solve on interval  with IC (regular)
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
@@ -78,9 +74,9 @@ u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
 w = 1;
 u1 = u0.*exp(1i*w*t);
 
-% J = twistJ(real(u0),imag(u0),k,phi,d,w);
-% [V,l] = eig(J);
-% l = diag(l);
+J = twistJ(real(u0),imag(u0),k,phi,d,w);
+[V,l] = eig(J);
+l = diag(l);
 
 phases = angle(u0);
 amps = u0;
@@ -113,35 +109,43 @@ legendCell = strcat('n=', string(num2cell(1:NPlot)) );legend(legendCell);
 xlabel('$z$','Interpreter','latex');
 ylabel('$|c_n|$','Interpreter','latex');
 
-% figure('DefaultAxesFontSize',20);
-% set(gca,'fontname','times');
-% % spectrum plot
-% plot(l, '.', 'MarkerSize',30);
-% axis([-1e-12,1e-12,-2,2]);
-% xlabel('Re $\lambda$','Interpreter','latex');
-% ylabel('Im $\lambda$','Interpreter','latex');
-
-
-%%
+figure('DefaultAxesFontSize',20);
+set(gca,'fontname','times');
+% spectrum plot
+plot(l, '.', 'MarkerSize',30);
+axis([-1e-12,1e-12,-2,2]);
+xlabel('Re $\lambda$','Interpreter','latex');
+ylabel('Im $\lambda$','Interpreter','latex');
 
 % make plots
 
-figure('DefaultAxesFontSize',20,'Position', [0 0 1600 600]);
+% figure('DefaultAxesFontSize',20,'Position', [0 0 1600 600]);
+% set(gca,'fontname','times');
+% 
+% ax1 = subplot(1,2,1);
+% hold on
+% lS = {'-','--',':','-.'};
+% NPlot=4;
+% for index = 1:NPlot
+%     plot(t,real(u(index,:)),'Linewidth',3, 'LineStyle', lS{mod(index,length(lS))+1} );
+% end
+% legendCell = strcat('n=', string(num2cell(1:NPlot)) );
+% legend(legendCell,'Interpreter','latex','location','southeast');
+% xlabel('$z$','Interpreter','latex');
+% ylabel('Re $c_n$','Interpreter','latex');
+% 
+% ax2=subplot(1,2,2);
+% hold on;
+% plot(1:N,amps,'.','MarkerSize',30);
+% plot(1:N,amps,'-k');
+% xlabel('$n$','Interpreter','latex');
+% ylabel('$a_n$','Interpreter','latex');
+% set(gca,'XTick',1:N);
+% axis([1,N,-0.4,1.2]);
+% axis(ax2,'tight');
+
+figure('DefaultAxesFontSize',20);
 set(gca,'fontname','times');
-
-ax1 = subplot(1,2,1);
-hold on
-lS = {'-','--',':','-.'};
-NPlot=4;
-for index = 1:NPlot
-    plot(t,real(u(index,:)),'Linewidth',3, 'LineStyle', lS{mod(index,length(lS))+1} );
-end
-legendCell = strcat('n=', string(num2cell(1:NPlot)) );
-legend(legendCell,'Interpreter','latex','location','southeast');
-xlabel('$z$','Interpreter','latex');
-ylabel('Re $c_n$','Interpreter','latex');
-
-ax2=subplot(1,2,2);
 hold on;
 plot(1:N,amps,'.','MarkerSize',30);
 plot(1:N,amps,'-k');
@@ -150,6 +154,7 @@ ylabel('$a_n$','Interpreter','latex');
 set(gca,'XTick',1:N);
 axis([1,N,-0.4,1.2]);
 axis(ax2,'tight');
+
 % 
 % subplot(1,2,2);
 % hold on;

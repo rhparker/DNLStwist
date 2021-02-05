@@ -11,7 +11,6 @@
 \usepackage{amsthm}
 \usepackage{bbm}
 \usepackage[table,xcdraw]{xcolor}
-\usepackage{tikz}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{svg}
@@ -110,11 +109,11 @@ In this paper, we consider a multi-core fiber consisting of $N$ waveguides arran
 \caption{Schematic of $N$ twisted fibers arranged in a ring.}
 \label{fig:ring}
 \end{figure}
-\noi Each fiber is twisted in a uniform fashion along the propagation direction $z$. For the system with an optical Kerr nonlinearity, the dynamics are given by the coupled system of equations
+\noi The entire fiber is twisted in a uniform fashion along the propagation direction $z$. For the system with an optical Kerr nonlinearity, the dynamics are given by the coupled system of equations
 \begin{equation}\label{eq:twist}
 i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n
 \end{equation}
-for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry \cite{castro2016,Parto2017}. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the nearest-neighbor coupling, $\gamma_n$ is the optical gain or loss at site $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[section 2]{castro2016} for a description of the parameters in terms of the geometry of the optical waveguide system). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, the system is conservative. Furthermore, upon normalizing the fields by taking $c_n \rightarrow \frac{1}{\sqrt{|d|}}c_n$,  equation \cref{eq:twist} becomes
+for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry \cite{castro2016,Parto2017}. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the nearest-neighbor coupling, $\gamma_n$ is the optical gain or loss at site $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[section 2]{castro2016} for a description of the parameters in terms of the geometry of the optical waveguide system and \cite{Longhi2007b,Garanovich2012} for a derivation of this equation). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, the system is conservative. Furthermore, upon normalizing the fields by taking $c_n \rightarrow \frac{1}{\sqrt{|d|}}c_n$,  equation \cref{eq:twist} becomes
 \begin{equation}\label{eq:twist1}
 i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right)  \pm |c_n|^2 c_n,
 \end{equation}
@@ -145,11 +144,11 @@ where we have taken the defocusing (minus) nonlinearity. Equation \cref{eq:twist
 \end{equation}
 by separating real and imaginary parts. We note that the the exponential terms in \cref{eq:twisteq} depend only on the phase differences $\theta_{n+1}-\theta_n$ between adjacent sites. Due to the gauge invariance of \cref{eq:twist1}, if $c_n$ is solution, so is $e^{i \theta} c_n$, thus we may without loss of generality take $\theta_1 = 0$. If $\phi = 0$, i.e. the fibers are not twisted, we can take $\theta_n = 0$ for all $n$, and so \cref{eq:twisteq} reduces to the untwisted case with periodic boundary conditions. Similarly, if we take $\phi = 2 \pi/N$ and $\theta_n = (n-1)\phi$ for all $n$, the exponential terms do not contribute, and \cref{eq:twisteq} once again reduces to untwisted case. The interesting cases, therefore, occur when $0 < \theta < 2 \pi/N$. 
 
-In the anti-continuum (AC) limit ($k = 0$), the lattice sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{\omega} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{\omega}$ are real if  $\omega > 0$. We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{\omega}$ and $a_n = 0$ for all other $n$. (We can start with more than once excited state, but, in general, these solutions will not be stable.) In addition, we take $\theta_n = 0$ for all $n$ and $\phi = 0$.  We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
+In the anti-continuum (AC) limit ($k = 0$), the lattice sites are decoupled. Each $a_n$ can take on the values $\{0, \pm \sqrt{\omega} \}$, the phases $\theta_n$ are arbitrary, and $\phi$ does not contribute. The amplitudes $\sqrt{\omega}$ are real if  $\omega > 0$. We construct solutions to \cref{eq:twisteqreal} by parameter continuation from the AC limit with no twist using the standard continuation software package AUTO. As an initial condition, we choose a single excited site at node 1, i.e. $a_1 = \sqrt{\omega}$ and $a_n = 0$ for all other $n$. (We can start with more than once excited state, but, in general, these solutions will not be stable.) In addition, we take $\theta_n = 0$ for all $n$ and $\phi = 0$.  We first continue in the coupling parameter $k$, and then, for fixed $k$, we continue in the twist parameter $\phi$. In doing this, we observe that the solutions have the following symmetry:
 \begin{equation}\label{eq:symm}
 \begin{aligned}
 a_k &= a_{N-k+2} && \qquad k = 2, \dots, M-1 \\
-\theta_k &= -a_{N-k+2} && \qquad k = 2, \dots, M-1,
+\theta_k &= -\theta_{N-k+2} && \qquad k = 2, \dots, M-1,
 \end{aligned}
 \end{equation}
 where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, node $M$ is the node directly across the ring from node 1, and $\theta_M = 0$. For all $N$, $\theta_1 = 0$. See \cref{fig:symmetry1} for an illustration of these symmetry relations for $N = 6$ and $N = 7$. 
@@ -230,7 +229,7 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
 \caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. Left panel is real part of solution for nodes 1-4, right panel is absolute value of solution at each node. Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1$, $k = 0.25$.}
 \label{fig:evenhole6}
 \end{figure}
-Numerical parameter continuation with AUTO shows that these standing wave solutions exist for $|k| \leq k_0$, where $k_0$ depends on $N$ and $\omega$ (\cref{fig:evenbif}, left panel). The dependence of $k_0$ on $\omega$ is shown in the right panel of \cref{fig:evenbif}, which suggests that $k_0$ approaches $\omega/2$ as $N$ gets large. As $k$ approaches $k_0$ in the parameter continuation, the $l^2$ norm of the solution approaches 0, thus the solution approaches the zero solution. 
+Numerical parameter continuation with AUTO shows that these standing wave solutions exist for $|k| \leq k_0$, where $k_0$ depends on $N$ and $\omega$ (\cref{fig:evenbif}, left panel). Although it is possible that there are standing wave solutions for $|k| > k_0$, they cannot be reached by parameter continuation from this branch of solutions. The dependence of $k_0$ on $\omega$ is shown in the right panel of \cref{fig:evenbif}, which suggests that $k_0$ approaches $\omega/2$ as $N$ gets large. As $k$ approaches $k_0$ in the parameter continuation, the $l^2$ norm of the solution approaches 0, thus the solution approaches the zero solution. 
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
@@ -324,7 +323,7 @@ S &= \begin{pmatrix}
 -\sin \phi & & \dots & \sin \phi & 0
 \end{pmatrix}.
 \end{align*}
-Since \cref{eq:linearization} is a finite dimensional matrix, the spectrum is purely point spectrum. Due to the gauge invariance, there an eigenvalue at 0 with algebraic multiplicity 2 and geometric multiplicity 1. Following the analysis in \cite[Section 2.1.1.1]{Kevrekidis2009}, there are plane wave eigenfunctions which are, to leading order, of the form $e^{\pm( i q n + \lambda z)}$ and satisfy the dispersion relation
+Since \cref{eq:linearization} is a finite dimensional matrix, the spectrum is purely point spectrum. Due to the gauge invariance, there is an eigenvalue at 0 with algebraic multiplicity 2 and geometric multiplicity 1. Following the analysis in \cite[Section 2.1.1.1]{Kevrekidis2009}, there are plane wave eigenfunctions which are, to leading order, of the form $e^{\pm( i q n + \lambda z)}$ and satisfy the dispersion relation
 \begin{equation}\label{eq:dispersion}
 \lambda = \pm i \left( \omega + 2 k \cos(q + \phi) \right).
 \end{equation}
@@ -332,8 +331,8 @@ The corresponding eigenvalues are thus purely imaginary and are contained in the
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
-\includegraphics[width=8cm]{images/evenhole6spec.eps}
-\includegraphics[width=8cm]{images/evenhole50spec.eps}
+\includegraphics[width=7.5cm]{images/evenhole6spec.eps}
+\includegraphics[width=7.5cm]{images/evenhole50spec.eps}
 \end{tabular}
 \end{center}
 \caption{Spectrum of linearization of \cref{eq:twist1} about solution for even $N$ with a single dark node opposite a single bright node. $N=6$ (left panel) and $N=50$ (left panel). $k=0.25$, $\omega = 1$, $\phi = \pi/N$.}
@@ -351,7 +350,8 @@ Since the spectrum of these solutions is purely imaginary, we expect that they w
 \caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=6$,  $\phi = \pi/6$ (left panel) and $N=7$, $\phi = \pi/7$ (right panel). Initial condition is obtained by adding 0.01 to the dark node. Timestepping using a fourth order Runge-Kutta scheme, $k=0.25$.}
 \label{fig:evenhole6perturbed}
 \end{figure}
-In addition, we can start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$. \cref{fig:evenholekperturbed} shows the results of perturbations in $k$. In particular, note that in the right panel of \cref{fig:evenholekperturbed}, the system is evolved for a value of the coupling parameter $k$ which is greater than $k_0$, where $k_0$ is defined in Section \ref{sec:Neven}. In both cases, the solutions show oscillations, but there is no increase or decrease in amplitude at each node.
+In addition, we can start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$. \cref{fig:evenholekperturbed} shows the results of perturbations in $k$. In particular, note that in the right panel of \cref{fig:evenholekperturbed}, the system is evolved for a value of the coupling parameter $k$ which is greater than $k_0$, where $k_0$ is defined in Section \ref{sec:Neven}. In both cases, the solutions show oscillations, indicating this to be robust dynamics. The simulation suggests the period of oscillations has a strong dependence on $k$. Additional timestepping results can be found in \cite{castro2016}. In particular, see \cite[Figure 4]{castro2016} for timestepping results when the fiber is initially excited at a single site. 
+
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
@@ -362,15 +362,13 @@ In addition, we can start with a neutrally stable standing wave solution and per
 \caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=10$ and $\phi = \pi/10$. Initial condition is solution to \cref{eq:twisteqevenhole} with $k = 0.45$. Timestepping performed with $k = 0.35$ (left) and $k = 0.55$ (right) using a fourth order Runge-Kutta scheme.}
 \label{fig:evenholekperturbed}
 \end{figure}
-Additional timestepping results can be found in \cite{castro2016}. In particular, see \cite[Figure 4]{castro2016} for timestepping results when the fiber is initially excited at a single site. 
 
 \section{Asymmetric coupling}\label{sec:variants}
 
-If the strength of the nearest-neighbor coupling is allowed to differ between pairs of nodes, equation \cref{eq:twist1} becomes
+As an additional variant, if the strength of the nearest-neighbor coupling is allowed to differ between pairs of nodes, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twistk}
 i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} + i \gamma_n c_n + d |c_n|^2 c_n.
 \end{equation}
-This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}). These asymmetric solutions are also neutrally stable. 
 
 \begin{figure}[H]
 \begin{center}
@@ -382,9 +380,11 @@ This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contra
 \label{fig:even6assym}
 \end{figure}
 
+\noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}). These asymmetric solutions are also neutrally stable.
+
 \section{Multi-pulses}
 
-Another broad class of solutions is multi-pulses, which are solutions in which the energy is concentrated at multiple nodes. These nodes are typically well-separated in the ring. Multi-pulses can be generated by parameter continuation from the AC limit, similar to what was done in \cref{sec:standingwave}. Although a systematic study of the existence and stability of multi-pulses is beyond the scope of this paper (see, for example, \cite{Parker2020} for results on multi-pulses in the discrete NLS equation), we present one example of a symmetric double pulse solution for even $N$ in which the two excited sites are opposite each other in the ring (\cref{fig:dp}. If $N$ is a multiple of 4 and $\phi = 2\pi/N$, there is a pair of dark nodes halfway between the two bright nodes (in both directions), as can be seen in \cref{fig:dp}.
+Another broad class of solutions is multi-pulses, which are solutions in which the energy is concentrated at multiple nodes (see \cref{fig:dp} for two examples). These nodes are typically well-separated in the ring. Multi-pulses can be generated by parameter continuation from the AC limit, similar to what was done in \cref{sec:standingwave}. Although a systematic study of the existence and stability of multi-pulses is beyond the scope of this paper (see, for example, \cite{Parker2020} for results on multi-pulses in the discrete NLS equation), we present one example of a symmetric double pulse solution for even $N$ in which the two excited sites are opposite each other in the ring (\cref{fig:dp}). 
 
 \begin{figure}[H]
 \begin{center}
@@ -397,18 +397,18 @@ Another broad class of solutions is multi-pulses, which are solutions in which t
 \label{fig:dp}
 \end{figure}
 
-Numerical spectral computations as well as timestepping results of perturbations of these solutions suggest that these double pulse solutions are neutrally stable (\cref{fig:dpstab}).
-
 \begin{figure}[H]
 \begin{center}
 \begin{tabular}{cc}
-\includegraphics[width=8cm]{dp12pi6spec.eps}
-\includegraphics[width=8cm]{dp12pi6pert.eps}
+\includegraphics[width=7.5cm]{dp12pi6spec.eps}
+\includegraphics[width=7.5cm]{dp12pi6pert.eps}
 \end{tabular}
 \end{center}
-\caption{Spectrum of linearization of \cref{eq:twist1} about symmetric double pulse solution with $N=12$ and $\phi = \pi/6$ (left panel). Timestepping of small perturbation of this solution (right panel) using fourth order Runge-Kutta scheme. $k=0.25$.}
+\caption{Spectrum of linearization of \cref{eq:twist1} about symmetric double pulse solution with $N=12$ and $\phi = \pi/6$ (left panel). Timestepping of perturbation of this solution (right panel) using fourth order Runge-Kutta scheme. $k=0.25$.}
 \label{fig:dpstab}
 \end{figure}
+
+If $N$ is a multiple of 4 and $\phi = 2\pi/N$, there is a pair of dark nodes halfway between the two bright nodes (in both directions), as can be seen in \cref{fig:dp}. Numerical spectral computations as well as timestepping results of perturbations of these solutions suggest that these double pulse solutions are neutrally stable (\cref{fig:dpstab}).
 
 \section{Conclusions}
 
@@ -416,7 +416,7 @@ In this paper, we have demonstrated the existence of standing wave solutions to 
 
 \section*{Acknowledgments}
 
-This material is based upon work supported by the U.S. National Science Foundation under the RTG grant DMS-1840260 (R.P. and A.A.). The authors would also like to thank P.G. Kevrekidis for his helpful comments and suggestions for numerical simulations.
+This material is based upon work supported by the U.S. National Science Foundation under the RTG grant DMS-1840260 (R.P. and A.A.) and DMS-1909559 (AA). The authors would also like to thank P.G. Kevrekidis for his helpful comments and suggestions for numerical simulations.
 
 \bibliographystyle{amsplain}
 \bibliography{twist.bib}

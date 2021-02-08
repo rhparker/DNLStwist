@@ -102,6 +102,7 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
       ! U(C+1) = 1
 
       U(1) = 1
+      U(5) = 1
 
       PAR(1) = D
       PAR(2) = K

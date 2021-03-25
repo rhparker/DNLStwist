@@ -28,19 +28,20 @@ mags = mags';
 % u0 = exp( 1i*phi*nn');
 % u0 = u0.*mags';
 
-% % get phases from AUTO
-% N = (length(mags)+1)/2;
-% p = [0 ; mags(N+1:end)];
-% u0 = ( mags(1:N).*exp( 1i*p ) );
-% phi = pi/4;
-% w = 1;
+% get phases from AUTO
+N = (length(mags)+1)/2;
+p = [0 ; mags(N+1:end)];
+u0 = ( mags(1:N).*exp( 1i*p ) );
+phi = 0.25;
+w = 1;
+amps = mags(1:N);
 
-% even hole from AUTO, phi = pi/N
-N = length(mags)*2;
-phi = pi/N;
-nn = [1:length(mags) - 1]';
-p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
-u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
+% % even hole from AUTO, phi = pi/N
+% N = length(mags)*2;
+% phi = pi/N;
+% nn = [1:length(mags) - 1]';
+% p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
+% u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
 % % odd hole from AUTO, phi = pi/N
 % N = length(mags)*2 + 1;
@@ -51,7 +52,7 @@ u0 = [mags ; 0 ; flip(mags(2:end)) ].*exp(1i*p);
 
 % % perturbation 
 % k = 0.25;
-k = 0.35;
+% k = 0.35;
 
 % solve on interval  with IC (regular)
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);
@@ -78,17 +79,19 @@ J = twistJ(real(u0),imag(u0),k,phi,d,w);
 [V,l] = eig(J);
 l = diag(l);
 
-phases = angle(u0);
-amps = u0;
-for index = 1:length(u0)
-    if (real(u0(index)) < 0)
-        amps(index) = -abs( u0(index) );
-        phases(index) = angle( u0(index) ) + pi;
-    else
-        amps(index) = abs( u0(index) );
-        phases(index) = angle( u0(index) );
-    end
-end
+% phases = angle(u0);
+% amps = u0;
+% for index = 1:length(u0)
+%     if (real(u0(index)) < 0)
+%         amps(index) = -abs( u0(index) );
+%         phases(index) = angle( u0(index) ) + pi;
+%     else
+%         amps(index) = abs( u0(index) );
+%         phases(index) = angle( u0(index) );
+%     end
+% end
+
+%% make plots
 
 % AClimit = 0*u0;
 % AClimit(1) = 1;
@@ -96,6 +99,7 @@ end
 % [V0,l0] = eig(J0);
 % l0 = diag(l0);
 
+% solution
 figure('DefaultAxesFontSize',24);
 set(gca,'fontname','times');
 hold on
@@ -109,6 +113,7 @@ legendCell = strcat('n=', string(num2cell(1:NPlot)) );legend(legendCell);
 xlabel('$z$','Interpreter','latex');
 ylabel('$|c_n|$','Interpreter','latex');
 
+%% spectrum
 figure('DefaultAxesFontSize',20);
 set(gca,'fontname','times');
 % spectrum plot
@@ -117,43 +122,45 @@ axis([-1e-12,1e-12,-2,2]);
 xlabel('Re $\lambda$','Interpreter','latex');
 ylabel('Im $\lambda$','Interpreter','latex');
 
-% make plots
+%% make plots
 
-% figure('DefaultAxesFontSize',20,'Position', [0 0 1600 600]);
-% set(gca,'fontname','times');
-% 
-% ax1 = subplot(1,2,1);
-% hold on
-% lS = {'-','--',':','-.'};
-% NPlot=4;
-% for index = 1:NPlot
-%     plot(t,real(u(index,:)),'Linewidth',3, 'LineStyle', lS{mod(index,length(lS))+1} );
-% end
-% legendCell = strcat('n=', string(num2cell(1:NPlot)) );
-% legend(legendCell,'Interpreter','latex','location','southeast');
-% xlabel('$z$','Interpreter','latex');
-% ylabel('Re $c_n$','Interpreter','latex');
-% 
-% ax2=subplot(1,2,2);
-% hold on;
-% plot(1:N,amps,'.','MarkerSize',30);
-% plot(1:N,amps,'-k');
-% xlabel('$n$','Interpreter','latex');
-% ylabel('$a_n$','Interpreter','latex');
-% set(gca,'XTick',1:N);
-% axis([1,N,-0.4,1.2]);
-% axis(ax2,'tight');
+% figure('DefaultAxesFontSize',24,'Position', [0 0 1600 600]);
+figure('DefaultAxesFontSize',24,'Position', [0 0 700 600]);
 
-figure('DefaultAxesFontSize',20);
 set(gca,'fontname','times');
+
+ax1 = subplot(2,2,[1 3]);
+hold on
+lS = {'-','--',':','-.'};
+NPlot=4;
+for index = 1:NPlot
+    plot(t,abs(u(index,:)),'Linewidth',3, 'LineStyle', lS{mod(index,length(lS))+1} );
+end
+legendCell = strcat('n=', string(num2cell(1:NPlot)) );
+legend(legendCell,'Interpreter','latex','location','northeast');
+xlabel('$z$','Interpreter','latex');
+ylabel('$|c_n|$','Interpreter','latex');
+
+ax2=subplot(2,2,2);
 hold on;
-plot(1:N,amps,'.','MarkerSize',30);
-plot(1:N,amps,'-k');
+plot(1:N,amps,'.b','MarkerSize',40);
+% plot(1:N,amps,'-k');
 xlabel('$n$','Interpreter','latex');
-ylabel('$a_n$','Interpreter','latex');
+ylabel('amplitude ($a_n$)','Interpreter','latex');
 set(gca,'XTick',1:N);
 axis([1,N,-0.4,1.2]);
 axis(ax2,'tight');
+
+ax3=subplot(2,2,4);
+hold on;
+plot(1:N,p,'.r','MarkerSize',40);
+% plot(1:N,amps,'-k');
+xlabel('$n$','Interpreter','latex');
+ylabel('phase ($\theta_n$)','Interpreter','latex');
+set(gca,'XTick',1:N);
+% axis([1,N,-0.4,1.2]);
+axis(ax3,'tight');
+
 
 % 
 % subplot(1,2,2);
@@ -164,19 +171,7 @@ axis(ax2,'tight');
 % ylabel('$|c_n|$','Interpreter','latex');
 
 
-%% 
-d = -1;
-omega = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-k0 = [0.12524714663, 0.25049429326, 0.37574143989, 0.50098858651, 0.62623573316, ...
-    0.7514828798, 0.87673002633, 1.0019764545]
-p = polyfit(omega, k0, 1);
-figure('DefaultAxesFontSize',20);
-hold on;
-set(gca,'fontname','times');
-plot(omega, k0, '.','MarkerSize',30);
-plot(omega, polyval(p,omega),'LineWidth',2);
-xlabel('$\omega$','Interpreter','latex');
-ylabel('$k_0$','Interpreter','latex');
+
 
 
 %%

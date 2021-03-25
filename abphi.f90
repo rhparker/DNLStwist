@@ -19,7 +19,7 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       INTEGER NDIM, IJAC, ICP(*)
       INTEGER I,N
       DOUBLE PRECISION U(NDIM), PAR(*), F(NDIM), DFDU(*), DFDP(*)
-      DOUBLE PRECISION D,K,W,PHI
+      DOUBLE PRECISION D,K,W,PHI,T
 
       ! variable split into magnitude and angle
       DOUBLE PRECISION A(NDIM), P(NDIM), S(NDIM), C(NDIM)
@@ -30,18 +30,19 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       PHI = PAR(4)
 
       ! magnitudes
-      N = (NDIM+1)/2
+      N = (NDIM)/2
       DO I = 1,N
           A(I) = U(I)
       END DO
-      ! phase angles, first one is always 0
-      P(1) = 0
-      DO I = 1,N-1
-          P(I+1) = U(I+N)
+      ! phase angles
+      DO I = 1,N
+          P(I) = U(I+N)
       END DO
 
       ! compute relevant sin/cos terms
-      DO I = 1,N-1
+      C(1) = COS( P(2) - P(1) - PHI )
+      S(1) = SIN( P(2) - P(1) - PHI )
+      DO I = 2,N-1
           C(I) = COS( P(I+1) - P(I) - PHI )
           S(I) = SIN( P(I+1) - P(I) - PHI )
       END DO
@@ -56,9 +57,12 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       ! periodic BCs
       F(1)   = K*( C(1)*A(2) + C(N)*A(N) ) + W*A(1) + D*(A(1)**3) 
       F(1+N) = K*( S(1)*A(2) - S(N)*A(N) )
-      F(N)   = K*( C(N)*A(1) + C(N-1)*A(N-1) ) + W*A(N) + D*(A(N)**3)
-      F(N+N) = K*( S(N)*A(1) - S(N-1)*A(N-1) )
-      
+
+      T = SQRT( 1 - ( S(N)*A(N-1)/A(1) )**2 )
+      F(N)   = K*( T*A(1) + C(N-1)*A(N-1) ) + W*A(N) + D*(A(N)**3)
+      F(N+N) = U(N+1)
+      ! F(N+N) = K*( S(N)*A(1) - S(N-1)*A(N-1) )
+
 END SUBROUTINE FUNC
 !----------------------------------------------------------------------
 !----------------------------------------------------------------------
@@ -102,7 +106,6 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
       ! U(C+1) = 1
 
       U(1) = 1
-      U(5) = 1
 
       PAR(1) = D
       PAR(2) = K

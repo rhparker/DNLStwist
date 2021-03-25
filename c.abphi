@@ -1,8 +1,8 @@
-NDIM=  15, IPS =   1, IRS =   0, ILP =   1
+NDIM=  12, IPS =   1, IRS =   0, ILP =   1
 ICP =  [2]
 NTST=  50, NCOL=   4, IAD =   3, ISP =   0, ISW = 1, IPLT= 0, NBC= 0, NINT= 0
-NMX=  100, NPR=  10, MXBF=  3, IID =   2, ITMX= 8, ITNW= 5, NWTN= 3, JAC= 0
+NMX=  200, NPR=  10, MXBF=  3, IID =   2, ITMX= 8, ITNW= 5, NWTN= 3, JAC= 0
 EPSL= 1e-07, EPSU = 1e-07, EPSS = 1e-05
-DS  =   0.01, DSMIN= 0.00001, DSMAX=   0.01, IADS=   1
+DS  =   0.01, DSMIN= 0.0001, DSMAX=   0.01, IADS=   1
 NPAR=  1, THL =  {11: 0.0}, THU =  {}
-UZSTOP={ 2:0.25 }
+UZSTOP={ 2:0.15 }

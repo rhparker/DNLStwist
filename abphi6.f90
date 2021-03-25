@@ -36,14 +36,13 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       K6  = PAR(10)
 
       ! magnitudes
-      N = (NDIM+1)/2
+      N = NDIM/2
       DO I = 1,N
           A(I) = U(I)
       END DO
-      ! phase angles, first one is always 0
-      P(1) = 0
-      DO I = 1,N-1
-          P(I+1) = U(I+N)
+      ! phase angles
+      DO I = 1,N
+          P(I) = U(I+N)
       END DO
 
       ! compute relevant sin/cos terms
@@ -55,22 +54,22 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       S(N) = SIN( P(1) - P(N) - PHI )
 
       F(1)   = (K+K1)*C(1)*A(2) + (K+K6)*C(N)*A(N) + W*A(1) + D*(A(1)**3)
-      F(1+N) =   S(1)*A(2) - S(N)*A(N)
+      F(1+N) = (K+K1)*S(1)*A(2) - (K+K6)*S(N)*A(N)
 
       F(2)   = (K+K2)*C(2)*A(3) + (K+K1)*C(1)*A(1) + W*A(2) + D*(A(2)**3)
-      F(2+N) =   S(2)*A(3) -   S(1)*A(1)
+      F(2+N) = (K+K2)*S(2)*A(3) - (K+K1)*S(1)*A(1)
 
       F(3)   = (K+K3)*C(3)*A(4) + (K+K2)*C(2)*A(2) + W*A(3) + D*(A(3)**3)
-      F(3+N) =   S(3)*A(4) -   S(2)*A(2)
+      F(3+N) = (K+K3)*S(3)*A(4) - (K+K2)*S(2)*A(2)
 
       F(4)   = (K+K4)*C(4)*A(5) + (K+K3)*C(3)*A(3) + W*A(4) + D*(A(4)**3)
-      F(4+N) =   S(4)*A(5)   - S(3)*A(3)
+      F(4+N) = (K+K4)*S(4)*A(5) - (K+K3)*S(3)*A(3)
 
       F(5)   = (K+K5)*C(5)*A(6) + (K+K4)*C(4)*A(4) + W*A(5) + D*(A(5)**3)
-      F(5+N) =   S(5)*A(6) -   S(4)*A(4)
+      F(5+N) = (K+K5)*S(5)*A(6) - (K+K4)*S(4)*A(4)
 
       F(N)   = (K+K6)*C(N)*A(1) + (K+K5)*C(N-1)*A(N-1) + W*A(N) + D*(A(N)**3)
-      F(N+N) =   S(N)*A(1) -   S(N-1)*A(N-1)
+      F(N+N) = (K+K6)*S(N)*A(1) - (K+K5)*S(N-1)*A(N-1)
 
 END SUBROUTINE FUNC
 !----------------------------------------------------------------------

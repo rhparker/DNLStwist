@@ -10,7 +10,7 @@ s = r3('UZ1')
 sol = np.array(s[0]['u'])
 
 # save array
-savemat( 'mags.mat', { 'mags' : sol } )
+savemat( 'mags6.mat', { 'mags' : sol } )
 
 N = int( (len(sol) + 1)/2 )
 print(sol[0:N])

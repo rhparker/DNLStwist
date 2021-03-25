@@ -1,5 +1,5 @@
 % \documentclass[12pt,reqno]{amsart}
-\documentclass[reprint, amsmath,amssymb,aps]{revtex4-2}
+\documentclass[reprint, amsmath,amssymb,aps, prl]{revtex4-2}
 
 \usepackage[pdfborder={0 0 0.5 [3 2]}, plainpages=false]{hyperref}%
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}%
@@ -136,7 +136,7 @@ Standing wave solutions to \cref{eq:twist1} are bound states of the form
 \begin{equation}\label{eq:ansatz1}
 c_n = a_n e^{i (\omega z + \theta_n) },
 \end{equation}
-where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the frequency of oscillation. (Since we allow $a_n$ to be negative, we can restrict $\theta_n$ to that interval). \revised{Standing waves are periodic in $z$ with period $2\pi/\omega$, and the intensity at each node $|c_n| = |a_n|$ is constant in $z$}.
+where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the frequency of oscillation. (Since we allow $a_n$ to be negative, we can restrict $\theta_n$ to that interval). \revised{We will refer to the $a_n$ as the amplitudes and the $\theta_n$ as the phases of each node. Standing waves are periodic in $z$ with period $2\pi/\omega$, and the intensity at each node $|c_n| = |a_n|$ is constant in $z$}.
 Making this substitution and simplifying, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twisteq}
 \begin{aligned}
@@ -239,7 +239,7 @@ from which it follows that we can have a single dark node at site $M$ when $\phi
 &k a_{M-2} + \omega a_{M-1} - a_{M-1}^3 = 0.
 \end{aligned}
 \end{equation}
-This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (\sqrt{\omega}, 0, \dots, 0)$. Since $D_F(\tilde{a}, 0) = \diag(-2\omega,\omega, \dots, \omega)$, which is invertible for $\omega \neq 0$, \revised{it follows from the implicit function theorem that there exists $k_0 > 0$ such the system \cref{eq:twisteqevenhole} has a solution for all $k$ with $|k| < k_0$. The critical value $k_0$ can be computed numerically by parameter continuation with AUTO, and will depend on both $N$ and $\omega$ (\cref{fig:k0plot}). These computations suggest that $k_0$ approaches $\omega/2$ as $N$ becomes large.}
+This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (\sqrt{\omega}, 0, \dots, 0)$. Since $D_F(\tilde{a}, 0) = \diag(-2\omega,\omega, \dots, \omega)$, which is invertible for $\omega \neq 0$, \revised{it follows from the implicit function theorem that there exists $k_0 > 0$ such the system \cref{eq:twisteqevenhole} has a unique solution for all $k$ with $|k| < k_0$. The critical value $k_0$ can be computed numerically by parameter continuation with AUTO, and will depend on both $N$ and $\omega$ (\cref{fig:k0plot}). These computations suggest that $k_0$ approaches $\omega/2$ as $N$ becomes large.}
 
 \begin{figure}
     \begin{center}
@@ -333,7 +333,7 @@ from which it follows that we can have a single dark node at $a_1$ when $\phi = 
 &k ( a_M + a_{M-1} ) + \omega a_M - a_M^3 = 0.
 \end{aligned}
 \end{equation}
-This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \dots, a_M)$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (0, \dots, 0, \sqrt{-\omega/d}, 0)$. Since $D_F(\tilde{a}, 0) = \diag(\omega, \dots, \omega, -2\omega)$, which is invertible for $\omega \neq 0$, the system \cref{eq:twisteqoddhole} has a solution for sufficiently small $k$ by the implicit function theorem. Once \cref{eq:twisteqoddhole} has been solved numerically, we obtain the full solution to \cref{eq:twisteqreal} using
+This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \dots, a_M)$. $F(\tilde{a}, 0) = 0$, where $\tilde{a} = (0, \dots, 0, \sqrt{-\omega/d}, 0)$. Since $D_F(\tilde{a}, 0) = \diag(\omega, \dots, \omega, -2\omega)$, which is invertible for $\omega \neq 0$, it follows from the implicit function theorem that there exists $k_0 > 0$ such the system \cref{eq:twisteqoddhole} has a unique solution for all $k$ with $|k| < k_0$. As in the case for $N$ even, the critical value $k_0$, as well as its dependency on $N$ and $\omega$, can be computed numerically. Once \cref{eq:twisteqoddhole} has been solved numerically, we obtain the full solution to \cref{eq:twisteqreal} using
 \begin{align*}
 &a_1 = 0 \\
 &a_{M+j} = a_{M-j+1} && \qquad j = 1, \dots, M-1 \\
@@ -423,20 +423,19 @@ In addition, we can start with a neutrally stable standing wave solution and per
 
 As an additional variant, if the strength of the nearest-neighbor coupling is allowed to differ between pairs of nodes, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twistk}
-i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} + d |c_n|^2 c_n.
+i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} + d |c_n|^2 c_n,
 \end{equation}
-
+\revised{where there is a different coupling parameter $k_n$ for each pair of nodes. This could occur in an asymmetric configuration of waveguides. It could also be a consequence of small imprecisions in the fiber bundle construction, in which case the parameters $k_n$ would be close, but not identical.}
 \begin{figure}
 \begin{center}
 \begin{tabular}{c}
 \includegraphics[width=8cm]{even6assym.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.2$ for all other $n$. Left is real part of solution $c_n$ versus $z$ for nodes 1-4 over a full period ($2 \pi)$, right is amplitude $a_n$ solution at each node. $\phi = 0.25$.}
+\caption{Standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.25$ for all other $n$. Left is intensity $|c_n|$ versus $z$ for nodes 1-4, right is amplitude $a_n$ and phase $\theta_n$ for solution at each node. $\phi = 0.25$, $\omega = 1$.}
 \label{fig:even6assym}
 \end{figure}
-
-\noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}). These asymmetric solutions are also neutrally stable.
+\noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}, which has the same set of parameters except for the coupling parameter $k_1$). These asymmetric solutions are also neutrally stable.
 
 \section{Multi-pulses}
 
@@ -474,7 +473,7 @@ In this paper, we have demonstrated the existence of standing wave solutions to 
 This material is based upon work supported by the U.S. National Science Foundation under the RTG grant DMS-1840260 (R.P. and A.A.) and DMS-1909559 (AA). The authors would also like to thank P.G. Kevrekidis for his helpful comments and suggestions for numerical simulations.
 \end{acknowledgments}
 
-\bibliographystyle{amsplain}
+\bibliographystyle{apsrev4-2}
 \bibliography{twist.bib}
 
 

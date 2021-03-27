@@ -24,9 +24,9 @@ First referee
 \begin{enumerate}
 \item \emph{In Section 2, there is a typo that $0<\phi<2\pi/N$, not $0<\theta<2\pi/N$.} This has been fixed. \emph{And the authors only study the standing wave solutions of $\phi=\pi/N$. How about N is not a integer? e.g., $\phi=1.5*\pi/N$, with $N$ as a integer, can we obtain the similar results like Section 3?} The first example (Figure 3) shows $\phi = 0.25$, which has no relation to $N$. The text now makes this more clear. In addition, we have added a figure showing the amplitude of the node opposite the peak intensity node vs. $\phi$ (Figure 4). This suggests that the AB suppression occurs when $\phi = \pi/N$ (which is $\pi/6$ for this specific example), independent of the coupling coefficient $k$. This motivates the discussion of AB suppression in the next section, where we in fact show that AB suppression is obtained when $\phi = \pi/N$.
 
-\item \emph{In Section 3A, when $N$ is even, the authors say that $k_0$ depends on $N$ and $\omega$, what is the relationship between $k_0$ and $N$, please show it numerically. For different $N$ or $\omega$ (fixed one of the parameters), is the relationship similar? Is this a limitation of the numerical parameter continuation with AUTO method? Or can you give a detailed discussion.} The relationship between $k_0$ and $N$ is now shown numerically in Figure 6.
+\item \emph{In Section 3A, when $N$ is even, the authors say that $k_0$ depends on $N$ and $\omega$, what is the relationship between $k_0$ and $N$, please show it numerically. For different $N$ or $\omega$ (fixed one of the parameters), is the relationship similar? Is this a limitation of the numerical parameter continuation with AUTO method? Or can you give a detailed discussion.} The relationship between $k_0$ and $N$ is now shown numerically in Figure 5.
 
-\item In Section 5, for asymmetric coupling, for certain different $k_{n}$ and $d=-1$, are there asymmetric unstable standing wave solutions? When $d=1$ in Expression (13), are these asymmetric solutions also neutrally stable? Please give a more detailed explanation.
+\item \emph{In Section 5, for asymmetric coupling, for certain different $k_{n}$ and $d=-1$, are there asymmetric unstable standing wave solutions? When $d=1$ in Expression (13), are these asymmetric solutions also neutrally stable? Please give a more detailed explanation.} The parameter $d$ has now been scaled out of the equation, as in Eq (2). We also are only considering the defocusing (minus) nonlinearity, as in the symmetric case. (This corresponds to $d=-1$.)
 
 \end{enumerate}
 
@@ -36,15 +36,15 @@ Second Referee
 
 \item \emph{In first page, second column, first paragraph: It says: ``nearest -neighbor coupling'', do you mean ``nearest-neighbor-waveguide coupling''; It says: ``gain or loss at site $n$'', do you mean ``gain or lost of waveguide $n$''. Correct or clarify.} I did mean ``nearest-neighbor-waveguide coupling'' and ``gain or loss at waveguide $n$''. This has been corrected.
 
-\item \emph{In first page, second column, last paragraph: a) it says: ``Hamiltonian case (2)'' but the Hamiltonian is given by equation (3). Correct. b) It says that $\phi$ is a parameter that represents the twist of the fibers and as shown in Fig. 1. On the other hand in Ref. 2, it is defined as phase Peierls; Say how it is related to the twist of the fiber.} (a) equation (2) is a Hamiltonian system with conserved quantity (3). This is now stated more clearly. (b)...
+\item \emph{In first page, second column, last paragraph: a) it says: ``Hamiltonian case (2)'' but the Hamiltonian is given by equation (3). Correct. b) It says that $\phi$ is a parameter that represents the twist of the fibers and as shown in Fig. 1. On the other hand in Ref. 2, it is defined as phase Peierls; Say how it is related to the twist of the fiber.} (a) equation (2) is a Hamiltonian system with conserved quantity (3). This is now stated more clearly. (b) The text now states that the quantity $\phi$ is the Peierls phase, and a formula for $\phi$ in terms of physical parameters of the sytstem, including the twist rate $\epsilon$ (which is defined before Eq (1)) and the circle radius $R$ is given.
 
 \item \emph{In page, give a cite for the package AUTO.} This has been added.
 
 \item \emph{Make larger the font size of x- and y-ticks and key labels of all figures}
 
-\item \emph{In Fig. 1: a) ``$N$ twisted fibers arranged in a ring'' might mean different than ``twisted multi-core fiber consisting of $N$ waveguides arranged in a ring''. Check and clarify. b) Do the radius of the fiber play a role on the analysis?} The caption of Figure 1 now clearly states that this is a twisted multi-core fiber consisting of $N$ waveguides arranged in a ring.
+\item \emph{In Fig. 1: a) ``$N$ twisted fibers arranged in a ring'' might mean different than ``twisted multi-core fiber consisting of $N$ waveguides arranged in a ring''. Check and clarify. b) Do the radius of the fiber play a role on the analysis?} (a) The caption of Figure 1 now clearly states that this is a twisted multi-core fiber consisting of $N$ waveguides arranged in a ring. (b) The radius of the fiber $R$ is now depicted in Figure 1, and the dependence of the Peierls phase on $R$ is given in the formula for $\phi$. The radius of the fiber plays a role in the analysis only via $\phi$.
 
-\item In equation (4), $\omega$ can not be a parameter of frequency, since $C_n$ is a bound or localized state, the spatial variable in the exponential is $z$ and then $\omega$ must have units of the inverse of length. Check and correct. Since $\omega$ is customary used as a frequency parameter, it might be convenient to use another literal to avoid confusion.
+\item \emph{In equation (4), $\omega$ can not be a parameter of frequency, since $c_n$ is a bound or localized state, the spatial variable in the exponential is $z$ and then $\omega$ must have units of the inverse of length. Check and correct. Since $\omega$ is customary used as a frequency parameter, it might be convenient to use another literal to avoid confusion.} A.A.
 
 \item In Figs 3, 4 and 6: a) In the text, give a detailed explanation of the plots. Explain the corresponding behavior in terms of the values
 of the parameters of $k$, $omega$ and $phi$. What are the initial conditions for the amplitudes of each node. What is the input wavelength, power of the electric field? What is the excited mode in the fibers? Why do the states behave in the way shown in the plots.  Make a comparison of the curves shown in panels (a) of figures 3 and 4 and with those of Fig 6 (Explain the reason of the similarity of the curves). Explain. b) In panel (a), it might be convenient to give the horizontal axis scale in multiples of $2\pi$. Give units for $z$. c) In the caption, give units for $\omega$ and $k$. d) Discuss about the results for the phases $\theta$ and $\phi$ shown in corresponding set of equations for both the even and odd cases. It might be convenient to
@@ -54,15 +54,15 @@ show phase plots for respective examples.
 
 \item \emph{In last equations in page 4, second column, it might be convenient to use another dummy variable for $k$, to avoid confusion with the nearest-neighbor coupling parameter $k$.} This is a good point and an easy source of confusion. The dummy index variable is now $j$, both on page 4 and the corresponding set of equations for $N$ even on page 3.
 
-\item In last paragraph of page 3, it says that the observation of a dark node for $N=6$ agrees with what was shown in [2]. Give a comparison of both calculations that of Ref [2] and the present one. Explain the considerations or conditions for both calculations and discuss about it.
+\item \emph{In last paragraph of page 3, it says that the observation of a dark node for $N=6$ agrees with what was shown in [2]. Give a comparison of both calculations that of Ref [2] and the present one. Explain the considerations or conditions for both calculations and discuss about it.} There is now a comparison between our results and these prior asymptotic results. In particular, the text explains that our results are much more rigorous and hold for all $N$ even.
 
 \item \emph{In last two lines of page 3, define $k_0$.} $k_0$ is now defined as the critical value of $k$ which is a consequence of the implicit function theorem.
 
 \item \emph{In Fig 5: a) define $l^2$ norm; b) In both the plots and caption, give units for $k$, $k_0$, and $\omega$; c) What does $l^2$ norm equals to one mean?, d) In last line of page 3, it says that $k_0$ depends on N, and in the text it says that Fig. 5 suggests that $k_0$ approaches $\omega$/2 as $N$ gets large; however, there is no respective plot for $k_0$ Vs $N$. Show it.} (a) The $l^2$ norm is now defined in the text. (b)... (c) The $l^2$ norm is $\sqrt{\omega}$ when $k = 0$ (the AC limit) since there is only one excited site. For $\omega = 1$ in the figure, the $l^2$ norm will be 1. (d) a plot of $k_0$ vs $N$ has been added (figure 5).
 
-\item Discuss in physical terms, and according to the results, the optical Aharonov-Bohm suppression.
+\item \emph{Discuss in physical terms, and according to the results, the optical Aharonov-Bohm suppression.} A.A.
 
-\item In Eq. (12): define $q$.
+\item \emph{In Eq. (12): define $q$.} $q$ is the discrete wavenumber. This is now indicated in the text before the dispersion relation equation.
 
 \item \emph{In Fig. 7: a) since the eigenvalues $\lambda$ are purely imaginary, it might be no necessary to multiply Re $\lambda$ by $\times10^{-12}$. This also applies to panel (a) of Fig. 12. b) In caption, ``left panel'' is referred twice but ``right panel'' is not. Check.} (a) we are longer multiplying the real part by $1e-12$ since the eigenvalues are purely imaginary. (b) The panels are now correctly captioned in Figure 7.
 
@@ -74,13 +74,13 @@ show phase plots for respective examples.
 
 \item In the multi-pulses section, it says that Fig. 11 shows two examples of multi-pulses solutions in which the energy is concentrated at multiple nodes. Panel (a) of the Figure shows 2 maxima at node 1 and 5, 4 minima at nodes 2,4,6 and 8, and 2 dark nodes with zero amplitudes. So, the energy is distributed in all nodes and mainly concentrated in 2 of them. This kind of behavior can also be seen in Fig. 6, where the energy is distributed in all nodes but mainly concentrated in nodes 4 and 5. If so, there is not a clear distinction between cases of one- and multi-pulses. Explain and clarify.
 
-\item Discuss about the nonlinearity of the fiber. How does it play a role in the presented results.
+\item \emph{Discuss about the nonlinearity of the fiber. How does it play a role in the presented results.} A.A.
 
-\item It would be very convenient to show plots of a particular configuration for twisted fibers. That is, show results for a corresponding case given all geometric, linear and nonlinear parameters for the ring configuration formed by twisted fibers. Indeed, this would give a sense of the configuration that should be created experimentally.
+\item \emph{It would be very convenient to show plots of a particular configuration for twisted fibers. That is, show results for a corresponding case given all geometric, linear and nonlinear parameters for the ring configuration formed by twisted fibers. Indeed, this would give a sense of the configuration that should be created experimentally.} A.A.
 
 \item \emph{Give citation in order of appearance.} Done using \texttt{apsrev4-2} BibTeX style.
 
-\item \emph{Homogenize the format of references and give them as specified by PRA. Revise all bibliography data fields, some are missing or incorrect. Give them.} Bibliographic references should contain all material. Journals abbreviated per PRA style guide. Formatting done with \texttt{apsrev4-2} BibTeX style.
+\item \emph{Homogenize the format of references and give them as specified by PRA. Revise all bibliography data fields, some are missing or incorrect. Give them.} Bibliographic references should contain all material. Journals abbreviated per PRA style guide. Formatting done with \texttt{apsrev4-2} BibTeX style with \texttt{aps} and \texttt{pra} parameters.
 
 \end{enumerate}
 

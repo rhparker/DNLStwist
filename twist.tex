@@ -1,5 +1,5 @@
 % \documentclass[12pt,reqno]{amsart}
-\documentclass[reprint, amsmath,amssymb,aps, prl]{revtex4-2}
+\documentclass[reprint, amsmath,amssymb,aps,pra]{revtex4-2}
 
 \usepackage[pdfborder={0 0 0.5 [3 2]}, plainpages=false]{hyperref}%
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}%
@@ -109,20 +109,21 @@ There has been much recent theoretical and experimental interest in light dynami
 In this paper, we consider a multi-core fiber consisting of $N$ waveguides arranged in a ring (\cref{fig:ring}).
 \begin{figure}
 \begin{center}
-\includegraphics[width=4cm]{circle}
+\includegraphics[width=3.5cm]{circle}
 \end{center}
-\caption{Schematic of twisted, multi-core fiber consisting of $N$ waveguides arranged in a ring.}
+\caption{\revised{Schematic of twisted, multi-core fiber consisting of $N$ waveguides arranged in a ring.}}
 \label{fig:ring}
 \end{figure}
-\noi The entire fiber is twisted in a uniform fashion along the propagation direction $z$. For the system with an optical Kerr nonlinearity, the dynamics are given by the coupled system of equations
+\noi The entire fiber is twisted in a uniform fashion along the propagation direction $z$ \revised{with a twist rate $\epsilon = 2\pi/\Lambda$, where $\Lambda$ is the spatial period.} For the system with an optical Kerr nonlinearity, the dynamics are given by the coupled system of equations
 \begin{equation}\label{eq:twist}
 i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right) + i \gamma_n c_n + d |c_n|^2 c_n
 \end{equation}
-for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry \cite{castro2016,Parto2017}. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the \revised{nearest-neighbor-waveguide coupling}, $\gamma_n$ is the optical gain or loss at \revised{waveguide} $n$, and $\phi$ is a parameter representing the twist of the fibers. (See \cite[section 2]{castro2016} for a description of the parameters in terms of the geometry of the optical waveguide system and \cite{Longhi2007b,Garanovich2012} for a derivation of this equation). If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, the system is conservative. Furthermore, upon normalizing the fields by taking $c_n \mapsto \frac{1}{\sqrt{|d|}}c_n$,  equation \cref{eq:twist} becomes
+for $n = 1, \dots, N$, where $c_0 = c_{N}$ and $c_{N+1} = c_1$ due to the circular geometry \cite{castro2016,Parto2017}. The quantities $c_n(z)$ are the complex-valued amplitudes of each waveguide, $k$ is the strength of the \revised{nearest-neighbor-waveguide coupling}, $\gamma_n$ is the optical gain or loss at \revised{waveguide} $n$, and \revised{
+$\phi = 4 \pi^2 \epsilon n_s R^2/N \lambda$ is the Peierls phase introduced by the twist, where $n_s$ the refractive index of the substrate, $R$ is the radius of the circular ring, and $\lambda$ is the wavelength of the propagating field \cite{castro2016} (see also \cite{Longhi2007b,Garanovich2012} for a derivation of this equation).} If $\gamma_n = 0$ for all $n$, i.e. there is no gain or loss at each node, the system is conservative. Furthermore, upon normalizing the fields by taking $c_n \mapsto \frac{1}{\sqrt{|d|}}c_n$,  equation \cref{eq:twist} becomes
 \begin{equation}\label{eq:twist1}
 i \partial_z c_n = k \left(e^{-i\phi}c_{n+1} + e^{i\phi}c_{n-1}\right)  \pm |c_n|^2 c_n,
 \end{equation}
-which is Hamiltonian with conserved energy given by
+which is Hamiltonian with conserved energy
 \begin{equation}\label{eq:H}
 H = \sum_{n=1}^N k (c_{n+1}c_n^* e^{-i \phi} + c_n c_{n+1}^* e^{i \phi}) \pm \frac{1}{2}|c_n|^4.
 \end{equation}
@@ -136,7 +137,7 @@ Standing wave solutions to \cref{eq:twist1} are bound states of the form
 \begin{equation}\label{eq:ansatz1}
 c_n = a_n e^{i (\omega z + \theta_n) },
 \end{equation}
-where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the frequency of oscillation. (Since we allow $a_n$ to be negative, we can restrict $\theta_n$ to that interval). \revised{We will refer to the $a_n$ as the amplitudes and the $\theta_n$ as the phases of each node. Standing waves are periodic in $z$ with period $2\pi/\omega$, and the intensity at each node $|c_n| = |a_n|$ is constant in $z$}.
+where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the propagation constant . (Since we allow $a_n$ to be negative, we can restrict $\theta_n$ to that interval). \revised{We will refer to the $a_n$ as the amplitudes and the $\theta_n$ as the phases of each node. Standing waves are periodic in $z$ with period $2\pi/\omega$, and the intensity at each node $|c_n| = |a_n|$ is constant in $z$}.
 Making this substitution and simplifying, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twisteq}
 \begin{aligned}
@@ -165,7 +166,7 @@ a_k &= a_{N-k+2} && \qquad k = 2, \dots, M-1 \\
 where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, node $M$ is the node directly across the ring from node 1, and $\theta_M = 0$. For all $N$, $\theta_1 = 0$. See \cref{fig:symmetry1} for an illustration of these symmetry relations for $N = 6$ and $N = 7$. 
 \begin{figure}
 \begin{center}
-\includegraphics[width=6cm]{symmetryvertical.eps}
+\includegraphics[width=5cm]{symmetryvertical.eps}
 \end{center}
 \caption{Schematic of symmetry relationship between nodes for $N = 6$ and $N=7$. For nodes connected with arrows, the amplitudes $a_k$ are the same and the phases $\theta_k$ are opposite.}
 \label{fig:symmetry1}
@@ -278,7 +279,8 @@ Once \cref{eq:twisteqevenhole} has been solved numerically, the full solution to
 &\theta_M = 0 \\
 &\theta_{M+j} = -\theta_{M-j} && \qquad j = 1, \dots, M-2.
 \end{align*}
-\cref{fig:evenhole6} shows this solution for $N=6$. This observation of a dark node for $N = 6$ when $\phi = \pi/6$ agrees with what was shown in \cite{castro2016}. 
+\cref{fig:evenhole6} shows this solution for $N=6$. \revised{In \cite{castro2016}, a perturbation method is used for the $N=6$ case to show that if the peak intensity is contained in node 1, the opposite node (node 4) has an intensity of 0, to leading order, when $\phi=\pi/6$. Our analysis confirms the result of these asymptotics, but is much more rigorous in that it demonstrates that for all $N$ even, when the twist is given by $\phi = \pi/N$, a standing wave solution exists for which the peak intensity is contained in node 1, and the opposite node has intensity identically equal to 0 for all $z$. }
+
 \begin{figure}
 \begin{center}
 \begin{tabular}{c}
@@ -379,7 +381,7 @@ S &= \begin{pmatrix}
 -\sin \phi & & \dots & \sin \phi & 0
 \end{pmatrix}.
 \end{align*}
-Since \cref{eq:linearization} is a finite dimensional matrix, the spectrum is purely point spectrum. Due to the gauge invariance, there is an eigenvalue at 0 with algebraic multiplicity 2 and geometric multiplicity 1. Following the analysis in \cite[Section 2.1.1.1]{Kevrekidis2009}, there are plane wave eigenfunctions which are, to leading order, of the form $e^{\pm( i q n + \lambda z)}$ and satisfy the dispersion relation
+Since \cref{eq:linearization} is a finite dimensional matrix, the spectrum is purely point spectrum. Due to the gauge invariance, there is an eigenvalue at 0 with algebraic multiplicity 2 and geometric multiplicity 1. Following the analysis in \cite[Section 2.1.1.1]{Kevrekidis2009}, there are plane wave eigenfunctions which are, to leading order, of the form $e^{\pm( i q n + \lambda z)}$, \revised{where $q$ is the discrete wavenumber}, and satisfy the dispersion relation
 \begin{equation}\label{eq:dispersion}
 \lambda = \pm i \left( \omega + 2 k \cos(q + \phi) \right).
 \end{equation}
@@ -423,9 +425,9 @@ In addition, we can start with a neutrally stable standing wave solution and per
 
 As an additional variant, if the strength of the nearest-neighbor coupling is allowed to differ between pairs of nodes, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twistk}
-i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} + d |c_n|^2 c_n,
+i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} \pm |c_n|^2 c_n,
 \end{equation}
-\revised{where there is a different coupling parameter $k_n$ for each pair of nodes. This could occur in an asymmetric configuration of waveguides. It could also be a consequence of small imprecisions in the fiber bundle construction, in which case the parameters $k_n$ would be close, but not identical.}
+\revised{where there is a different coupling parameter $k_n$ for each pair of nodes. As in the symmteric case, we will  only consider the defocusing (minus) nonlinearity. This could occur in an asymmetric configuration of waveguides. It could also be a consequence of small imperfections in the fiber bundle construction, in which case the parameters $k_n$ would be close, but not identical.}
 \begin{figure}
 \begin{center}
 \begin{tabular}{c}

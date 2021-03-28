@@ -95,7 +95,7 @@ Dallas, TX 75275}
 \email{aaceves@smu.edu}
 
 \begin{abstract}
-In the present work, we consider the existence and spectral stability of standing wave solutions to a model for light propagation in a twisted multi-core fiber with no gain or loss of energy. Numerical parameter continuation experiments demonstrate the existence of standing wave solutions for sufficiently small values of the coupling parameter. Furthermore, standing waves exhibiting optical Aharonov-Bohm suppression, where there is a single waveguide which remains unexcited, exist when the twist parameter $\phi$ and the number of waveguides $N$ is related by $\phi = \pi/N$. Spectral computations and numerical timestepping simulations suggest that standing wave solutions where the energy is concentrated in a single site are neutrally stable. Solutions with asymmetric coupling and multi-pulse solutions are also briefly explored. 
+In the present work, we consider the existence and spectral stability of standing wave solutions to a model for light propagation in a twisted multi-core fiber with no gain or loss of energy. Numerical parameter continuation experiments demonstrate the existence of standing wave solutions for sufficiently small values of the coupling parameter. Furthermore, standing waves exhibiting optical Aharonov-Bohm suppression, where there is a single waveguide which remains unexcited, exist when the twist parameter $\phi$ and the number of waveguides $N$ is related by $\phi = \pi/N$. Spectral computations and numerical evolution simulations suggest that standing wave solutions where the energy is concentrated in a single site are neutrally stable. Solutions with asymmetric coupling and multi-pulse solutions are also briefly explored. 
 \end{abstract}
 
 \maketitle
@@ -170,7 +170,7 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, no
 \label{fig:symmetry1}
 \end{figure}
 
-\cref{fig:twist025} shows an example of a standing wave solution \revised{of the form \cref{eq:ansatz1}} produced by numerical parameter continuation for $N = 6$, \revised{$k = 0.25$, and $\phi = 0.25$}. \revised{Since the paramater continuaton was initialized with a single excited site at node 1 when $k=0$, the peak intensity is still contained in node 1 when $k>0$, although the intensity has spread to the other nodes in the ring}. The symmetry relations \cref{eq:symm} among the \revised{amplitudes $a_n$ and phases $\theta_n$} can be seen in the left panel. \revised{The node with minimum intensity is the node directly across the ring from node 1. The right panel shows the intensity $|c_n|$ at each node as a function of $z$. Since these are standing wave solutions, the intensity is constant in $z$. The evolution in $z$ is computed with a fourth-order Runga-Kutta method using equation \cref{eq:ansatz1} with $z=0$ as the initial condition. }
+\cref{fig:twist025} shows an example of a standing wave solution \revised{of the form \cref{eq:ansatz1}} produced by numerical parameter continuation for $N = 6$, \revised{$k = 0.25$, and $\phi = 0.25$}. \revised{Since the paramater continuaton was initialized with a single excited site at node 1 when $k=0$, the peak intensity is still contained in node 1 when $k>0$, although the intensity has spread to the other nodes in the ring}. The symmetry relations \cref{eq:symm} among the \revised{amplitudes $a_n$ and phases $\theta_n$} can be seen in the left panel. \revised{The node with minimum intensity is the node directly across the ring from node 1. The right panel shows the intensity $|c_n|$ at each node as a function of $z$. Since these are standing wave solutions, the intensity is constant in $z$. The evolution in $z$ is computed with a fourth-order Runga-Kutta method using equation \cref{eq:ansatz1} with $z=0$ as the initial condition. This initial condition is used for all evolution plots for standing waves.}
 
 \begin{figure}
 \begin{center}
@@ -178,7 +178,7 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, no
 \includegraphics[width=8cm]{twist025.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution for $N = 6$, $\omega = 1$, $k = 0.25$, and $\phi = 0.25$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} }
+\caption{Standing wave solution for $N = 6$, $\omega = 1 \text{ mm}^{-1}$, $k = 0.25 \text{ mm}^{-1}$, and $\phi = 0.25$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ [mm] for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} }
 \label{fig:twist025}
 \end{figure}
 
@@ -190,11 +190,11 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, no
     \includegraphics[width=8cm]{twist025N7.eps}
     \end{tabular}
     \end{center}
-    \caption{Standing wave solution for $N = 7$, $\omega = 1$, $k = 0.25$, and $\phi = 0.25$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} }
+    \caption{Standing wave solution for $N = 7$, $\omega = 1\text{ mm}^{-1}$, $k = 0.25\text{ mm}^{-1}$, and $\phi = 0.25$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ [mm] for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} }
     \label{fig:twist025N7}
     \end{figure}
 
-\revised{The left panel of \cref{fig:ABsuppression} shows the amplitude of the node with minimum intensity (node 4 in \cref{fig:twist025}) versus the twist parameter $\phi$ for $N=6$. For all values of the coupling parameter $k$, the amplitude of this node is 0 when the twist parameter is given by $\phi = \pi/6$, which is an example of optical Aharonov-Bohm suppression. Since this a standing wave solution, this node will have 0 intensity for all $z$.} This observation of a dark node opposite the node of maximum intensity agrees with the results of \cite{castro2016,Parto2017}. \revised{This occurs in general when $N$ is even and $\phi = \pi/N$, and is discussed in detail below in \cref{sec:Neven}. The right panel of \cref{fig:ABsuppression} shows the amplitude of the nodes with minimum intensity (nodes 4 and 5 in \cref{fig:twist025N7}) versus the twist parameter $\phi$ for $N=7$. Since the amplitudes of these nodes are never 0, optical Aharonov-Bohm suppression does not occur when $N$ is odd and there is a single excited node. (See \cref{sec:Nodd} below for a setting in which this does occur for $N$ odd). }
+\revised{The left panel of \cref{fig:ABsuppression} shows the amplitude of the node with minimum intensity (node 4 in \cref{fig:twist025}) versus the twist parameter $\phi$ for $N=6$. For all values of the coupling parameter $k$, the amplitude of this node is 0 when the twist parameter is given by $\phi = \pi/6$, which is an example of optical Aharonov-Bohm suppression. Since this a standing wave solution, this node will have 0 intensity for all $z$.} This observation of a dark node opposite the node of maximum intensity agrees with the results of \cite{castro2016,Parto2017}. \revised{This occurs in general when $N$ is even and $\phi = \pi/N$, and is discussed in detail below in Section \ref{sec:Neven}. The right panel of \cref{fig:ABsuppression} shows the amplitude of the nodes with minimum intensity (nodes 4 and 5 in \cref{fig:twist025N7}) versus the twist parameter $\phi$ for $N=7$. Since the amplitudes of these nodes are never 0, optical Aharonov-Bohm suppression does not occur when $N$ is odd and there is a single excited node. (See Section \ref{sec:Nodd} below for a setting in which this does occur for $N$ odd). }
 
 \begin{figure}
     \begin{center}
@@ -203,10 +203,9 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, no
     \includegraphics[width=4cm]{images/noABsuppression.eps} 
     \end{tabular}
     \end{center}
-    \caption{\revised{Amplitude of node 4 (minimum intensity) versus $\phi$ for standing wave solution with $N=6$ (left pandel), and amplitude of nodes 4 and 5 (minimum intensity) versus $\phi$ for standing wave solution with $N=7$ (right panel). $\omega = 1$.}}
+    \caption{\revised{Amplitude of node 4 (minimum intensity) versus $\phi$ for standing wave solution with $N=6$ (left pandel), and amplitude of nodes 4 and 5 (minimum intensity) versus $\phi$ for standing wave solution with $N=7$ (right panel). $\omega = 1 \text{ mm}^{-1}$, coupling constants $k$ are $\text{mm}^{-1}$.}}
     \label{fig:ABsuppression}
 \end{figure}
-
 
 \section{Optical Aharonov-Bohm suppression}\label{sec:ABsupp}
 
@@ -262,7 +261,7 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
     \includegraphics[width=3.9cm]{images/k0vsomega.eps}
     \end{tabular}
     \end{center}
-    \caption{Left panel shows $k_0$ versus $N$ for dark node opposite peak intensity node for $N$ even, $\omega = 1$. Right panel shows $k_0$ vs $\omega$ together with least squares linear regression line for $N = 50$.}
+    \caption{Left panel shows $k_0$ [$\text{mm}^{-1}$] versus $N$ for dark node opposite peak intensity node for $N$ even, $\omega = 1 \text{ mm}^{-1}$. Right panel shows $k_0$ [$\text{mm}^{-1}$] vs $\omega$ [$\text{mm}^{-1}$] together with least squares linear regression line for $N = 50$.}
     \label{fig:k0plot}
 \end{figure}
 
@@ -278,7 +277,7 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
 \includegraphics[width=6cm]{evenbif50.eps} 
 \end{tabular}
 \end{center}
-\caption{$\ell^2$ norm of solution vs $k$, for $N = 50$ with dark node opposite peak intensity node. $\omega = 1$.}
+\caption{$\ell^2$ norm of solution vs $k$ [$\text{mm}^{-1}$] , for $N = 50$ with dark node opposite peak intensity node. $\omega = 1 \text{ mm}^{-1}$.}
 \label{fig:evenbif}
 \end{figure}
 }
@@ -302,7 +301,7 @@ Once \cref{eq:twisteqevenhole} has been solved numerically, the full solution to
 \includegraphics[width=8cm]{evenhole6.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1$, $k = 0.25$.}
+\caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ [mm] for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1 \text{ mm}^{-1}$, $k = 0.25 \text{ mm}^{-1}$.}
 \label{fig:evenhole6}
 \end{figure}
 
@@ -358,14 +357,14 @@ This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \do
 &\theta_j = (j-1)\phi - \pi/2 && \qquad j = 2, \dots, M \\
 &\theta_{M+j} = -\theta_{M-j+1} && \qquad j = 1, \dots, M-1
 \end{align*}
-\cref{fig:oddhole7} shows this solution for $N=7$. The results of parameter continuation simulations are similar to that of the $N$ even case.
+\cref{fig:oddhole7} shows this solution for $N=7$. \revised{The peak intensity in this solution is contained in two adjacent nodes, which is qualiatively different from the solution in \cref{fig:twist025N7}}. The results of parameter continuation simulations are similar to that of the case when $N$ is even
 \begin{figure}
 \begin{center}
 \begin{tabular}{c}
 \includegraphics[width=8cm]{oddhole7.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.}  Nodes 4 and 5 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1$, $k = 0.25$.}
+\caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ [mm] for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.}  Nodes 4 and 5 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1 \text{ mm}^{-1}$, $k = 0.25 \text{ mm}^{-1}$.}
 \label{fig:oddhole7}
 \end{figure}
 
@@ -408,11 +407,12 @@ The corresponding eigenvalues are thus purely imaginary and are contained in the
 \includegraphics[width=4cm]{evenhole50spec.eps}
 \end{tabular}
 \end{center}
-\caption{Spectrum of linearization of \cref{eq:twist1} about solution for even $N$ with a single dark node opposite a single bright node. $N=6$ (left panel) and $N=50$ \revised{(right panel)}. $k=0.25$, $\omega = 1$, $\phi = \pi/N$.}
+\caption{Spectrum of linearization of \cref{eq:twist1} about solution for even $N$ with a single dark node opposite a single bright node. $N=6$ (left panel) and $N=50$ \revised{(right panel)}. $k=0.25\text{ mm}^{-1}$, $\omega = 1\text{ mm}^{-1}$, $\phi = \pi/N$.}
 \label{fig:evenholespec}
 \end{figure}
 
-Since the spectrum of these solutions is purely imaginary, we expect that they will be neutrally stable.  \cref{fig:evenhole6perturbed} shows the results of timestepping for a small perturbation of the standing wave solution when $N=6$ and $N=7$. The solutions show small amplitude oscillations but no growth, which provides evidence for neutral stability. Similar results are obtained for other values of $N$, $\omega$, and $k$.
+Since the spectrum of these solutions is purely imaginary, we expect that they will be neutrally stable, \revised{i.e. any small perturbation of these solutions will remain close to the the unperturbed standing wave for all $z$ but will exhibit oscillatory behavior.} \cref{fig:evenhole6perturbed} shows the results of numerical evolution in $z$ for a small perturbation of the standing wave solution when $N=6$ and $N=7$. \revised{For the initial condition of the perturbed solution, a small quantity (0.05) was added to the amplitude of dark node. (This initial condition was chosen for simplicity. Any initial conditions which is close to the unperturbed solution in amplitude and phase produces results which are qualitatively the same).} Numerical results show small amplitude oscillations about the unperturbed solutions, but no growth, which provides numerical evidence for neutral stability. \revised{The amplitude of the oscillations depends on the magnitude of the initial perturbation. (Compare these evolution plots to the right panels of \cref{fig:evenhole6} and \cref{fig:oddhole7}, noting that the evolution in $z$ in \cref{fig:evenhole6perturbed} is over a much greater length).} Similar results are obtained for other values of $N$, $\omega$, and $k$.
+
 \begin{figure}
 \begin{center}
 \begin{tabular}{cc}
@@ -420,10 +420,11 @@ Since the spectrum of these solutions is purely imaginary, we expect that they w
 \includegraphics[width=4cm]{oddhole7perturbed.eps}
 \end{tabular}
 \end{center}
-\caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=6$,  $\phi = \pi/6$ (left panel) and $N=7$, $\phi = \pi/7$ (right panel). Initial condition is obtained by adding 0.05 to the dark node. Timestepping using a fourth order Runge-Kutta scheme, $k=0.25$.}
+\caption{Amplitude $|c_n|$ for first four nodes versus $z$ [mm] for solution with $N=6$, $\phi = \pi/6$ (left panel) and $N=7$, $\phi = \pi/7$ (right panel). Evolution performed using a fourth order Runge-Kutta scheme, $k=0.25 \text{ mm}^{-1}$.}
 \label{fig:evenhole6perturbed}
 \end{figure}
-In addition, we can start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$. \cref{fig:evenholekperturbed} shows the results of perturbations in $k$. In particular, note that in the right panel of \cref{fig:evenholekperturbed}, the system is evolved for a value of the coupling parameter $k$ which is greater than $k_0$, where $k_0$ is defined in Section \ref{sec:Neven}. In both cases, the solutions show oscillations, indicating this to be robust dynamics. The simulation suggests the period of oscillations has a strong dependence on $k$. Additional timestepping results can be found in \cite{castro2016}. In particular, see \cite[Figure 4]{castro2016} for timestepping results when the fiber is initially excited at a single site. 
+
+In addition, we can start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$. \cref{fig:evenholekperturbed} shows the results of perturbations in $k$. In particular, note that in the right panel of \cref{fig:evenholekperturbed}, the system is evolved for a value of the coupling parameter $k$ which is greater than $k_0$, where $k_0$ is defined in Section \ref{sec:Neven}. In both cases, the solutions show oscillations, indicating this to be robust dynamics. The simulation suggests the period of oscillations has a strong dependence on $k$. Additional evolution results can be found in \cite{castro2016}. In particular, see \cite[Figure 4]{castro2016} for evolution results when the fiber is initially excited at a single site. 
 
 \begin{figure}
 \begin{center}
@@ -432,7 +433,7 @@ In addition, we can start with a neutrally stable standing wave solution and per
 \includegraphics[width=4cm]{even10pertk45to55}
 \end{tabular}
 \end{center}
-\caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=10$ and $\phi = \pi/10$. Initial condition is solution to \cref{eq:twisteqevenhole} with $k = 0.45$. Timestepping performed with $k = 0.35$ (left) and $k = 0.55$ (right) using a fourth order Runge-Kutta scheme.}
+\caption{Amplitude $|c_n|$ for first four nodes versus $z$ [mm] for solution with $N=10$ and $\phi = \pi/10$. Initial condition is solution to \cref{eq:twisteqevenhole} with $k = 0.45\text{ mm}^{-1}$. Evolution performed with $k = 0.35\text{ mm}^{-1}$ (left) and $k = 0.55\text{ mm}^{-1}$ (right) using a fourth order Runge-Kutta scheme.}
 \label{fig:evenholekperturbed}
 \end{figure}
 
@@ -449,10 +450,10 @@ i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} \pm |c_n
 \includegraphics[width=8cm]{even6assym.eps}
 \end{tabular}
 \end{center}
-\caption{Asymmetric standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.25$ for all other $n$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} $\phi = 0.25$, $\omega = 1$.}
+\caption{Asymmetric standing wave solution to \cref{eq:twistk} for $N = 6$, $k_1 = 0.4\text{ mm}^{-1}$, and $k_n = 0.25\text{ mm}^{-1}$ for all other $n$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ [mm] for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} $\phi = 0.25$, $\omega = 1\text{ mm}^{-1}$.}
 \label{fig:even6assym}
 \end{figure}
-\noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}, which has the same set of parameters except for the coupling parameter $k_1$). \revised{The asymmetric solution in \cref{fig:even6assym} is neutrally stable, since its spectrum is imaginary, and small perturbations result in oscillatory behavior about the unperturbed solution (\cref{fig:assymstab}). Although a rigorous analysis of these asymmetric solutions is beyond the scope of this work, it is likely that small differences in the coupling coefficients $k_n$ do not affect stability, which would imply that small imperfections in the physical model would not result in loss of stability.}
+\noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. \revised{When compared to the symmetric solution for uniform $k$ in \cref{fig:twist025} (which has the same set of parameters except for the coupling parameter $k_1$), the phases and amplitudes are similar in magnitude, but the symmetry relations \cref{eq:symm} have been broken. The asymmetric solution in \cref{fig:even6assym} is neutrally stable, since its spectrum is imaginary, and small perturbations result in oscillatory behavior about the unperturbed solution (\cref{fig:assymstab}, compare to the right panel of \cref{fig:even6assym}). Although a rigorous analysis of these asymmetric solutions is beyond the scope of this work, it is likely that small differences in the coupling coefficients $k_n$ do not affect stability, which would imply that small imperfections in the physical model would not result in loss of stability.}
 
 \begin{figure}
     \begin{center}
@@ -461,7 +462,7 @@ i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} \pm |c_n
     \includegraphics[width=4cm]{assym6pert.eps}
     \end{tabular}
     \end{center}
-    \caption{\revised{Spectrum of linearization of \cref{eq:twistk} about asymmetric standing wave solution from \cref{fig:even6assym} (left panel). Timestepping of perturbation of this solution (right panel) using fourth order Runge-Kutta scheme.}}
+    \caption{\revised{Spectrum of linearization of \cref{eq:twistk} about asymmetric standing wave solution from \cref{fig:even6assym} (left panel). Amplitude $|c_n|$ for first four nodes versus $z$ [mm] for evolution of perturbation of this solution using fourth order Runge-Kutta scheme (right panel).}}
     \label{fig:assymstab}
     \end{figure}
 
@@ -469,7 +470,7 @@ i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} \pm |c_n
 
 Another broad class of solutions is multi-pulses, \revised{which are solutions in which the energy is concentrated at multiple nodes which are well separated in the ring (see \cref{fig:dp} for two examples where the two nodes with peak intensity occupy opposite positions). In contrast with the solutions in \cref{fig:oddhole7}, where the intensity is concentrated at two adjacent nodes, the energy in a multi-pulse is concentrated at sites which are far apart. The solutions with two adjacent excited sites behave like a single soliton (see \cite{Kevrekidis2009} for a discussion of on-site and intersite solitons in the discrete NLS equation), whereas multi-pulses behave like a collection of solitons which can interact with their neighbors on either side \cite{Parker2020}.}
 
-Multi-pulses can be generated by parameter continuation from the AC limit, similar to what was done in \cref{sec:standingwave}. Although a systematic study of the existence and stability of multi-pulses is beyond the scope of this paper (see, for example, \cite{Parker2020} for results on multi-pulses in the discrete NLS equation), we present one example of a symmetric double pulse solution for even $N$ in which the two excited sites are opposite each other in the ring. If $N$ is a multiple of 4 and $\phi = 2\pi/N$, there is a pair of dark nodes halfway between the two bright nodes (in both directions), as can be seen in \cref{fig:dp}. \revised{In fact, these particular solutions are exactly two copies of the solutions from \cref{sec:Neven} spliced together.} 
+Multi-pulses can be generated by parameter continuation from the AC limit, similar to what was done in \cref{sec:standingwave}. Although a systematic study of the existence and stability of multi-pulses is beyond the scope of this paper (see, for example, \cite{Parker2020} for results on multi-pulses in the discrete NLS equation), we present one example of a symmetric double pulse solution for even $N$ in which the two excited sites are opposite each other in the ring. If $N$ is a multiple of 4 and $\phi = 2\pi/N$, there is a pair of dark nodes halfway between the two bright nodes (in both directions), as can be seen in \cref{fig:dp}. \revised{In fact, these particular solutions are exactly two copies of the solutions from Section \ref{sec:Neven} spliced together.} 
 
 \begin{figure}
 \begin{center}
@@ -478,7 +479,7 @@ Multi-pulses can be generated by parameter continuation from the AC limit, simil
 \includegraphics[width=4cm]{dp12pi6}
 \end{tabular}
 \end{center}
-\caption{Amplitudes $a_n$ for double pulse solutions with two bright nodes in opposite positions of the ring. $N=8$, $\phi=\pi/4$ (left panel) and $N=12$, $\phi=\pi/6$ (right panel). $k=0.25$.}
+\caption{Amplitudes $a_n$ for double pulse solutions with two bright nodes in opposite positions of the ring. $N=8$, $\phi=\pi/4$ (left panel) and $N=12$, $\phi=\pi/6$ (right panel). $\omega = 1\text{ mm}^{-1}$, $k=0.25\text{ mm}^{-1}$.}
 \label{fig:dp}
 \end{figure}
 
@@ -489,11 +490,11 @@ Multi-pulses can be generated by parameter continuation from the AC limit, simil
 \includegraphics[width=4cm]{dp12pi6pert.eps}
 \end{tabular}
 \end{center}
-\caption{Spectrum of linearization of \cref{eq:twist1} about symmetric double pulse solution with $N=12$ and $\phi = \pi/6$ (left panel). Timestepping of perturbation of this solution (right panel) using fourth order Runge-Kutta scheme. $k=0.25$.}
+\caption{Spectrum of linearization of \cref{eq:twist1} about symmetric double pulse solution with $N=12$ and $\phi = \pi/6$ (left panel). Amplitude $|c_n|$ for first four nodes versus $z$ [mm] for evolution of perturbation of this solution using fourth order Runge-Kutta scheme (right panel). $\omega = 1\text{ mm}^{-1}$, $k=0.25\text{ mm}^{-1}$.}
 \label{fig:dpstab}
 \end{figure}
 
-Numerical spectral computations as well as timestepping results of perturbations of these solutions suggest that these double pulse solutions are neutrally stable (\cref{fig:dpstab}).
+Numerical spectral computations as well as results of evolutions of these perturbations of these solutions suggest that these double pulse solutions are neutrally stable (\cref{fig:dpstab}).
 
 \section{Conclusions}
 

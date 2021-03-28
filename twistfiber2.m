@@ -9,12 +9,12 @@ t = linspace(0,100*pi,20000);
 load mags;
 mags = mags';
 
-% % get phases from AUTO
-% N = length(mags)/2;
-% p = [ mags(N+1:end) ];
-% u0 = ( mags(1:N).*exp( 1i*p ) );
-% w = 1;
-% amps = mags(1:N);
+% get phases from AUTO
+N = length(mags)/2;
+p = [ mags(N+1:end) ];
+u0 = ( mags(1:N).*exp( 1i*p ) );
+w = 1;
+amps = mags(1:N);
 
 % % even hole from AUTO, phi = pi/N
 % N = length(mags)*2;
@@ -24,19 +24,18 @@ mags = mags';
 % amps = [mags ; 0 ; flip(mags(2:end)) ];
 % u0 = amps.*exp(1i*p);
 
-% double pulse from even hole from AUTO
-N = length(mags)*2;
-phi = pi/N;
-nn = [1:length(mags) - 1]';
-p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
-amps = [mags ; 0 ; flip(mags(2:end)) ];
-u0 = amps.*exp(1i*p);
-p = [p ; p];
-amps = [amps ; amps];
-u0 = [u0 ; u0];
-N = 2*N;
+% % double pulse from even hole from AUTO
+% N = length(mags)*2;
+% phi = pi/N;
+% nn = [1:length(mags) - 1]';
+% p = [0 ; nn ; 0 ; -flip(nn) ]*phi;
+% amps = [mags ; 0 ; flip(mags(2:end)) ];
+% u0 = amps.*exp(1i*p);
+% p = [p ; p];
+% amps = [amps ; amps];
+% u0 = [u0 ; u0];
+% N = 2*N;
 
-%%
 % % odd hole from AUTO, phi = pi/N
 % N = length(mags)*2 + 1;
 % phi = pi/N;
@@ -48,7 +47,7 @@ N = 2*N;
 % % perturbation 
 % k = 0.25;
 % k = 0.55;
-u0(4) = 0.05;
+% u0(4) = 0.05;
 
 % solve on interval  with IC (regular)
 u  = rk4( @(s,u) twist(s,u,k,phi,d), u0, t);

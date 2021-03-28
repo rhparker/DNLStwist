@@ -1,4 +1,3 @@
-% \documentclass[12pt,reqno]{amsart}
 \documentclass[reprint, amsmath,amssymb,aps,pra]{revtex4-2}
 
 \usepackage[pdfborder={0 0 0.5 [3 2]}, plainpages=false]{hyperref}%
@@ -136,7 +135,7 @@ Standing wave solutions to \cref{eq:twist1} are bound states of the form
 \begin{equation}\label{eq:ansatz1}
 c_n = a_n e^{i (\omega z + \theta_n) },
 \end{equation}
-where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the propagation constant . (Since we allow $a_n$ to be negative, we can restrict $\theta_n$ to that interval). \revised{We will refer to the $a_n$ as the amplitudes and the $\theta_n$ as the phases of each node. Standing waves are periodic in $z$ with period $2\pi/\omega$, and the intensity at each node $|c_n| = |a_n|$ is constant in $z$}.
+where $a_n \in \R$, $\theta_n \in (-\pi/2, \pi/2]$, and $\omega$ is the propagation constant. (Since we allow $a_n$ to be negative, we can restrict $\theta_n$ to that interval). \revised{We will refer to the $a_n$ as the amplitudes and the $\theta_n$ as the phases of each node. Standing waves are periodic in $z$ with period $2\pi/\omega$, and the intensity at each node $|c_n| = |a_n|$ is constant in $z$}.
 Making this substitution and simplifying, equation \cref{eq:twist1} becomes
 \begin{equation}\label{eq:twisteq}
 \begin{aligned}
@@ -170,26 +169,41 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, no
 \caption{Schematic of symmetry relationship between nodes for $N = 6$ and $N=7$. For nodes connected with arrows, the amplitudes $a_k$ are the same and the phases $\theta_k$ are opposite.}
 \label{fig:symmetry1}
 \end{figure}
-\noi \cref{fig:twist025} shows an example of a standing wave solution produced by numerical parameter continuation for $N = 6$, \revised{$k = 0.25$, and $\phi = 0.25$}. The symmetry relations \cref{eq:symm} among the amplitudes $a_k$ can be seen in the right panel.
+
+\cref{fig:twist025} shows an example of a standing wave solution \revised{of the form \cref{eq:ansatz1}} produced by numerical parameter continuation for $N = 6$, \revised{$k = 0.25$, and $\phi = 0.25$}. \revised{Since the paramater continuaton was initialized with a single excited site at node 1 when $k=0$, the peak intensity is still contained in node 1 when $k>0$, although the intensity has spread to the other nodes in the ring}. The symmetry relations \cref{eq:symm} among the \revised{amplitudes $a_n$ and phases $\theta_n$} can be seen in the left panel. \revised{The node with minimum intensity is the node directly across the ring from node 1. The right panel shows the intensity $|c_n|$ at each node as a function of $z$. Since these are standing wave solutions, the intensity is constant in $z$. The evolution in $z$ is computed with a fourth-order Runga-Kutta method using equation \cref{eq:ansatz1} with $z=0$ as the initial condition. }
+
 \begin{figure}
 \begin{center}
 \begin{tabular}{c}
 \includegraphics[width=8cm]{twist025.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution for $N = 6$, $\omega = 1$, $k = 0.25$, and $\phi = 0.25$. Left panel is real part of solution $c_n$ versus $z$ for nodes 1-4 over a full period ($2 \pi)$. The solution for the remaining nodes can be found from the symmetry relations \cref{eq:symm}. Right panel is amplitude $a_n$ solution at each node.}
+\caption{Standing wave solution for $N = 6$, $\omega = 1$, $k = 0.25$, and $\phi = 0.25$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} }
 \label{fig:twist025}
 \end{figure}
 
-\revised{Since we started the parameter continuation with a single excited node in the AC limit, the maximum intensity is contained in node 1, as expected. The node with minimum intensity is the node directly across the ring from node 1 (node 4 in \cref{fig:twist025}). \cref{fig:ABsuppression} shows the amplitude of this node for four different values of $k$. In all cases, the amplitude of this node is 0 when the twist parameter $\phi = \pi/6$, which is an example of Aharonov-Bohm suppression. Since this a standing wave solution, this node will have 0 intensity for all $z$.} This observation of a dark node opposite the node of maximum intensity agrees with the results of \cite{castro2016,Parto2017}.
+\revised{Similarly, \cref{fig:twist025N7} shows a standing wave solution produced by numerical parameter continuation for $N = 7$, $k = 0.25$, and $\phi = 0.25$. As with the case of $N=6$, the peak intensity is contained in the node 1, and the symmetry relations \cref{eq:symm} among the amplitudes $a_n$ and phases $\theta_n$ can be seen in the left panel. In contrast with the $N=6$ case, there is a pair of nodes with minimum intensity and the same amplitude directly across the ring from node 1.}
 
 \begin{figure}
     \begin{center}
     \begin{tabular}{c}
-    \includegraphics[width=6.5cm]{images/ABsuppression.eps}
+    \includegraphics[width=8cm]{twist025N7.eps}
     \end{tabular}
     \end{center}
-    \caption{\revised{Amplitude $a_4$ of node 4 (node opposite peak intensity) versus $\phi$ for standing wave solution with $N=6$ and $\omega=1$ for four different values of $k$. $N=6$, $\omega=1$.}}
+    \caption{Standing wave solution for $N = 7$, $\omega = 1$, $k = 0.25$, and $\phi = 0.25$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} }
+    \label{fig:twist025N7}
+    \end{figure}
+
+\revised{The left panel of \cref{fig:ABsuppression} shows the amplitude of the node with minimum intensity (node 4 in \cref{fig:twist025}) versus the twist parameter $\phi$ for $N=6$. For all values of the coupling parameter $k$, the amplitude of this node is 0 when the twist parameter is given by $\phi = \pi/6$, which is an example of optical Aharonov-Bohm suppression. Since this a standing wave solution, this node will have 0 intensity for all $z$.} This observation of a dark node opposite the node of maximum intensity agrees with the results of \cite{castro2016,Parto2017}. \revised{This occurs in general when $N$ is even and $\phi = \pi/N$, and is discussed in detail below in \cref{sec:Neven}. The right panel of \cref{fig:ABsuppression} shows the amplitude of the nodes with minimum intensity (nodes 4 and 5 in \cref{fig:twist025N7}) versus the twist parameter $\phi$ for $N=7$. Since the amplitudes of these nodes are never 0, optical Aharonov-Bohm suppression does not occur when $N$ is odd and there is a single excited node. (See \cref{sec:Nodd} below for a setting in which this does occur for $N$ odd). }
+
+\begin{figure}
+    \begin{center}
+    \begin{tabular}{cc}
+    \includegraphics[width=4cm]{images/ABsuppression.eps} &
+    \includegraphics[width=4cm]{images/noABsuppression.eps} 
+    \end{tabular}
+    \end{center}
+    \caption{\revised{Amplitude of node 4 (minimum intensity) versus $\phi$ for standing wave solution with $N=6$ (left pandel), and amplitude of nodes 4 and 5 (minimum intensity) versus $\phi$ for standing wave solution with $N=7$ (right panel). $\omega = 1$.}}
     \label{fig:ABsuppression}
 \end{figure}
 
@@ -278,7 +292,9 @@ Once \cref{eq:twisteqevenhole} has been solved numerically, the full solution to
 &\theta_M = 0 \\
 &\theta_{M+j} = -\theta_{M-j} && \qquad j = 1, \dots, M-2.
 \end{align*}
-\cref{fig:evenhole6} shows this solution for $N=6$. \revised{In \cite{castro2016}, a perturbation method is used for the $N=6$ case to show that if the peak intensity is contained in node 1, the opposite node (node 4) has an intensity of 0, to leading order, when $\phi=\pi/6$. Our analysis confirms the result of these asymptotics, but is much more rigorous in that it demonstrates that for all $N$ even, when the twist is given by $\phi = \pi/N$, a standing wave solution exists for which the peak intensity is contained in node 1, and the opposite node has intensity identically equal to 0 for all $z$. }
+\cref{fig:evenhole6} shows this solution for $N=6$ and $k=\pi/6$. \revised{The amplitudes $a_n$ and phases $\theta_n$ are qualitatively similar to the case when $\phi = 0.25$ (\cref{fig:twist025}); however, when $\phi = \pi/6$, the intensity of node 4 is actually 0, whereas for other values of $\phi$, the intensity of node 4 is small, but nonzero (\cref{fig:ABsuppression}). }
+
+\revised{In \cite{castro2016}, a perturbation method is used for the $N=6$ case to show that if the peak intensity is contained in node 1, the opposite node (node 4) has an intensity of 0, to leading order, when $\phi=\pi/6$. Our analysis confirms the result of these asymptotics, but is much more rigorous in that it demonstrates that for all $N$ even, when the twist is given by $\phi = \pi/N$, a standing wave solution exists for which the peak intensity is contained in node 1, and the opposite node has intensity identically equal to 0 for all $z$. }
 
 \begin{figure}
 \begin{center}
@@ -286,13 +302,13 @@ Once \cref{eq:twisteqevenhole} has been solved numerically, the full solution to
 \includegraphics[width=8cm]{evenhole6.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. Left panel is real part of solution for nodes 1-4, right panel is absolute value of solution at each node. Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1$, $k = 0.25$.}
+\caption{Standing wave solution for $N = 6$ and $\phi = \pi/6$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} Node 1 has maximum amplitude, and node 4 is a dark node. $\omega = 1$, $k = 0.25$.}
 \label{fig:evenhole6}
 \end{figure}
 
 \subsection{\texorpdfstring{$N$}{N} odd}\label{sec:Nodd}
 
-We can also obtain a dark node when $N$ is odd. For simplicity, we take node 1 to be the dark node; in this case, the dark node will be opposite a pair of bright nodes at $a_M$ and $a_{M+1}$ with the same amplitude, where $M = (N+1)/2$. Using the symmetries \cref{eq:symm}, when $a_1 = 0$, the system \cref{eq:twisteqreal} reduces to 
+\revised{As shown above in \cref{fig:ABsuppression}, when $N$ is odd and there is a single bright node, we cannot obtain dark nodes for any value of the twist parameter $k$. We can, however, obtain a dark node when $N$ is odd if we start with two adjacent bright nodes.} For simplicity, we take node 1 to be the dark node; in this case, the dark node will be opposite a pair of bright nodes at $a_M$ and $a_{M+1}$ with the same amplitude, where $M = (N+1)/2$. Using the symmetries \cref{eq:symm}, when $a_1 = 0$, the system \cref{eq:twisteqreal} reduces to 
 \begin{equation*}
 \begin{aligned}
 &2 k a_2 \cos(\theta_2 - \phi) = 0 \\
@@ -349,7 +365,7 @@ This system of equations is again of the form $F(a,k) = 0$, where $a = (a_2, \do
 \includegraphics[width=8cm]{oddhole7.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. Left panel is real part of solution for nodes 1-4, right panel is absolute value of solution at each node. Nodes 4 and 5 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1$, $k = 0.25$.}
+\caption{Standing wave solution for $N = 7$ and $\phi = \pi/7$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.}  Nodes 4 and 5 have equal and maximum amplitude, and node 1 is a dark node. $\omega = 1$, $k = 0.25$.}
 \label{fig:oddhole7}
 \end{figure}
 
@@ -433,7 +449,7 @@ i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} \pm |c_n
 \includegraphics[width=8cm]{even6assym.eps}
 \end{tabular}
 \end{center}
-\caption{Asymmetric standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.25$ for all other $n$. Left is intensity $|c_n|$ versus $z$ for nodes 1-4, right is amplitude $a_n$ and phase $\theta_n$ for solution at each node. $\phi = 0.25$, $\omega = 1$.}
+\caption{Asymmetric standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.25$ for all other $n$. \revised{Left panel shows amplitudes $a_n$ and phases $\phi_n$ for solution at each node. Right panel is intensity of solution $|c_n|$ versus $z$ for nodes 1-4, which is constant in $z$. Evolution in $z$ computed using fourth order Runge-Kutta method.} $\phi = 0.25$, $\omega = 1$.}
 \label{fig:even6assym}
 \end{figure}
 \noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}, which has the same set of parameters except for the coupling parameter $k_1$). \revised{The asymmetric solution in \cref{fig:even6assym} is neutrally stable, since its spectrum is imaginary, and small perturbations result in oscillatory behavior about the unperturbed solution (\cref{fig:assymstab}). Although a rigorous analysis of these asymmetric solutions is beyond the scope of this work, it is likely that small differences in the coupling coefficients $k_n$ do not affect stability, which would imply that small imperfections in the physical model would not result in loss of stability.}

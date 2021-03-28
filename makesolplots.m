@@ -1,7 +1,8 @@
 % load evenhole50data
-load assym6data
+% load assym6data
 % load evenhole6data
 % load dataN6k025phi025
+load dataN7k025phi025
 % load oddhole7
 % load dp12k025
 % load dp8k025
@@ -47,7 +48,7 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 set(gca,'fontname','times');
 
-ax1 = subplot(2,2,[1 3]);
+ax1 = subplot(2,2,[2 4]);
 hold on
 lS = {'-','--',':','-.'};
 NPlot=4;
@@ -64,7 +65,7 @@ xticklabels({'$0$','$2\pi$','$4\pi$'});
 % axis([0 4*pi 0 1.2]);
 axis([0 4*pi 0 1.0]);
 
-ax2=subplot(2,2,2);
+ax2=subplot(2,2,1);
 hold on;
 plot(1:N,amps,'.b','MarkerSize',40);
 % plot(1:N,amps,'-k');
@@ -78,7 +79,7 @@ axis([1 N -0.5 1]);
 
 % axis(ax2,'tight');
 
-ax3=subplot(2,2,4);
+ax3=subplot(2,2,3);
 hold on;
 plot(1:N,p,'.r','MarkerSize',40);
 % plot(1:N,amps,'-k');
@@ -90,9 +91,9 @@ set(gca,'YTick',[-pi/3 -pi/6 0 pi/6 pi/3]);
 axis([1,N,-pi/6 pi/6]);
 yticklabels({'$-\pi/3$','$-\pi/6$','$0$','$\pi/6$','$\pi/3$'});
 
-% set(gca,'YTick',[-pi/3 -pi/6 0 pi/6 pi/3]);
-% axis([1,N,-pi/3 pi/3]);
-% yticklabels({'$-\pi/3$','$-\pi/6$','$0$','$\pi/6$','$\pi/3$'});
+set(gca,'YTick',[-pi/3 -pi/6 0 pi/6 pi/3]);
+axis([1,N,-pi/3 pi/3]);
+yticklabels({'$-\pi/3$','$-\pi/6$','$0$','$\pi/6$','$\pi/3$'});
 
 % set(gca,'YTick',[-pi/2 -pi/3 -pi/6 0 pi/6 pi/3 pi/2]);
 % axis([1,N,-pi/2 pi/2]);

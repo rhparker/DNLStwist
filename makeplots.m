@@ -1,6 +1,6 @@
-%% plot 
+%% plot min intensity node vs phi (N=6)
 
-figure('DefaultAxesFontSize',24);
+figure('DefaultAxesFontSize',30);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');
@@ -30,6 +30,38 @@ ylabel('$a_4$','Interpreter','latex');
 set(gca,'xtick',[0:pi/6:pi/3]) % where to set the tick marks
 set(gca,'xticklabels',{'$0$','$\pi/6$','$\pi/3$'});
 
+%% plot min intensity node vs phi (N=7)
+
+figure('DefaultAxesFontSize',30);
+set(gca,'fontname','times');
+set(groot,'defaultAxesTickLabelInterpreter','latex');  
+set(groot,'defaulttextinterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+
+hold on;
+lS = {'-','--',':','-.'};
+lw = 3;
+
+load dark15N7
+plot(phi,a4,'-','LineWidth',lw);
+
+load dark20N7
+plot(phi,a4,'--','LineWidth',lw);
+
+load dark25N7
+plot(phi,a4,':','LineWidth',lw);
+
+load dark30N7
+plot(phi,a4,'-.','LineWidth',lw);
+
+legendCell = {'$k = 0.15$','$k = 0.20$','$k = 0.25$','$k = 0.30$'};
+legend(legendCell,'Interpreter','latex','location','southeast');
+xlabel('$\phi$','Interpreter','latex');
+ylabel('$a_4$, $a_5$','Interpreter','latex');
+
+axis([0 2*pi/7,-0.08,0]);
+set(gca,'xtick',[0:pi/7:2*pi/7]) % where to set the tick marks
+set(gca,'xticklabels',{'$0$','$\pi/7$','$2 \pi/7$'});
 %% k0 vs N for omega = 1
 
 N = [6 8 10 12 14 16 18 20 ...

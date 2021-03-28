@@ -67,7 +67,6 @@
 \DeclareMathOperator{\ran}{range}
 \DeclareMathOperator{\diag}{diag}
 
-
 \graphicspath{ {images/} }
 
 \newtheorem{lemma}{Lemma}
@@ -187,7 +186,7 @@ where $M = (N/2)+1$ for $N$ even and $M = (N+1)/2$ for $N$ odd. For $N$ even, no
 \begin{figure}
     \begin{center}
     \begin{tabular}{c}
-    \includegraphics[width=8cm]{images/ABsuppression.eps}
+    \includegraphics[width=6.5cm]{images/ABsuppression.eps}
     \end{tabular}
     \end{center}
     \caption{\revised{Amplitude $a_4$ of node 4 (node opposite peak intensity) versus $\phi$ for standing wave solution with $N=6$ and $\omega=1$ for four different values of $k$. $N=6$, $\omega=1$.}}
@@ -262,7 +261,7 @@ This system is of the form $F(a,k) = 0$, where $a = (a_1, \dots, a_{M-1})$. $F(\
 \begin{figure}
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[width=5cm]{evenbif50.eps} 
+\includegraphics[width=6cm]{evenbif50.eps} 
 \end{tabular}
 \end{center}
 \caption{$\ell^2$ norm of solution vs $k$, for $N = 50$ with dark node opposite peak intensity node. $\omega = 1$.}
@@ -405,7 +404,7 @@ Since the spectrum of these solutions is purely imaginary, we expect that they w
 \includegraphics[width=4cm]{oddhole7perturbed.eps}
 \end{tabular}
 \end{center}
-\caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=6$,  $\phi = \pi/6$ (left panel) and $N=7$, $\phi = \pi/7$ (right panel). Initial condition is obtained by adding 0.01 to the dark node. Timestepping using a fourth order Runge-Kutta scheme, $k=0.25$.}
+\caption{Amplitude $|c_n|$ for first four nodes versus $z$ for solution with $N=6$,  $\phi = \pi/6$ (left panel) and $N=7$, $\phi = \pi/7$ (right panel). Initial condition is obtained by adding 0.05 to the dark node. Timestepping using a fourth order Runge-Kutta scheme, $k=0.25$.}
 \label{fig:evenhole6perturbed}
 \end{figure}
 In addition, we can start with a neutrally stable standing wave solution and perturb the system by a small change in $k$ or $\phi$. \cref{fig:evenholekperturbed} shows the results of perturbations in $k$. In particular, note that in the right panel of \cref{fig:evenholekperturbed}, the system is evolved for a value of the coupling parameter $k$ which is greater than $k_0$, where $k_0$ is defined in Section \ref{sec:Neven}. In both cases, the solutions show oscillations, indicating this to be robust dynamics. The simulation suggests the period of oscillations has a strong dependence on $k$. Additional timestepping results can be found in \cite{castro2016}. In particular, see \cite[Figure 4]{castro2016} for timestepping results when the fiber is initially excited at a single site. 
@@ -434,14 +433,27 @@ i \partial_z c_n = k_{n+1} e^{-i\phi}c_{n+1} + k_{n-1} e^{i\phi}c_{n-1} \pm |c_n
 \includegraphics[width=8cm]{even6assym.eps}
 \end{tabular}
 \end{center}
-\caption{Standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.25$ for all other $n$. Left is intensity $|c_n|$ versus $z$ for nodes 1-4, right is amplitude $a_n$ and phase $\theta_n$ for solution at each node. $\phi = 0.25$, $\omega = 1$.}
+\caption{Asymmetric standing wave solution to \cref{eq:twistk} for $N = 6$. $\omega = 1$, $k_1 = 0.4$, and $k_n = 0.25$ for all other $n$. Left is intensity $|c_n|$ versus $z$ for nodes 1-4, right is amplitude $a_n$ and phase $\theta_n$ for solution at each node. $\phi = 0.25$, $\omega = 1$.}
 \label{fig:even6assym}
 \end{figure}
-\noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}, which has the same set of parameters except for the coupling parameter $k_1$). These asymmetric solutions are also neutrally stable.
+\noi This allows for asymmetric solutions, as shown in \cref{fig:even6assym}. (Contrast to the symmetric solutions for uniform $k$ in \cref{fig:twist025}, which has the same set of parameters except for the coupling parameter $k_1$). \revised{The asymmetric solution in \cref{fig:even6assym} is neutrally stable, since its spectrum is imaginary, and small perturbations result in oscillatory behavior about the unperturbed solution (\cref{fig:assymstab}). Although a rigorous analysis of these asymmetric solutions is beyond the scope of this work, it is likely that small differences in the coupling coefficients $k_n$ do not affect stability, which would imply that small imperfections in the physical model would not result in loss of stability.}
+
+\begin{figure}
+    \begin{center}
+    \begin{tabular}{cc}
+    \includegraphics[width=4cm]{even6assymspec.eps}
+    \includegraphics[width=4cm]{assym6pert.eps}
+    \end{tabular}
+    \end{center}
+    \caption{\revised{Spectrum of linearization of \cref{eq:twistk} about asymmetric standing wave solution from \cref{fig:even6assym} (left panel). Timestepping of perturbation of this solution (right panel) using fourth order Runge-Kutta scheme.}}
+    \label{fig:assymstab}
+    \end{figure}
 
 \section{Multi-pulses}
 
-Another broad class of solutions is multi-pulses, which are solutions in which the energy is concentrated at multiple nodes (see \cref{fig:dp} for two examples). These nodes are typically well-separated in the ring. Multi-pulses can be generated by parameter continuation from the AC limit, similar to what was done in \cref{sec:standingwave}. Although a systematic study of the existence and stability of multi-pulses is beyond the scope of this paper (see, for example, \cite{Parker2020} for results on multi-pulses in the discrete NLS equation), we present one example of a symmetric double pulse solution for even $N$ in which the two excited sites are opposite each other in the ring (\cref{fig:dp}). 
+Another broad class of solutions is multi-pulses, \revised{which are solutions in which the energy is concentrated at multiple nodes which are well separated in the ring (see \cref{fig:dp} for two examples where the two nodes with peak intensity occupy opposite positions). In contrast with the solutions in \cref{fig:oddhole7}, where the intensity is concentrated at two adjacent nodes, the energy in a multi-pulse is concentrated at sites which are far apart. The solutions with two adjacent excited sites behave like a single soliton (see \cite{Kevrekidis2009} for a discussion of on-site and intersite solitons in the discrete NLS equation), whereas multi-pulses behave like a collection of solitons which can interact with their neighbors on either side \cite{Parker2020}.}
+
+Multi-pulses can be generated by parameter continuation from the AC limit, similar to what was done in \cref{sec:standingwave}. Although a systematic study of the existence and stability of multi-pulses is beyond the scope of this paper (see, for example, \cite{Parker2020} for results on multi-pulses in the discrete NLS equation), we present one example of a symmetric double pulse solution for even $N$ in which the two excited sites are opposite each other in the ring. If $N$ is a multiple of 4 and $\phi = 2\pi/N$, there is a pair of dark nodes halfway between the two bright nodes (in both directions), as can be seen in \cref{fig:dp}. \revised{In fact, these particular solutions are exactly two copies of the solutions from \cref{sec:Neven} spliced together.} 
 
 \begin{figure}
 \begin{center}
@@ -465,7 +477,7 @@ Another broad class of solutions is multi-pulses, which are solutions in which t
 \label{fig:dpstab}
 \end{figure}
 
-If $N$ is a multiple of 4 and $\phi = 2\pi/N$, there is a pair of dark nodes halfway between the two bright nodes (in both directions), as can be seen in \cref{fig:dp}. Numerical spectral computations as well as timestepping results of perturbations of these solutions suggest that these double pulse solutions are neutrally stable (\cref{fig:dpstab}).
+Numerical spectral computations as well as timestepping results of perturbations of these solutions suggest that these double pulse solutions are neutrally stable (\cref{fig:dpstab}).
 
 \section{Conclusions}
 

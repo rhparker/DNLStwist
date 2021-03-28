@@ -41,7 +41,7 @@ k0 = [5.77350E-01 5.41196E-01 5.25731E-01 5.17638E-01 5.12858E-01 5.09796E-01 5.
     5.02419E-01 5.02142E-01 5.01910E-01 5.01714E-01 5.01546E-01 ...
     5.01402E-01 5.01277E-01 5.01168E-01 5.01073E-01 5.00989E-01];
 
-figure('DefaultAxesFontSize',24);
+figure('DefaultAxesFontSize',30);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');
@@ -55,7 +55,7 @@ ylabel('$k_0$','Interpreter','latex');
 
 %% k0 vs omega for N = 50
 
-figure('DefaultAxesFontSize',24);
+figure('DefaultAxesFontSize',30);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');

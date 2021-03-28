@@ -2,7 +2,7 @@ k = 0.25;
 d = -1;
 w = 1;
 
-t = linspace(0,50*pi,10000);
+t = linspace(0,100*pi,20000);
 
 load mags6;
 mags = mags';
@@ -10,14 +10,38 @@ N = 6;
 
 % get phases from AUTO
 p = mags(N+1:end) - mags(N+1);
-u0 = ( mags(1:N).*exp( 1i*p ) );
+amps = mags(1:N);
+
+% perturbation
+amps(4) = amps(4)+0.05;
+
+u0 = amps.*exp( 1i*p );
 phi = 0.25;
 w = 1;
 k = [0.4 0.25 0.25 0.25 0.25 0.25];
-amps = mags(1:N);
+
+
 
 % solve on interval
 u  = rk4( @(s,u) twist_k(s,u,k,phi,d), u0, t);
+
+J = twistJ_k(real(u0),imag(u0),k,phi,d,w);
+[V,l] = eig(J);
+l = diag(l);
+
+% solution
+figure('DefaultAxesFontSize',24);
+set(gca,'fontname','times');
+hold on
+lS = {'-','--',':','-.'};
+NPlot=4;
+for index = 1:NPlot
+    plot(t,abs(u(index,:)),'Linewidth',2, 'LineStyle', lS{index} );
+end
+% plot(t,abs(u).^2,'Linewidth',3 );
+legendCell = strcat('n=', string(num2cell(1:NPlot)) );legend(legendCell);
+xlabel('$z$','Interpreter','latex');
+ylabel('$|c_n|$','Interpreter','latex');
 
 %% subroutines
  
@@ -134,6 +158,25 @@ function J = twistJ(a,b,k,phi,d,w)
     C = cos(phi)*(  UD1 + LD1 );
     S = sin(phi)*( -UD1 + LD1 );
     kblock = k* [ [ S C ] ; [ -C S ] ];
+    J = kblock + wblock + NLblock;
+end
+
+% Jacobian for twisted system, when k is a vector
+function J = twistJ_k(a,b,k,phi,d,w)
+    N = length(a);
+    Id = eye(N);
+    Z = zeros(N,N);
+    wblock = w * [ [ Z Id ] ; [ -Id Z ] ];
+    NLblock = d * [ [ diag(2*a.*b) diag(a.^2+3*b.^2) ] ; ...
+                    [ diag(-(3*a.^2+b.^2)) diag(-2*a.*b) ] ];
+    UD1 = diag( ones(1,N-1), 1  ); UD1(N,1) = 1;
+    LD1 = diag( ones(1,N-1), -1 ); LD1(1,N) = 1;
+    C = cos(phi)*(  UD1 + LD1 );
+    S = sin(phi)*( -UD1 + LD1 );
+    kmask = diag(k(1:N-1),1) + diag(k(1:N-1),-1);
+    kmask(1,N) = k(N);
+    kmask(N,1) = k(N);
+    kblock = [ [ kmask.*S kmask.*C ] ; [ -kmask.*C kmask.*S ] ];
     J = kblock + wblock + NLblock;
 end
 

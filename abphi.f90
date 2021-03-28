@@ -61,7 +61,8 @@ SUBROUTINE FUNC(NDIM,U,ICP,PAR,IJAC,F,DFDU,DFDP)
       T = SQRT( 1 - ( S(N)*A(N-1)/A(1) )**2 )
       F(N)   = K*( T*A(1) + C(N-1)*A(N-1) ) + W*A(N) + D*(A(N)**3)
       F(N+N) = U(N+1)
-      ! F(N+N) = K*( S(N)*A(1) - S(N-1)*A(N-1) )
+    !   F(N)   = K*( C(N)*A(1) + C(N-1)*A(N-1) ) + W*A(N) + D*(A(N)**3)
+    !   F(N+N) = K*( S(N)*A(1) - S(N-1)*A(N-1) )
 
 END SUBROUTINE FUNC
 !----------------------------------------------------------------------
@@ -106,6 +107,9 @@ SUBROUTINE STPNT(NDIM,U,PAR,T)
       ! U(C+1) = 1
 
       U(1) = 1
+
+      ! multi-pulse
+      U(5) = 1
 
       PAR(1) = D
       PAR(2) = K

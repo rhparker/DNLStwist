@@ -1,6 +1,6 @@
 %% plot min intensity node vs phi (N=6)
 
-figure('DefaultAxesFontSize',30);
+figure('DefaultAxesFontSize',26);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');
@@ -32,7 +32,7 @@ set(gca,'xticklabels',{'$0$','$\pi/6$','$\pi/3$'});
 
 %% plot min intensity node vs phi (N=7)
 
-figure('DefaultAxesFontSize',30);
+figure('DefaultAxesFontSize',26);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');
@@ -73,12 +73,13 @@ k0 = [5.77350E-01 5.41196E-01 5.25731E-01 5.17638E-01 5.12858E-01 5.09796E-01 5.
     5.02419E-01 5.02142E-01 5.01910E-01 5.01714E-01 5.01546E-01 ...
     5.01402E-01 5.01277E-01 5.01168E-01 5.01073E-01 5.00989E-01];
 
-figure('DefaultAxesFontSize',30);
+figure('DefaultAxesFontSize',36);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
-ms = 40;
+ms = 50;
+axis([0 50 0.5 0.56]);
 
 plot(N,k0,'.','MarkerSize',ms);
 
@@ -87,14 +88,14 @@ ylabel('$k_0$','Interpreter','latex');
 
 %% k0 vs omega for N = 50
 
-figure('DefaultAxesFontSize',30);
+figure('DefaultAxesFontSize',36);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
-ms = 40;
-lw = 2;
+ms = 50;
+lw = 3;
 
 d = -1;
 omega = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
@@ -108,3 +109,5 @@ plot(omega, polyval(p,omega),'LineWidth',lw);
 
 xlabel('$\omega$','Interpreter','latex');
 ylabel('$k_0$','Interpreter','latex');
+
+axis([0 2.1 0 1.1]);

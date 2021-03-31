@@ -2,9 +2,9 @@
 % load assym6data
 % load evenhole6data
 % load dataN6k025phi025
-load dataN7k025phi025
+% load dataN7k025phi025
 % load oddhole7
-% load dp12k025
+load dp12k025
 % load dp8k025
 
 %%  solution
@@ -103,12 +103,12 @@ yticklabels({'$-\pi/3$','$-\pi/6$','$0$','$\pi/6$','$\pi/3$'});
 
 %% spectrum
 
-figure('DefaultAxesFontSize',30);
+figure('DefaultAxesFontSize',34);
 set(gca,'fontname','times');
 set(groot,'defaultAxesTickLabelInterpreter','latex');  
 set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
-plot(l, '.', 'MarkerSize',40);
+plot(l, '.', 'MarkerSize',50);
 axis([-1,1,-2,2]);
 xlabel('Re $\lambda$','Interpreter','latex');
 ylabel('Im $\lambda$','Interpreter','latex');

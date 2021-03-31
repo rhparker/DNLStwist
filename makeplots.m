@@ -29,6 +29,7 @@ ylabel('$a_4$','Interpreter','latex');
 
 set(gca,'xtick',[0:pi/6:pi/3]) % where to set the tick marks
 set(gca,'xticklabels',{'$0$','$\pi/6$','$\pi/3$'});
+axis([ 0 pi/3 -0.1 -0.1]);
 
 %% plot min intensity node vs phi (N=7)
 
@@ -110,4 +111,4 @@ plot(omega, polyval(p,omega),'LineWidth',lw);
 xlabel('$\omega$','Interpreter','latex');
 ylabel('$k_0$','Interpreter','latex');
 
-axis([0 2.1 0 1.1]);
+axis([0 2.1 0 1.1] );
